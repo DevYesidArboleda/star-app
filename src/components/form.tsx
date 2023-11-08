@@ -72,14 +72,14 @@ export default function Form() {
   }
 
   return (
-    <section className="absolute inset-0 flex flex-col justify-between m-8 p-10 bg-white rounded-md">
+    <section className="absolute inset-0 flex flex-col justify-between m-8 p-10 ">
       {/* steps */}
       <nav aria-label="Progress" className='flex items-center w-full justify-center'>
         <ol role="list" className="space-y-0 md:flex w-3/4 TestP [&>*:first-child]:flex-row  [&>*:last-child]:flex-row-reverse">
           {steps.map((step, index) => (
             <li key={step.name} className="md:flex-auto ml-0 w-full ">
               {currentStep > index ? (
-                <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block ">
+                <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#53545C]  after:border-4 after:inline-block ">
                 <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
                   <svg
                     className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
@@ -99,7 +99,7 @@ export default function Form() {
                 </span>
               </div>
               ) : currentStep === index ? (
-                <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block ">
+                <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
                   <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
                     <svg
                       className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
@@ -119,8 +119,8 @@ export default function Form() {
                   </span>
                 </div>
               ) : (
-                <div className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b  after:border-gray-100 after:border-4 after:inline-block text-[#DCDCDC]">
-                  <div className="border-slate-300 border-4  flex items-center justify-center w-10 h-10 bg-transparent rounded-full lg:h-12 lg:w-12  shrink-0"></div>
+                <div className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b  after:border-[#DCDCDC] after:border-4 after:inline-block text-[#DCDCDC]">
+                  <div className="border-[#DCDCDC] border-4  flex items-center justify-center w-10 h-10 bg-transparent rounded-full lg:h-12 lg:w-12  shrink-0"></div>
                 </div>
               )}
             </li>
@@ -129,7 +129,7 @@ export default function Form() {
       </nav>
 
       {/* Form */}
-      <form className="mt-12 py-12" onSubmit={handleSubmit(processForm)}>
+      <form className="mt-12 py-12 bg-white rounded-md" onSubmit={handleSubmit(processForm)}>
         {currentStep === 0 && (
           <motion.div
             initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
@@ -139,7 +139,7 @@ export default function Form() {
 
             <VideoStreaming/>
 
-            
+
             <h2 className="text-base font-semibold leading-7 text-gray-900">
               Personal Information
             </h2>

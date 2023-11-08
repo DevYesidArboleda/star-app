@@ -58,9 +58,7 @@ export const VideoStreaming = () => {
           <br />
           <h1 className="text-black">Tallas Disponibles</h1>
           <ul className="flex gap-2">
-          {data.tags.map((items:any, index:number ) => {
-            return <li key={index} className="flex text-black">{items}</li>
-            })}
+          
           </ul>
           <br />
           <div className="p-6 pt-0">
