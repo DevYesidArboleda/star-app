@@ -8,9 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <>
-    <div className='bg-white flex m-4 flex-col gap-4'>
-      <h1>Coming soon</h1>
-      <br />
+    <div className='bg-white flex m-4 flex-col gap-4'>      
       <Form />
     </div>
     </>

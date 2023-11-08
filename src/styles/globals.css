@@ -18,10 +18,17 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #E7ECEF;
+}
+
+.TestP  li:last-child div{
+  flex-direction: row-reverse;
+}
+
+.TestP  li:last-child div::after{
+  display: none;
+}
+
+.TestP  li:last-child {
+  width: auto;
 }
