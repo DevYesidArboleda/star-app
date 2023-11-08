@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
 
 interface typeData {
-    name:string;
-    description:string;
-    tags:string[];
+    doc:{
+      name:string;
+      description:string;
+      price:number;
+      tags:string[]|null;
+    }
 }
 
 export const VideoStreaming = () => {
@@ -21,10 +24,10 @@ export const VideoStreaming = () => {
         if (!response.ok) {
           throw new Error("Error al cargar los datos");
         }
-        const result = await response.json();
+        const result:typeData = await response.json();
         setData(result.doc[2]);
         setUrl(result.doc[2].videoUrl);
-        console.log("respuesta", result.doc[2]);
+        console.log("respuesta", result);
         console.log("video", result.doc[2].videoUrl);
       } catch (error) {
         console.error("Error al obtener los datos:", error);
@@ -55,9 +58,7 @@ export const VideoStreaming = () => {
           <br />
           <h1 className="text-black">Tallas Disponibles</h1>
           <ul className="flex gap-2">
-            {data.tags.map((items:any, index:number ) => {
-            return <li key={index} className="flex text-black">{items}</li>
-            })}
+          
           </ul>
           <br />
           <div className="p-6 pt-0">
