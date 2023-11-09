@@ -93,7 +93,34 @@ export const VideoStreaming = () => {
 };
 
 /*
-  Traer todos los Productos
+
+<div className="flex h-screen flex-col justify-around h-min p-4 leading-normal">
+            <h1 className="text-4xl  text-[#274C77] font-bold">Producto</h1>
+            <br />
+          <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#53545C] ">
+            { data && data[2]?.name }
+          </h5>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">            
+          Description: { data && data[2]?.description }
+          </p>
+          <br />
+          <h1 className="text-black">Tallas Disponibles</h1>
+          <ul className="flex gap-2">
+          {data.length > 0 && data[2]?.tags.map((items:any, index:number ) => {
+            return <li key={index} className="flex text-black">{items}</li>
+            }) }
+          </ul>
+          <br />
+          <div className="p-6 pt-0">
+            <button
+              className="select-none rounded-lg bg-[#8B8C89] py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button"
+              data-ripple-light="true"
+            >
+              Comprar producto
+            </button>
+          </div>
+        </div>
 
     <div>
     { data.map((item:typeData, index:number) => {
