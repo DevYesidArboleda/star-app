@@ -1,35 +1,48 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-import { z } from 'zod'
-import { FormDataSchema } from '../../lib/schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { VideoStreaming } from './VideoStreaming'
-import  Style  from './form.module.css'
+import { z } from "zod";
+import { FormDataSchema } from "../../lib/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { VideoStreaming } from "./VideoStreaming";
+import { useSteps } from "../hooks/useSteps";
+import { usePrevs } from "../hooks/useStepsPrev";
+import ReactPlayer from "react-player";
+import Image from 'next/image'
 
-type Inputs = z.infer<typeof FormDataSchema>
+type Inputs = z.infer<typeof FormDataSchema>;
 
-const steps = [
+export const steps = [
   {
-    id: 'Step 1',
-    name: 'Personal Information',
-    fields: ['firstName', 'lastName', 'email']
+    id: "Step 1",
+    name: "Personal Information",
+    fields: ["firstName", "lastName", "email"],
   },
   {
-    id: 'Step 2',
-    name: 'Address',
-    fields: ['country', 'state', 'city', 'street', 'zip']
+    id: "Step 2",
+    name: "Address",
+    fields: ["country", "state", "city", "street", "zip"],
   },
-  { id: 'Step 3', name: 'Complete' }
-]
+  { id: "Step 3", name: "Complete" },
+];
+
+interface typeData {
+  name: string;
+  description: string;
+  price: number;
+  tags: string[];
+}
 
 export default function Form() {
-  const [previousStep, setPreviousStep] = useState(0)
-  const [currentStep, setCurrentStep] = useState(0)
-  const delta = currentStep - previousStep
+  const { previousStep, setPreviousStep } = usePrevs();
+  const { currentStep, setCurrentStep } = useSteps();
+  const [video, setVideo] = useState<JSX.Element | null>(null);
+  const [data, setData] = useState<typeData[]>([]);
+  const [url, setUrl] = useState("");
+  const delta = currentStep - previousStep;
 
   const {
     register,
@@ -37,67 +50,106 @@ export default function Form() {
     watch,
     reset,
     trigger,
-    formState: { errors }
+    formState: { errors },
   } = useForm<Inputs>({
-    resolver: zodResolver(FormDataSchema)
-  })
+    resolver: zodResolver(FormDataSchema),
+  });
 
-  const processForm: SubmitHandler<Inputs> = data => {
-    console.log(data)
-    reset()
-  }
+  const processForm: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    reset();
+  };
 
-  type FieldName = keyof Inputs
+  type FieldName = keyof Inputs;
 
   const next = async () => {
-    const fields = steps[currentStep].fields
-    const output = await trigger(fields as FieldName[], { shouldFocus: true })
+    const fields = steps[currentStep].fields;
+    const output = await trigger(fields as FieldName[], { shouldFocus: true });
 
-    if (!output) return
+    if (!output) return;
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        await handleSubmit(processForm)()
+        await handleSubmit(processForm)();
       }
-      setPreviousStep(currentStep)
-      setCurrentStep(step => step + 1)
+      setPreviousStep(currentStep);
+      setCurrentStep((step) => step + 1);
     }
-  }
+  };
 
   const prev = () => {
     if (currentStep > 0) {
-      setPreviousStep(currentStep)
-      setCurrentStep(step => step - 1)
+      setPreviousStep(currentStep);
+      setCurrentStep((step) => step - 1);
     }
-  }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://martiolo.xyz/api/products/allProducts"
+        );
+        if (!response.ok) {
+          throw new Error("Error al cargar los datos");
+        }
+        const result = await response.json();
+        setData(result.doc);
+        setUrl(result.doc[2].videoUrl);
+        console.log("respuesta", result);
+        console.log("video", result.doc[2].videoUrl);
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setVideo(
+      <ReactPlayer
+        url={`${url}`}
+        controls={true}
+        height="750px"
+        width="464px"
+      />
+    );
+  }, []);
 
   return (
     <section className="absolute inset-0 flex flex-col justify-between m-8 p-10 ">
       {/* steps */}
-      <nav aria-label="Progress" className='flex items-center w-full justify-center'>
-        <ol role="list" className="space-y-0 md:flex w-3/4 TestP [&>*:first-child]:flex-row  [&>*:last-child]:flex-row-reverse">
+      <nav
+        aria-label="Progress"
+        className="flex items-center w-full justify-center"
+      >
+        <ol
+          role="list"
+          className="space-y-0 md:flex w-3/4 TestP [&>*:first-child]:flex-row  [&>*:last-child]:flex-row-reverse"
+        >
           {steps.map((step, index) => (
             <li key={step.name} className="md:flex-auto ml-0 w-full ">
               {currentStep > index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#53545C]  after:border-4 after:inline-block ">
-                <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
-                  <svg
-                    className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 16 12"
-                  >
-                    <path
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M1 5.917 5.724 10.5 15 1.5"
-                    />
-                  </svg>
-                </span>
-              </div>
+                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
+                    <svg
+                      className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 16 12"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 5.917 5.724 10.5 15 1.5"
+                      />
+                    </svg>
+                  </span>
+                </div>
               ) : currentStep === index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
                   <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
@@ -129,90 +181,83 @@ export default function Form() {
       </nav>
 
       {/* Form */}
-      <form className="mt-12 py-12 bg-white rounded-md" onSubmit={handleSubmit(processForm)}>
+      <form
+        className="mt-12 bg-white rounded-md"
+        onSubmit={handleSubmit(processForm)}
+      >
         {currentStep === 0 && (
           <motion.div
             initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-
-            <VideoStreaming/>
-
-
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Personal Information
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Provide your personal details.
-            </p>
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="firstName"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  First name
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="firstName"
-                    {...register("firstName")}
-                    autoComplete="given-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.firstName?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.firstName.message}
-                    </p>
-                  )}
+            <div>
+              <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row pr-8">
+                <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
+                  {video}
                 </div>
-              </div>
-
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="lastName"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Last name
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="lastName"
-                    {...register("lastName")}
-                    autoComplete="family-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.lastName?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.lastName.message}
+                <div className="flex flex-col  h-full gap-12 justify-start items-start">
+                  <div className="border-b-2 border-[#8B8C89] w-full">
+                    <div className="flex">
+                      <h1 className="text-2xl  text-[#53545C] font-bold">
+                        Producto
+                      </h1>
+                      <br />
+                      <Image
+                        src="/logoStar.svg"
+                        width={41}
+                        height={41}
+                        alt="Logo Star"
+                      />
+                    </div>                                        
+                    <h5 className="mb-2 text-xl font-normal tracking-tight text-black ">
+                      {data && data[2]?.name}
+                    </h5>
+                  </div>
+                  <div className="border-b-2 border-[#8B8C89] w-full">
+                    <p className="mb-3 font-normal text-black text-xl">
+                      Pago contra entrega
                     </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Email address
-                </label>
-                <div className="mt-2">
-                  <input
-                    id="email"
-                    type="email"
-                    {...register("email")}
-                    autoComplete="email"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.email?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.email.message}
+                  </div>
+                  <div className="border-b-2 border-[#8B8C89] w-full">
+                    <p className="mb-3 font-bold text-2xl text-[#53545C] ">
+                      Envío gratis
                     </p>
-                  )}
+                  </div>
+                  <div className="border-b-2 border-[#8B8C89] w-full">
+                    <p className="mb-2 text-xl font-normal tracking-tight text-black">
+                      Description: {data && data[2]?.description}
+                    </p>
+                  </div>
+                  <div className="border-b-2 border-[#8B8C89] w-full">
+                    <h1 className="mb-3 font-bold text-2xl text-[#53545C]">
+                      Variaciones
+                    </h1>
+                    <ul className="flex gap-2">
+                      {data.length > 0 &&
+                        data[2]?.tags.map((items: any, index: number) => {
+                          return (
+                            <li
+                              key={index}
+                              className="mb-2 text-xl font-normal tracking-tight text-black"
+                            >
+                              {items}
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </div>
+                  <div className="flex w-full justify-center">
+                    <button
+                      className="select-none rounded-lg bg-[#42E083] py-3 px-12 normal-case text-center align-middle font-sans text-xl font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                      type="button"
+                      onClick={next}
+                      disabled={currentStep === steps.length - 1}
+                      data-ripple-light="true"
+                    >
+                      Comprar producto
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -327,7 +372,6 @@ export default function Form() {
                   )}
                 </div>
               </div>
-
               <div className="sm:col-span-2">
                 <label
                   htmlFor="zip"
@@ -349,7 +393,7 @@ export default function Form() {
                     </p>
                   )}
                 </div>
-              </div>
+              M</div>
             </div>
           </motion.div>
         )}

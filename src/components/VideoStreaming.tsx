@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
+import next, {steps} from "./form"; 
+import { useSteps } from '../hooks/useSteps';
+import { usePrevs } from '../hooks/useStepsPrev';
 
 interface typeData {    
       name:string;
@@ -12,6 +15,7 @@ export const VideoStreaming = () => {
   const [video, setVideo] = useState<JSX.Element | null>(null);
   const [data, setData] = useState<typeData[]>([]);
   const [url, setUrl] = useState("");
+  const { currentStep, setCurrentStep } = useSteps()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,8 +83,10 @@ export const VideoStreaming = () => {
           </div>
           <div className="flex w-full justify-center">
           <button
-              className="select-none rounded-lg bg-[#8B8C89] py-3 px-12 normal-case text-center align-middle font-sans text-xl font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              className="select-none rounded-lg bg-[#42E083] py-3 px-12 normal-case text-center align-middle font-sans text-xl font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
+              onClick={next}
+              disabled={currentStep === steps.length - 1}
               data-ripple-light="true"
             >
               Comprar producto
@@ -93,34 +99,7 @@ export const VideoStreaming = () => {
 };
 
 /*
-
-<div className="flex h-screen flex-col justify-around h-min p-4 leading-normal">
-            <h1 className="text-4xl  text-[#274C77] font-bold">Producto</h1>
-            <br />
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#53545C] ">
-            { data && data[2]?.name }
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">            
-          Description: { data && data[2]?.description }
-          </p>
-          <br />
-          <h1 className="text-black">Tallas Disponibles</h1>
-          <ul className="flex gap-2">
-          {data.length > 0 && data[2]?.tags.map((items:any, index:number ) => {
-            return <li key={index} className="flex text-black">{items}</li>
-            }) }
-          </ul>
-          <br />
-          <div className="p-6 pt-0">
-            <button
-              className="select-none rounded-lg bg-[#8B8C89] py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              type="button"
-              data-ripple-light="true"
-            >
-              Comprar producto
-            </button>
-          </div>
-        </div>
+  traer todos los produsctos
 
     <div>
     { data.map((item:typeData, index:number) => {
@@ -130,4 +109,83 @@ export const VideoStreaming = () => {
     )
   })}
   </div>
+
+  
+
+            <h2 className="text-base font-semibold leading-7 text-gray-900">
+              Personal Information
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-gray-600">
+              Provide your personal details.
+            </p>
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  First name
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="firstName"
+                    {...register("firstName")}
+                    autoComplete="given-name"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                  />
+                  {errors.firstName?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Last name
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="lastName"
+                    {...register("lastName")}
+                    autoComplete="family-name"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                  />
+                  {errors.lastName?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.lastName.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Email address
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="email"
+                    type="email"
+                    {...register("email")}
+                    autoComplete="email"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
+                  />
+                  {errors.email?.message && (
+                    <p className="mt-2 text-sm text-red-400">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
 */
