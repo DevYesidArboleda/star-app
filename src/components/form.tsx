@@ -142,8 +142,8 @@ export default function Form() {
           {steps.map((step, index) => (
             <li key={step.name} className="md:flex-auto ml-0 w-full ">
               {currentStep > index ? (
-                <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#53545C]  after:border-4 after:inline-block ">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
+                <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#42E083]  after:border-4 after:inline-block ">
+                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">
                     <svg
                       className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
                       aria-hidden="true"
@@ -162,7 +162,7 @@ export default function Form() {
                 </div>
               ) : currentStep === index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full lg:h-12 lg:w-12  shrink-0">
+                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">
                     <svg
                       className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
                       aria-hidden="true"
@@ -272,39 +272,41 @@ export default function Form() {
             </div>
 
             <Modal isOpen={open} onClose={() => setOpen(false)}>
-                <h1 className="text-black">Detalles de la compra</h1>
-                <div className="pb-3 w-full">
-                  <p className="mb-3 font-light text-base text-[#53545C]">Valor total</p>
-                  <p className="mb-3 font-semibold text-black text-2xl">{data[2]?.price}</p>
-                </div>
-                <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">                  
-                <Select label="Seleccionar ..." 
-                    className="max-w-xs mb-3 font-light text-base text-[#53545C]">
-                    {data[2]?.tags.map((items: any, index: number) => {
-                          return (
-                            <SelectItem className="text-black" key={index} value={items}>
-                              {items}
-                          </SelectItem>
-                          );
-                        })}
-                  </Select>
-                </div>
-                <div className="pb-3 w-full">
-                    <p className="mb-3 font-light text-base text-[#53545C] ">
-                      Valor envío
-                    </p>
-                    <p className="mb-3 font-semibold text-black text-2xl">
-                      Gratis
-                    </p>
+                <div className="">
+                  <h1 className="w-full flex justify-center mb-4 text-black text-xl">Detalles de la compra</h1>
+                  <div className="pb-3 w-full">
+                    <p className="mb-3 font-light text-base text-[#53545C]">Valor total</p>
+                    <p className="mb-3 font-semibold text-black text-2xl">{data[2]?.price}</p>
                   </div>
-                <button
-                  className="btn-success"
-                  type="button"
-                  onClick={next}
-                  disabled={currentStep === steps.length - 1}
-                  data-ripple-light="true">
-                  Continuar
-                </button>
+                  <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">                  
+                  <Select label="Seleccionar ..." 
+                      className="max-w-xs mb-3 font-light text-base text-[#53545C]">
+                      {data[2]?.tags.map((items: any, index: number) => {
+                            return (
+                              <SelectItem className="text-black" key={index} value={items}>
+                                {items}
+                            </SelectItem>
+                            );
+                          })}
+                    </Select>
+                  </div>
+                  <div className="pb-3 w-full">
+                      <p className="mb-3 font-light text-base text-[#53545C] ">
+                        Valor envío
+                      </p>
+                      <p className="mb-3 font-semibold text-black text-2xl">
+                        Gratis
+                      </p>
+                    </div>
+                  <button
+                    className="btn-success flex w-full items-center text-center justify-center"
+                    type="button"
+                    onClick={next}
+                    disabled={currentStep === steps.length - 1}
+                    data-ripple-light="true">
+                    Continuar
+                  </button>
+                </div>
             </Modal>
  
           </motion.div>
