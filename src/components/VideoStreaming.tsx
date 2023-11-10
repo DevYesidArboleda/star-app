@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
-import next, {steps} from "./form"; 
+import next, {steps} from "./Form"; 
 import { useSteps } from '../hooks/useSteps';
 import { usePrevs } from '../hooks/useStepsPrev';
 

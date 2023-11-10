@@ -1,8 +1,6 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-
 import { z } from "zod";
 import { FormDataSchema } from "../../lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -101,6 +99,14 @@ export default function Form() {
         setUrl(result.doc[2].videoUrl);
         console.log("respuesta", result);
         console.log("video", result.doc[2].videoUrl);
+        setVideo(
+          <ReactPlayer
+            url={result.doc[2].videoUrl}
+            controls={true}
+            height="750px"
+            width="464px"
+          />
+        );
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
@@ -109,19 +115,21 @@ export default function Form() {
     fetchData();
   }, []);
 
-  useEffect(() => {
+  //Hooks Para poder traer el video
+  /*useEffect(() => {
     setVideo(
       <ReactPlayer
-        url={`${url}`}
+        url={url}
         controls={true}
         height="750px"
         width="464px"
       />
     );
-  }, []);
+    console.log("entro aqui", url)
+  }, []);*/
 
   return (
-    <section className="absolute inset-0 flex flex-col justify-between m-8 p-10 ">
+    <section className="bg-[#E7ECEF] absolute inset-0 flex flex-col justify-between p-14 ">
       {/* steps */}
       <nav
         aria-label="Progress"
@@ -145,8 +153,8 @@ export default function Form() {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M1 5.917 5.724 10.5 15 1.5"
                       />
                     </svg>
@@ -164,8 +172,8 @@ export default function Form() {
                     >
                       <path
                         stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M1 5.917 5.724 10.5 15 1.5"
                       />
                     </svg>
@@ -269,13 +277,12 @@ export default function Form() {
                   <p className="mb-3 font-light text-base text-[#53545C]">Valor total</p>
                   <p className="mb-3 font-semibold text-black text-2xl">{data[2]?.price}</p>
                 </div>
-                <p className="mb-3 font-light text-base text-[#53545C]">Seleccionar Talla</p>
                 <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">                  
                 <Select label="Seleccionar ..." 
                     className="max-w-xs mb-3 font-light text-base text-[#53545C]">
                     {data[2]?.tags.map((items: any, index: number) => {
                           return (
-                            <SelectItem className="bg-slate-600 rounded-sm" key={index} value={items}>
+                            <SelectItem className="text-black" key={index} value={items}>
                               {items}
                           </SelectItem>
                           );

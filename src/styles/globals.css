@@ -18,7 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #e7ecef;
+  background: #E7ECEF !important;
 }
 
 .TestP li:last-child div {
