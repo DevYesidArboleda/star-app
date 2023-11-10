@@ -18,21 +18,27 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #E7ECEF;
+  background: #e7ecef;
 }
 
-.TestP  li:last-child div{
+.TestP li:last-child div {
   flex-direction: row-reverse;
 }
 
-.TestP  li:last-child div::after{
+.TestP li:last-child div::after {
   display: none;
 }
 
-.TestP  li:last-child {
+.TestP li:last-child {
   width: auto;
 }
 
-.videoPlayer video{
+.videoPlayer video {
   border-radius: 18px;
+}
+
+@layer components {
+  .btn-success {
+    @apply select-none rounded-lg bg-[#42E083] py-3 px-12 normal-case text-center align-middle font-sans text-xl font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none;
+  }
 }

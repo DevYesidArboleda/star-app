@@ -12,6 +12,8 @@ import { useSteps } from "../hooks/useSteps";
 import { usePrevs } from "../hooks/useStepsPrev";
 import ReactPlayer from "react-player";
 import Image from 'next/image'
+import {Select, SelectItem} from "@nextui-org/react";
+import Modal from "./Modal";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -42,6 +44,7 @@ export default function Form() {
   const [video, setVideo] = useState<JSX.Element | null>(null);
   const [data, setData] = useState<typeData[]>([]);
   const [url, setUrl] = useState("");
+  const [open, setOpen] = useState<boolean>(false) 
   const delta = currentStep - previousStep;
 
   const {
@@ -144,7 +147,6 @@ export default function Form() {
                         stroke="currentColor"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        stroke-width="2"
                         d="M1 5.917 5.724 10.5 15 1.5"
                       />
                     </svg>
@@ -164,7 +166,6 @@ export default function Form() {
                         stroke="currentColor"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        stroke-width="2"
                         d="M1 5.917 5.724 10.5 15 1.5"
                       />
                     </svg>
@@ -249,10 +250,10 @@ export default function Form() {
                   </div>
                   <div className="flex w-full justify-center">
                     <button
-                      className="select-none rounded-lg bg-[#42E083] py-3 px-12 normal-case text-center align-middle font-sans text-xl font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                      className="btn-success"
                       type="button"
-                      onClick={next}
-                      disabled={currentStep === steps.length - 1}
+                      onClick={ data[2]?.tags !== null ? ()=>setOpen(true) : next}
+                      disabled={data[2]?.tags !== null ? false : currentStep === steps.length - 1}
                       data-ripple-light="true"
                     >
                       Comprar producto
@@ -261,6 +262,44 @@ export default function Form() {
                 </div>
               </div>
             </div>
+
+            <Modal isOpen={open} onClose={() => setOpen(false)}>
+                <h1 className="text-black">Detalles de la compra</h1>
+                <div className="pb-3 w-full">
+                  <p className="mb-3 font-light text-base text-[#53545C]">Valor total</p>
+                  <p className="mb-3 font-semibold text-black text-2xl">{data[2]?.price}</p>
+                </div>
+                <p className="mb-3 font-light text-base text-[#53545C]">Seleccionar Talla</p>
+                <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">                  
+                <Select label="Seleccionar ..." 
+                    className="max-w-xs mb-3 font-light text-base text-[#53545C]">
+                    {data[2]?.tags.map((items: any, index: number) => {
+                          return (
+                            <SelectItem className="bg-slate-600 rounded-sm" key={index} value={items}>
+                              {items}
+                          </SelectItem>
+                          );
+                        })}
+                  </Select>
+                </div>
+                <div className="pb-3 w-full">
+                    <p className="mb-3 font-light text-base text-[#53545C] ">
+                      Valor envío
+                    </p>
+                    <p className="mb-3 font-semibold text-black text-2xl">
+                      Gratis
+                    </p>
+                  </div>
+                <button
+                  className="btn-success"
+                  type="button"
+                  onClick={next}
+                  disabled={currentStep === steps.length - 1}
+                  data-ripple-light="true">
+                  Continuar
+                </button>
+            </Modal>
+ 
           </motion.div>
         )}
 
