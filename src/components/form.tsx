@@ -8,10 +8,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { VideoStreaming } from "./VideoStreaming";
 import { useSteps } from "../hooks/useSteps";
 import { usePrevs } from "../hooks/useStepsPrev";
-import ReactPlayer from "react-player";
-import Image from 'next/image'
 import {Select, SelectItem} from "@nextui-org/react";
 import Modal from "./Modal";
+import Steps  from "./Steps";
+import { AddressProduct } from "./AddressProduct";
+import ReactPlayer from "react-player";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -41,6 +42,7 @@ export default function Form() {
   const { currentStep, setCurrentStep } = useSteps();
   const [video, setVideo] = useState<JSX.Element | null>(null);
   const [data, setData] = useState<typeData[]>([]);
+  const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false) 
   const delta = currentStep - previousStep;
@@ -115,79 +117,10 @@ export default function Form() {
     fetchData();
   }, []);
 
-  //Hooks Para poder traer el video
-  /*useEffect(() => {
-    setVideo(
-      <ReactPlayer
-        url={url}
-        controls={true}
-        height="750px"
-        width="464px"
-      />
-    );
-    console.log("entro aqui", url)
-  }, []);*/
-
   return (
-    <section className="bg-[#E7ECEF] absolute inset-0 flex flex-col justify-between p-14 ">
-      {/* steps */}
-      <nav
-        aria-label="Progress"
-        className="flex items-center w-full justify-center"
-      >
-        <ol
-          role="list"
-          className="space-y-0 md:flex w-3/4 TestP [&>*:first-child]:flex-row  [&>*:last-child]:flex-row-reverse"
-        >
-          {steps.map((step, index) => (
-            <li key={step.name} className="md:flex-auto ml-0 w-full ">
-              {currentStep > index ? (
-                <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#42E083]  after:border-4 after:inline-block ">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">
-                    <svg
-                      className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 16 12"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M1 5.917 5.724 10.5 15 1.5"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              ) : currentStep === index ? (
-                <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">
-                    <svg
-                      className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 16 12"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M1 5.917 5.724 10.5 15 1.5"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              ) : (
-                <div className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b  after:border-[#DCDCDC] after:border-4 after:inline-block text-[#DCDCDC]">
-                  <div className="border-[#DCDCDC] border-4  flex items-center justify-center w-10 h-10 bg-transparent rounded-full lg:h-12 lg:w-12  shrink-0"></div>
-                </div>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
+    <section className="bg-[#E7ECEF] h-scTestP absolute inset-0 flex flex-col justify-between p-14 ">
+
+      <Steps currentStep={currentStep} />
 
       {/* Form */}
       <form
@@ -200,76 +133,8 @@ export default function Form() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <div>
-              <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row pr-8">
-                <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
-                  {video}
-                </div>
-                <div className="flex flex-col  h-full gap-12 justify-start items-start">
-                  <div className="border-b-2 border-[#8B8C89] w-full">
-                    <div className="flex">
-                      <h1 className="text-2xl  text-[#53545C] font-bold">
-                        Producto
-                      </h1>
-                      <br />
-                      <Image
-                        src="/logoStar.svg"
-                        width={41}
-                        height={41}
-                        alt="Logo Star"
-                      />
-                    </div>                                        
-                    <h5 className="mb-2 text-xl font-normal tracking-tight text-black ">
-                      {data && data[2]?.name}
-                    </h5>
-                  </div>
-                  <div className="border-b-2 border-[#8B8C89] w-full">
-                    <p className="mb-3 font-normal text-black text-xl">
-                      Pago contra entrega
-                    </p>
-                  </div>
-                  <div className="border-b-2 border-[#8B8C89] w-full">
-                    <p className="mb-3 font-bold text-2xl text-[#53545C] ">
-                      Envío gratis
-                    </p>
-                  </div>
-                  <div className="border-b-2 border-[#8B8C89] w-full">
-                    <p className="mb-2 text-xl font-normal tracking-tight text-black">
-                      Description: {data && data[2]?.description}
-                    </p>
-                  </div>
-                  <div className="border-b-2 border-[#8B8C89] w-full">
-                    <h1 className="mb-3 font-bold text-2xl text-[#53545C]">
-                      Variaciones
-                    </h1>
-                    <ul className="flex gap-2">
-                      {data.length > 0 &&
-                        data[2]?.tags.map((items: any, index: number) => {
-                          return (
-                            <li
-                              key={index}
-                              className="mb-2 text-xl font-normal tracking-tight text-black"
-                            >
-                              {items}
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  </div>
-                  <div className="flex w-full justify-center">
-                    <button
-                      className="btn-success"
-                      type="button"
-                      onClick={ data[2]?.tags !== null ? ()=>setOpen(true) : next}
-                      disabled={data[2]?.tags !== null ? false : currentStep === steps.length - 1}
-                      data-ripple-light="true"
-                    >
-                      Comprar producto
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
+            <VideoStreaming setOpen={setOpen} data={data} video={video}/>
 
             <Modal isOpen={open} onClose={() => setOpen(false)}>
                 <div className="">
@@ -283,7 +148,7 @@ export default function Form() {
                       className="max-w-xs mb-3 font-light text-base text-[#53545C]">
                       {data[2]?.tags.map((items: any, index: number) => {
                             return (
-                              <SelectItem className="text-black" key={index} value={items}>
+                              <SelectItem className="text-black" key={index} value={items} onClick={() => setVaration(items)}>
                                 {items}
                             </SelectItem>
                             );
@@ -318,131 +183,9 @@ export default function Form() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Address
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Address where you can receive mail.
-            </p>
+            
+            <AddressProduct variation={ variation }/>
 
-            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <label
-                  htmlFor="country"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Country
-                </label>
-                <div className="mt-2">
-                  <select
-                    id="country"
-                    {...register("country")}
-                    autoComplete="country-name"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                  >
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
-                  {errors.country?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.country.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="col-span-full">
-                <label
-                  htmlFor="street"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Street address
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="street"
-                    {...register("street")}
-                    autoComplete="street-address"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.street?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.street.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="sm:col-span-2 sm:col-start-1">
-                <label
-                  htmlFor="city"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  City
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="city"
-                    {...register("city")}
-                    autoComplete="address-level2"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.city?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.city.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="state"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  State / Province
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="state"
-                    {...register("state")}
-                    autoComplete="address-level1"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.state?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.state.message}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="sm:col-span-2">
-                <label
-                  htmlFor="zip"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  ZIP / Postal code
-                </label>
-                <div className="mt-2">
-                  <input
-                    type="text"
-                    id="zip"
-                    {...register("zip")}
-                    autoComplete="postal-code"
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
-                  />
-                  {errors.zip?.message && (
-                    <p className="mt-2 text-sm text-red-400">
-                      {errors.zip.message}
-                    </p>
-                  )}
-                </div>
-              M</div>
-            </div>
           </motion.div>
         )}
 
