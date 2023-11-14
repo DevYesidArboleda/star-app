@@ -8,12 +8,12 @@ const steps = [
     {
       id: "Step 2",
       name: "Address",
-      fields: ["country", "state", "city", "street", "zip"],
+      fields: ["city", "street"],
     },
     { id: "Step 3", name: "Complete" },
   ];
 
-const Steps = ( { currentStep}:any ) => {
+const Steps = ( { currentStep }:any ) => {
   return (
     <div>
         <nav
