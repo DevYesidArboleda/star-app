@@ -28,40 +28,12 @@ const Steps = ( { currentStep}:any ) => {
             <li key={step.name} className="md:flex-auto ml-0 w-full ">
               {currentStep > index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#42E083]  after:border-4 after:inline-block ">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">
-                    <svg
-                      className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 16 12"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M1 5.917 5.724 10.5 15 1.5"
-                      />
-                    </svg>
+                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">                    
                   </span>
                 </div>
               ) : currentStep === index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">
-                    <svg
-                      className="w-3.5 h-3.5 text-white lg:w-4 lg:h-4 "
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 16 12"
-                    >
-                      <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M1 5.917 5.724 10.5 15 1.5"
-                      />
-                    </svg>
+                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">                    
                   </span>
                 </div>
               ) : (

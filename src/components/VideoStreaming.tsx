@@ -23,7 +23,7 @@ export const VideoStreaming = ({setOpen, data, video}:any) => {
 
   return (
     <div>
-              <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row pr-8">
+              <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-row pr-8">
                 <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
                   {video}
                 </div>

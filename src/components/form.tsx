@@ -118,7 +118,7 @@ export default function Form() {
   }, []);
 
   return (
-    <section className="bg-[#E7ECEF] h-scTestP absolute inset-0 flex flex-col justify-between p-14 ">
+    <section className="bg-[#E7ECEF] h-scTestP inset-0 flex flex-col justify-between p-14 ">
 
       <Steps currentStep={currentStep} />
 
