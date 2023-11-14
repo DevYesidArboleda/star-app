@@ -14,6 +14,7 @@ import Steps from "./Steps";
 import { AddressProduct } from "./AddressProduct";
 import Image from "next/image";
 import ReactPlayer from "react-player";
+import { CompletePay } from "./CompletePay";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -124,7 +125,7 @@ export default function Form() {
 
       {/* Form */}
       <form
-        className="mt-12 bg-transparent rounded-md"
+        className="mt-12 bg-transparent rounded-md flex justify-center"
         onSubmit={handleSubmit(processForm)}
       >
         {currentStep === 0 && (
@@ -140,13 +141,13 @@ export default function Form() {
                 <h1 className="w-full flex justify-center mb-4 text-black text-xl">
                   Detalles de la compra
                 </h1>
-                <div className="pb-3 w-full">
-                  <p className="mb-3 font-light text-base text-[#53545C]">
+                <div className="flex flex-col pb-3 w-full">
+                  <span className="mb-3 font-light text-base text-[#53545C]">
                     Valor total
-                  </p>
-                  <p className="mb-3 font-semibold text-black text-2xl">
+                  </span>
+                  <span className="mb-3 font-semibold text-black text-2xl">
                     {data[2]?.price}
-                  </p>
+                  </span>
                 </div>
                 <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
                   <Select
@@ -167,13 +168,13 @@ export default function Form() {
                     })}
                   </Select>
                 </div>
-                <div className="pb-3 w-full">
-                  <p className="mb-3 font-light text-base text-[#53545C] ">
+                <div className="flex flex-col pb-3 w-full">
+                  <span className="mb-3 font-light text-base text-[#53545C] ">
                     Valor envío
-                  </p>
-                  <p className="mb-3 font-semibold text-black text-2xl">
+                  </span>
+                  <span className="mb-3 font-semibold text-black text-2xl">
                     Gratis
-                  </p>
+                  </span>
                 </div>
                 <button
                   className="btn-success flex w-full items-center text-center justify-center"
@@ -200,9 +201,9 @@ export default function Form() {
                 <h2 className=" leading-7  text-black text-xl font-medium text-center mb-5">
                   Hacer Pedido
                 </h2>
-                <p className="mt-1 text-base font-medium leading-6 text-[#8B8D97]">
+                <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97]">
                   Ingresa tus datos
-                </p>
+                </span>
 
                 <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                   <div className="col-span-full">
@@ -232,9 +233,9 @@ export default function Form() {
                         className="bg-Form-input "
                       />
                       {errors.phone?.message && (
-                        <p className="mt-2 text-sm text-red-400">
+                        <span className="mt-2 text-sm text-red-400">
                           {errors.phone.message}
-                        </p>
+                        </span>
                       )}
                     </div>
                   </div>
@@ -249,9 +250,9 @@ export default function Form() {
                         className="bg-Form-input "
                       />
                       {errors.email?.message && (
-                        <p className="mt-2 text-sm text-red-400">
+                        <span className="mt-2 text-sm text-red-400">
                           {errors.email.message}
-                        </p>
+                        </span>
                       )}
                     </div>
                   </div>
@@ -294,9 +295,9 @@ export default function Form() {
                         <option>Medellin</option>
                       </select>
                       {errors.city?.message && (
-                        <p className="mt-2 text-sm text-red-400">
+                        <span className="mt-2 text-sm text-red-400">
                           {errors.city.message}
-                        </p>
+                        </span>
                       )}
                     </div>
                   </div>
@@ -409,12 +410,7 @@ export default function Form() {
 
         {currentStep === 2 && (
           <>
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
-              Complete
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Thank you for your submission.
-            </p>
+            <CompletePay/>
           </>
         )}
       </form>
