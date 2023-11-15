@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 
-export const CompletePay = () => {
+
+
+export const CompletePay   = ({setStart}:any) => {
+    const [completePay, setCompletePay] = useState<boolean>()
+    
+
   return (
     <div className='flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow max-w-screen-lg'>
         <div className=''>
@@ -23,7 +28,7 @@ export const CompletePay = () => {
             </h1>            
         </div>
         <div className='pb-[50px]'>
-            <button className='btn-success '>
+            <button className='btn-success ' onClick={() => setStart(true)}>
                 Quiero ser una estrella
             </button>
         </div>

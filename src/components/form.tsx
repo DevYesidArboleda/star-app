@@ -15,6 +15,7 @@ import { AddressProduct } from "./AddressProduct";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
+import { UseWindowSize } from "@/hooks/UseWindowSize";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -30,6 +31,7 @@ export const steps = [
     fields: ["city", "street", "date", "phone", "name", "email"],
   },
   { id: "Step 3", name: "Complete" },
+  { id: "Step 4", name: "RegisterStar" },
 ];
 
 interface typeData {
@@ -47,7 +49,9 @@ export default function Form() {
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false);
+  const [start, setStart] = useState<boolean>(false);
   const delta = currentStep - previousStep;
+  const windowSize = UseWindowSize();
 
   const {
     register,
@@ -107,8 +111,9 @@ export default function Form() {
           <ReactPlayer
             url={result.doc[2].videoUrl}
             controls={true}
-            height="750px"
-            width="464px"
+            width="100%"
+            height="100%"
+            playing={true}
           />
         );
       } catch (error) {
@@ -344,7 +349,7 @@ export default function Form() {
 
               <div className="py-2 w-[72%]">
                 <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-row pr-8">
-                  <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
+                  <div className="w-[464px] h-4/5 rounded-md m-8 videoPlayer">
                     {video}
                   </div>
                   <div className="flex flex-col  h-full gap-12 justify-start items-start">
@@ -369,15 +374,15 @@ export default function Form() {
                     <div className="border-b-2 border-[#8B8C89] w-full">
                       <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
                         Valor del producto
-                      </span> 
+                      </span>
                       <span className="mb-3 font-normal text-black text-xl">
                         {data && data[2]?.price}
                       </span>
                     </div>
                     <div className="border-b-2 border-[#8B8C89] w-full">
-                    <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
+                      <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
                         Valor del envío
-                      </span> 
+                      </span>
                       <span className="mb-3 font-light text-xl text-black ">
                         Gratis
                       </span>
@@ -387,7 +392,7 @@ export default function Form() {
                         Detalles
                       </h1>
                       <span className="text-black font-light text-xl">
-                        Variaciones: { variation }
+                        Variaciones: {variation}
                       </span>
                     </div>
                     <div className="flex w-full justify-center">
@@ -410,7 +415,13 @@ export default function Form() {
 
         {currentStep === 2 && (
           <>
-            <CompletePay/>
+            <CompletePay setStart={setStart}/>
+          </>
+        )}
+
+        {start === true && (
+          <>
+            Hola
           </>
         )}
       </form>
