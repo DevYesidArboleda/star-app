@@ -31,7 +31,6 @@ export const steps = [
     fields: ["city", "street", "date", "phone", "name", "email"],
   },
   { id: "Step 3", name: "Complete" },
-  { id: "Step 4", name: "RegisterStar" },
 ];
 
 interface typeData {
@@ -52,6 +51,8 @@ export default function Form() {
   const [start, setStart] = useState<boolean>(false);
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
+
+  console.log("tamaño", windowSize)
 
   const {
     register,
@@ -252,7 +253,7 @@ export default function Form() {
                         id="email"
                         {...register("email")}
                         placeholder="Correo Electrónico"
-                        className="bg-Form-input "
+                        className="bg-Form-input"
                       />
                       {errors.email?.message && (
                         <span className="mt-2 text-sm text-red-400">
@@ -416,12 +417,6 @@ export default function Form() {
         {currentStep === 2 && (
           <>
             <CompletePay setStart={setStart}/>
-          </>
-        )}
-
-        {start === true && (
-          <>
-            Hola
           </>
         )}
       </form>

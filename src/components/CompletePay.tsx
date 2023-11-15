@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 
 
@@ -29,7 +30,7 @@ export const CompletePay   = ({setStart}:any) => {
         </div>
         <div className='pb-[50px]'>
             <button className='btn-success ' onClick={() => setStart(true)}>
-                Quiero ser una estrella
+                <Link href="/register">Quiero ser una estrella</Link>
             </button>
         </div>
     </div>
