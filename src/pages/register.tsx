@@ -43,9 +43,9 @@ const Register: FC<FormularioProps> = () => {
     <>
     <Header/>
     <form onSubmit={onSubmit}>
-      <div className="flex flex-col bg-[#E7ECEF] w-screen h-screen justify-center items-center">
+      <div className="flex flex-col bg-[#E7ECEF] w-screen h-screen justify-center items-center ">
         <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow  ">
-            <div className="py-[44px] px-[161px]">
+            <div className="py-[22px] px-[40px] md:py-[44px] md:px-[161px]">
                 <Image
                     src="/logoStar.svg"
                     width={140}

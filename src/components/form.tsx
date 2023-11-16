@@ -49,11 +49,8 @@ export default function Form() {
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false);
-  const [start, setStart] = useState<boolean>(false);
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
-
-  console.log("tamaño", windowSize)
 
   const {
     register,
@@ -129,7 +126,7 @@ export default function Form() {
   return (
     <>
     {
-      windowSize.width >= 900 ?
+      windowSize.width >= 768 ?
       <section className="bg-transparent h-scTestP inset-0 flex flex-col justify-between p-14 ">
       <Steps currentStep={currentStep} />
 
@@ -398,13 +395,13 @@ export default function Form() {
 
         {currentStep === 2 && (
           <>
-            <CompletePay setStart={setStart}/>
+            <CompletePay />
           </>
         )}
       </form>
     
     </section> :    
-    <section className="h-screen bg-[#E7ECEF]">
+    <section className=" bg-[#E7ECEF] flex items-center">
       {/* Mobile */}      
       <FormMobile data={data} video={video}/>
     </section>
