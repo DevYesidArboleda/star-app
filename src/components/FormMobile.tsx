@@ -11,7 +11,7 @@ import { CompletePay } from "./CompletePay";
 
 export default function FormMobile({ data, video }: any) {
   const [variation, setVaration] = useState("");
-  const [move, setMove] = useState<boolean>(true);
+  const [move, setMove] = useState<boolean>(false);
 
   const {
     register,
@@ -26,7 +26,7 @@ export default function FormMobile({ data, video }: any) {
     // TODO: submit to server
     // ...
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
+    console.log("llego aqui")
     reset();
     setMove(true)
   };
@@ -263,7 +263,9 @@ export default function FormMobile({ data, video }: any) {
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}>
 
-            <CompletePay/>
+            <div className="h-screen flex items-center">
+                <CompletePay/>
+            </div>
 
           </motion.div>
         )}

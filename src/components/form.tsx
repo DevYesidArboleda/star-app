@@ -401,7 +401,7 @@ export default function Form() {
       </form>
     
     </section> :    
-    <section className=" bg-[#E7ECEF] flex items-center">
+    <section className=" bg-[#E7ECEF] flex ">
       {/* Mobile */}      
       <FormMobile data={data} video={video}/>
     </section>
