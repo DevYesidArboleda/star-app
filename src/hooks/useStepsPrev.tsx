@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function usePrevs() {
+export const usePrevs = () => {
   const [previousStep, setPreviousStep] = useState(0)
 
   return {

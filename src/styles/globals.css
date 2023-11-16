@@ -37,6 +37,7 @@ body {
 
 .videoPlayer video {
   border-radius: 18px;
+  max-height: 750px;
 }
 
 @layer components {

@@ -16,6 +16,7 @@ import Image from "next/image";
 import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
+import FormMobile from "./FormMobile";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -126,7 +127,10 @@ export default function Form() {
   }, []);
 
   return (
-    <section className="bg-transparent h-scTestP inset-0 flex flex-col justify-between p-14 ">
+    <>
+    {
+      windowSize.width >= 900 ?
+      <section className="bg-transparent h-scTestP inset-0 flex flex-col justify-between p-14 ">
       <Steps currentStep={currentStep} />
 
       {/* Form */}
@@ -311,28 +315,6 @@ export default function Form() {
                   <div className="col-span-full">
                     <label
                       htmlFor="city"
-                      className="text-[10px] block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Fecha de entrega aproximada
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="date"
-                        id="date"
-                        {...register("date")}
-                        className="bg-Form-input "
-                      />
-                      {errors.date?.message && (
-                        <p className="mt-2 text-sm text-red-400">
-                          {errors.date.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="col-span-full">
-                    <label
-                      htmlFor="city"
                       className="block text-[10px] font-medium leading-6 text-gray-900"
                     >
                       Notas adicionales
@@ -420,54 +402,13 @@ export default function Form() {
           </>
         )}
       </form>
-
-      {/* Navigation */}
-      <div className="mt-8 pt-5">
-        <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={prev}
-            disabled={currentStep === 0}
-            className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            disabled={currentStep === steps.length - 1}
-            className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+    
+    </section> :    
+    <section className="h-screen bg-[#E7ECEF]">
+      {/* Mobile */}      
+      <FormMobile data={data} video={video}/>
     </section>
+    }
+    </>
   );
 }

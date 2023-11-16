@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export function useSteps() {
+export const useSteps = () => {
   const [currentStep, setCurrentStep] = useState(0);
 
   return {
