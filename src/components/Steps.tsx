@@ -15,7 +15,7 @@ const steps = [
 
 const Steps = ( { currentStep }:any ) => {
   return (
-    <div>
+    <>
         <nav
         aria-label="Progress"
         className="flex items-center w-full justify-center"
@@ -45,7 +45,7 @@ const Steps = ( { currentStep }:any ) => {
           ))}
         </ol>
       </nav>
-    </div>
+    </>
   )
 }
 

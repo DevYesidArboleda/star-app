@@ -8,6 +8,7 @@ import { Select, SelectItem } from "@nextui-org/react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { CompletePay } from "./CompletePay";
+import ReactPlayer from "react-player";
 
 export default function FormMobile({ data, video }: any) {
   const [variation, setVaration] = useState("");

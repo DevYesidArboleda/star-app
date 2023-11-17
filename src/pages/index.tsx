@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { VideoStreaming } from "@/components/VideoStreaming";
-import  Form  from "@/components/form";
+import  Form  from "@/components/Form";
 import {NextUIProvider} from "@nextui-org/react";
 import { Header } from '@/components/Header';
 
