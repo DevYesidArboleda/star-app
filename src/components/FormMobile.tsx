@@ -201,7 +201,7 @@ export default function FormMobile({ data, video }: any) {
                     {video}
                   </div>
                   <div className="flex flex-col  h-full gap-12 justify-center items-center">
-                    <div className="border-b-2 border-[#8b8c89a3] w-full">
+                    <div className="border-b-2 border-[#D9D9D9a3] w-full">
                       <div className="flex items-center justify-center">
                         <h1 className="text-2xl  text-[#53545C] font-bold text-center">
                           Producto
@@ -219,7 +219,7 @@ export default function FormMobile({ data, video }: any) {
                         {data && data[2]?.name}
                       </h5>
                     </div>
-                    <div className="border-b-2 border-[#8b8c89a3] w-full">
+                    <div className="border-b-2 border-[#D9D9D9a3] w-full">
                       <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] text-center">
                         Valor del producto
                       </span>
@@ -227,7 +227,7 @@ export default function FormMobile({ data, video }: any) {
                         {data && data[2]?.price}
                       </span>
                     </div>
-                    <div className="border-b-2 border-[#8b8c89a3] w-full">
+                    <div className="border-b-2 border-[#D9D9D9a3] w-full">
                       <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] text-center">
                         Valor del envío
                       </span>
@@ -235,7 +235,7 @@ export default function FormMobile({ data, video }: any) {
                         Gratis
                       </span>
                     </div>
-                    <div className="border-b-2 border-[#8b8c89a3] w-full">
+                    <div className="border-b-2 border-[#D9D9D9a3] w-full">
                       <h1 className="mb-3 font-bold text-2xl text-[#53545C] flex w-full justify-center">
                         Detalles
                       </h1>

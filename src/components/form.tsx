@@ -128,7 +128,7 @@ export default function Form() {
     <>
       {windowSize.width >= 768 ? (
         <section
-          className="bg-transparent h-scTestP inset-0 flex flex-col justify-between p-14 "
+          className="bg-transparent h-scTestP inset-0 flex flex-col justify-between xl:p-14 md:p-4 "
           suppressHydrationWarning={true}
         >
           <Steps currentStep={currentStep} />
@@ -347,7 +347,7 @@ export default function Form() {
                         {video}
                       </div>
                       <div className="flex flex-col  h-full gap-12 justify-start items-start">
-                        <div className="border-b-2 border-[#8B8C89] w-full">
+                        <div className="border-b-2 border-[#D9D9D9] w-full">
                           <div className="flex">
                             <h1 className="text-2xl  text-[#53545C] font-bold">
                               Producto
@@ -365,7 +365,7 @@ export default function Form() {
                             {data && data[2]?.name}
                           </h5>
                         </div>
-                        <div className="border-b-2 border-[#8B8C89] w-full">
+                        <div className="border-b-2 border-[#D9D9D9] w-full">
                           <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
                             Valor del producto
                           </span>
@@ -373,7 +373,7 @@ export default function Form() {
                             {data && data[2]?.price}
                           </span>
                         </div>
-                        <div className="border-b-2 border-[#8B8C89] w-full">
+                        <div className="border-b-2 border-[#D9D9D9] w-full">
                           <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
                             Valor del envío
                           </span>
@@ -381,7 +381,7 @@ export default function Form() {
                             Gratis
                           </span>
                         </div>
-                        <div className="border-b-2 border-[#8B8C89] w-full">
+                        <div className="border-b-2 border-[#D9D9D9] w-full">
                           <h1 className="mb-3 font-bold text-2xl text-[#53545C]">
                             Detalles
                           </h1>

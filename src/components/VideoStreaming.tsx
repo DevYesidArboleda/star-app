@@ -25,7 +25,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">{video}</div>
           <div className="flex flex-col  h-full gap-12 justify-start items-center">
-            <div className="border-b-2 border-[#8B8C89] w-full">
+            <div className="border-b-2 border-[#D9D9D9] w-full">
               <div className="flex">
                 <h1 className="text-2xl  text-[#53545C] font-bold">Producto</h1>
                 <br />
@@ -41,22 +41,22 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
                 {data && data[2]?.name}
               </h5>
             </div>
-            <div className="border-b-2 border-[#8B8C89] w-full">
+            <div className="border-b-2 border-[#D9D9D9] w-full">
               <p className="mb-3 font-normal text-black text-xl">
                 Pago contra entrega
               </p>
             </div>
-            <div className="border-b-2 border-[#8B8C89] w-full">
+            <div className="border-b-2 border-[#D9D9D9] w-full">
               <p className="mb-3 font-bold text-2xl text-[#53545C] ">
                 Envío gratis
               </p>
             </div>
-            <div className="border-b-2 border-[#8B8C89] w-full">
+            <div className="border-b-2 border-[#D9D9D9] w-full">
               <p className="mb-2 text-xl font-normal tracking-tight text-black">
                 Description: {data && data[2]?.description}
               </p>
             </div>
-            <div className="border-b-2 border-[#8B8C89] w-full">
+            <div className="border-b-2 border-[#D9D9D9] w-full">
               <h1 className="mb-3 font-bold text-2xl text-[#53545C]">
                 Variaciones
               </h1>
