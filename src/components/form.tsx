@@ -24,7 +24,7 @@ type Inputs = z.infer<typeof FormDataSchema>;
 export const steps = [
   {
     id: "Step 1",
-    name: "Personal Information",
+    name: "Product Information",
     fields: ["firstName", "lastName"],
   },
   {
