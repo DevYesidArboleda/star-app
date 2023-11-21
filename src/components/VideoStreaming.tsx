@@ -12,6 +12,10 @@ interface typeData {
   tags: string[];
 }
 
+interface ArrayDeArrays {
+  TypeData: typeData[][];
+}
+
 export const VideoStreaming = ({ setOpen, data, video }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
 
