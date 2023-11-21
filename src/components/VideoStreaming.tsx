@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactPlayer from "react-player";
 import next, { steps } from "./Form";
 import { useSteps } from "../hooks/useSteps";
 import Image from "next/image";
