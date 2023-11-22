@@ -1,5 +1,5 @@
 import React from "react";
-import next, { steps } from './Form';
+import next, { steps } from '../../src/components/Form';
 import { useSteps } from "../hooks/useSteps";
 import Image from "next/image";
 import { usePrevs } from "../hooks/useStepsPrev";
