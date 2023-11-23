@@ -4,7 +4,14 @@ const nextConfig = {
   experimental:{
     outputStandalone: true
   },
-
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://martiolo.xyz/:path*',
+      },
+    ]
+  },
   async headers() {
     return [
         {
