@@ -97,10 +97,7 @@ export default function Form() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://martiolo.xyz/api/products/allProducts",{
-            mode: 'cors', // <---
-            cache: 'default'
-          }
+          "https://martiolo.xyz/api/products/allProducts"
         );
         if (!response.ok) {
           throw new Error("Error al cargar los datos");
