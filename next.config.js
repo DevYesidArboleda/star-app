@@ -1,15 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental:{
-    outputStandalone: true
-  },
 
   async headers() {
     return [
       {
         // matching all API routes
-        source: "https://martiolo.xyz/api/products/allProducts",
+        source: "https://martiolo.xyz/api/products/allProducts*",
         headers: [
           { key: "Access-Control-Allow-Credentials", value: "true" },
           { key: "Access-Control-Allow-Origin", value: "*" },
