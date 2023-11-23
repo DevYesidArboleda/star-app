@@ -98,7 +98,7 @@ export default function Form() {
       try {
         const response = await fetch(
           "https://martiolo.xyz/api/products/allProducts",{
-            mode: 'no-cors', // <---
+            mode: 'cors', // <---
             cache: 'default'
           }
         );
