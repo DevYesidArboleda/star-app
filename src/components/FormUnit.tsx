@@ -18,6 +18,7 @@ import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
+import dataApi from "../../api";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -95,6 +96,8 @@ export default function Form() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const daty = await dataApi.get('/products/allProducts');
+      console.log("ajaja", daty);
       try {
         const response = await fetch(
           "https://martiolo.xyz/api/products/allProducts"
@@ -121,7 +124,7 @@ export default function Form() {
       }
     };
 
-    fetchData();
+    fetchData();    
   }, []);
 
   return (
