@@ -55,7 +55,7 @@ export default function Form(dataFinal:any) {
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
 
-  console.log("index principal Form", dataFinal);  
+  console.log("index principal Form", dataFinal.data);  
 
   const {
     register,
@@ -97,6 +97,8 @@ export default function Form(dataFinal:any) {
     }
   };
 
+  
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await dataApi.get<Data>('/products/allProducts');
@@ -109,13 +111,24 @@ export default function Form(dataFinal:any) {
           throw new Error("Error al cargar los datos");
         }
         const result = await response.json();
-        setData(result.doc);
+        /*setData(result.doc);
         setUrl(result.doc[2].videoUrl);
         console.log("respuesta", result);
         console.log("video", result.doc[2].videoUrl);
         setVideo(
           <ReactPlayer
             url={result.doc[2].videoUrl}
+            controls={true}
+            width="100%"
+            height="100%"
+            playing={true}
+          />
+        );*/
+        setData(dataFinal.data);
+        setUrl(dataFinal.data[2].videoUrl);
+        setVideo(
+          <ReactPlayer
+            url={dataFinal.data[2].videoUrl}
             controls={true}
             width="100%"
             height="100%"
