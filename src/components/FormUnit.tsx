@@ -19,6 +19,7 @@ import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
 import dataApi from "../../api";
+import { Data, Doc } from "../../interfaces";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -96,8 +97,8 @@ export default function Form() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const daty = await dataApi.get('/products/allProducts');
-      console.log("ajaja", daty);
+      const { data } = await dataApi.get<Data>('/products/allProducts');
+      console.log("ajaja", data.doc);
       try {
         const response = await fetch(
           "https://martiolo.xyz/api/products/allProducts"

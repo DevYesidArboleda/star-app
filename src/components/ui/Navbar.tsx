@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 
-export const Header = () => {
+export const Navbar = () => {
   return (
     <div className='flex bg-white justify-start  h-[50px] items-center pl-5 md:pl-20 md:h-[80px]'>
       <div className='w-[32px] md:w-[64px]'>

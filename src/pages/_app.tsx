@@ -1,13 +1,18 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import { Inter } from 'next/font/google'
+import "@/styles/globals.css";
+import { NextUIProvider } from "@nextui-org/react";
+import type { AppProps } from "next/app";
+import { Inter } from "next/font/google";
 
 const inter = Inter({
-  subsets:["latin"],
-})
+  subsets: ["latin"],
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <main className={inter.className}>
-    <Component {...pageProps} />
-  </main>
+  return (
+    <NextUIProvider>
+      <main className={inter.className}>
+        <Component {...pageProps} />
+      </main>
+    </NextUIProvider>
+  );
 }
