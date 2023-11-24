@@ -103,6 +103,17 @@ export default function Form(dataFinal:any) {
     const fetchData = async () => {
       const { data } = await dataApi.get<Data>('/products/allProducts');
       console.log("ajaja", data.doc);
+      setData(dataFinal.data);
+        setUrl(dataFinal.data[2].videoUrl);
+        setVideo(
+          <ReactPlayer
+            url={dataFinal.data[2].videoUrl}
+            controls={true}
+            width="100%"
+            height="100%"
+            playing={true}
+          />
+        );
       try {
         const response = await fetch(
           "https://martiolo.xyz/api/products/allProducts"
@@ -124,17 +135,6 @@ export default function Form(dataFinal:any) {
             playing={true}
           />
         );*/
-        setData(dataFinal.data);
-        setUrl(dataFinal.data[2].videoUrl);
-        setVideo(
-          <ReactPlayer
-            url={dataFinal.data[2].videoUrl}
-            controls={true}
-            width="100%"
-            height="100%"
-            playing={true}
-          />
-        );
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }

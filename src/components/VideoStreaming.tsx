@@ -18,6 +18,7 @@ interface ArrayDeArrays {
 export const VideoStreaming = ({ setOpen, data, video }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
 
+  console.log("data", data)
   /*useEffect(() => {
     setVideo(<ReactPlayer url={`${url}`} controls={true} height="750px" width="464px"/>);
   }, []);*/
