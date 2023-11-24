@@ -44,7 +44,7 @@ interface typeData {
   tags: string[];
 }
 
-export default function Form(datat:any) {
+export default function Form(dataFinal:any) {
   const { previousStep, setPreviousStep } = usePrevs();
   const { currentStep, setCurrentStep } = useSteps();
   const [video, setVideo] = useState<JSX.Element | null>(null);
@@ -55,7 +55,7 @@ export default function Form(datat:any) {
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
 
-  console.log("index principal Form", datat);  
+  console.log("index principal Form", dataFinal);  
 
   const {
     register,

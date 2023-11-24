@@ -28,7 +28,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   
   const { data } = await dataApi.get<Data>('/products/allProducts');
       console.log("index principal", data.doc);   
-      const dataFinal: Doc[] = data.doc 
+      const dataFinal: Doc[] = data.doc.map( (data, i) => ({
+        ...data
+      }) )
   return {
     props: {
       dataFinal:data.doc
