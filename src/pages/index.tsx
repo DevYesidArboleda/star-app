@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import Form from "@/components/FormUnit";
+import Form from "@/components/form/FormUnit";
 import { Layout } from "@/components/layouts/Layout";
 import { GetStaticProps } from "next";
 import dataApi from "../../api";

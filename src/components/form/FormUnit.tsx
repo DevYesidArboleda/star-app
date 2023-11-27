@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { FormDataSchema } from "../../lib/schema";
+import { FormDataSchema } from "../../../lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { VideoStreaming } from "./VideoStreaming";
-import { useSteps } from "../hooks/useSteps";
-import { usePrevs } from "../hooks/useStepsPrev";
+import { useSteps } from "../../hooks/useSteps";
+import { usePrevs } from "../../hooks/useStepsPrev";
 import { Select, SelectItem } from "@nextui-org/react";
 import Modal from "./Modal";
 import Steps from "./Steps";
@@ -18,8 +18,8 @@ import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
-import dataApi from "../../api";
-import { Data, Doc } from "../../interfaces";
+import dataApi from "../../../api";
+import { Data, Doc } from "../../../interfaces";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
