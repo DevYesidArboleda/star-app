@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
 
-import { Navbar } from '../ui';
+import { NavBar } from '../ui';
 
 interface Props {
   title?: string;
@@ -25,7 +25,7 @@ export const Layout: FC<Props> = ({ children, title }) => {
 
         </Head>
       
-        <Navbar />
+        <NavBar />
 
         <main style={{
           padding: '0px 20px'

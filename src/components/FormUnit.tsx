@@ -44,7 +44,7 @@ interface typeData {
   tags: string[];
 }
 
-export default function Form(dataFinal:any) {
+export default function Form(dataFinal: any) {
   const { previousStep, setPreviousStep } = usePrevs();
   const { currentStep, setCurrentStep } = useSteps();
   const [video, setVideo] = useState<JSX.Element | null>(null);
@@ -54,8 +54,6 @@ export default function Form(dataFinal:any) {
   const [open, setOpen] = useState<boolean>(false);
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
-
-  console.log("index principal Form", dataFinal.data);  
 
   const {
     register,
@@ -97,12 +95,9 @@ export default function Form(dataFinal:any) {
     }
   };
 
-  
-
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await dataApi.get<Data>('/products/allProducts');
-      console.log("ajaja", data.doc);
+      const { data } = await dataApi.get<Data>("/products/allProducts");
       try {
         const response = await fetch(
           "https://martiolo.xyz/api/products/allProducts"
@@ -130,18 +125,18 @@ export default function Form(dataFinal:any) {
     };
 
     setData(dataFinal.data);
-        setUrl(dataFinal.data[2].videoUrl);
-        setVideo(
-          <ReactPlayer
-            url={dataFinal.data[2].videoUrl}
-            controls={true}
-            width="100%"
-            height="100%"
-            playing={true}
-          />
-        );
+    setUrl(dataFinal.data[2].videoUrl);
+    setVideo(
+      <ReactPlayer
+        url={dataFinal.data[2].videoUrl}
+        controls={true}
+        width="100%"
+        height="100%"
+        playing={true}
+      />
+    );
 
-    fetchData();    
+    fetchData();
   }, []);
 
   return (

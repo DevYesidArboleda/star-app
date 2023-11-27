@@ -1,4 +1,4 @@
-import { Navbar } from "@/components/ui/Navbar";
+import { NavBar } from "@/components/ui/Navbar";
 import React, { FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
@@ -43,9 +43,9 @@ const Register: FC<FormularioProps> = () => {
   return (
     <Layout title="Checkout Estrellas">
       <>
-        <Navbar />
         <form onSubmit={onSubmit}>
-          <div className="flex flex-col bg-[#E7ECEF] w-screen h-screen justify-center items-center ">
+          <div className="flex flex-col bg-[#E7ECEF]
+           h-screen justify-center items-center ">
             <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow  ">
               <div className="py-[22px] px-[40px] md:py-[44px] md:px-[161px]">
                 <Image

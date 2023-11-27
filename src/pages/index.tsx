@@ -5,7 +5,6 @@ import { Layout } from "@/components/layouts/Layout";
 import { GetStaticProps } from "next";
 import dataApi from "../../api";
 import { Data, Doc } from "../../interfaces";
-import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
@@ -13,7 +12,6 @@ interface Props {
 }
 
 export default function Home({ dataFinal }: Props) {
-  console.log("hola aja", dataFinal);
   return (
     <Layout title="Checkout Estrellas">
       <div className="">

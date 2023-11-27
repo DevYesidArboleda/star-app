@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
 
-export const Navbar = () => {
+export const NavBar = () => {
   return (
-    <div className='flex bg-white justify-start  h-[50px] items-center pl-5 md:pl-20 md:h-[80px]'>
-      <div className='w-[32px] md:w-[64px]'>
-        <Image
+    
+    <Navbar >
+    <NavbarBrand className='grow-0 basis-auto w-[32px] md:w-[64px]'>
+    <Image
             src="/logoStar.svg"
             alt="Logo Star"
             width={64}
@@ -15,7 +17,8 @@ export const Navbar = () => {
               height: 'auto',
             }}
             priority={true}/>
-      </div>    
-    </div>
+    </NavbarBrand>
+    
+  </Navbar>
   )
 }
