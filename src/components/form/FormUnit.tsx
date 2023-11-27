@@ -18,7 +18,6 @@ import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
-import dataApi from "../../../api";
 import { Data, Doc } from "../../../interfaces";
 
 type Inputs = z.infer<typeof FormDataSchema>;
@@ -96,7 +95,7 @@ export default function Form(dataFinal: any) {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    /*const fetchData = async () => {
       const { data } = await dataApi.get<Data>("/products/allProducts");
       try {
         const response = await fetch(
@@ -106,7 +105,7 @@ export default function Form(dataFinal: any) {
           throw new Error("Error al cargar los datos");
         }
         const result = await response.json();
-        /*setData(result.doc);
+        setData(result.doc);
         setUrl(result.doc[2].videoUrl);
         console.log("respuesta", result);
         console.log("video", result.doc[2].videoUrl);
@@ -118,11 +117,11 @@ export default function Form(dataFinal: any) {
             height="100%"
             playing={true}
           />
-        );*/
+        );
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
-    };
+    };*/
 
     setData(dataFinal.data);
     setUrl(dataFinal.data[2].videoUrl);
@@ -136,7 +135,7 @@ export default function Form(dataFinal: any) {
       />
     );
 
-    fetchData();
+    //fetchData();
   }, []);
 
   return (

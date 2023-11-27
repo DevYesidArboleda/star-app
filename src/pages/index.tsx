@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Form from "@/components/form/FormUnit";
 import { Layout } from "@/components/layouts/Layout";
 import { GetStaticProps } from "next";
-import dataApi from "../../api";
+import { dataApi } from "../../api";
 import { Data, Doc } from "../../interfaces";
 
 const inter = Inter({ subsets: ["latin"] });
