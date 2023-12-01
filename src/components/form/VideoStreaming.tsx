@@ -18,20 +18,19 @@ interface ArrayDeArrays {
 export const VideoStreaming = ({ setOpen, data, video }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
 
-  console.log("data", data)
   /*useEffect(() => {
     setVideo(<ReactPlayer url={`${url}`} controls={true} height="750px" width="464px"/>);
   }, []);*/
 
   return (
     <div>
-      <div className="flex flex-row items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2">
+      <div className="flex flex-row items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2 max-w-screen-lg 2xl:pr-14 2xl:py-0">
         <div className="flex flex-col md:flex-row items-center">
           <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">{video}</div>
-          <div className="flex flex-col  h-full gap-12 justify-start items-center">
+          <div className="flex flex-col  h-full gap-12 justify-start items-center max-w-[440px]">
             <div className="border-b-2 border-[#D9D9D9] w-full">
               <div className="flex">
-                <h1 className="text-2xl  text-[#53545C] font-bold">Producto</h1>
+                <h1 className="text-2xl  text-[#53545C] font-bold bottom-2">Producto</h1>
                 <br />
                 <Image
                   src="/logoStar.svg"
@@ -42,7 +41,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
                 />
               </div>
               <h5 className="mb-2 text-xl font-normal tracking-tight text-black ">
-                {data && data[2]?.name}
+                {data && data.name}
               </h5>
             </div>
             <div className="border-b-2 border-[#D9D9D9] w-full">
@@ -57,7 +56,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
             </div>
             <div className="border-b-2 border-[#D9D9D9] w-full">
               <p className="mb-2 text-xl font-normal tracking-tight text-black">
-                Description: {data && data[2]?.description}
+                Description: {data && data.description}
               </p>
             </div>
             <div className="border-b-2 border-[#D9D9D9] w-full">
@@ -66,7 +65,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
               </h1>
               <ul className="flex gap-2">
                 {data.length > 0 &&
-                  data[2]?.tags.map((items: any, index: number) => {
+                  data.tags?.map((items: any, index: number) => {
                     return (
                       <li
                         key={index}
@@ -82,9 +81,9 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
               <button
                 className="btn-success"
                 type="button"
-                onClick={data[2]?.tags !== null ? () => setOpen(true) : next}
+                onClick={data.tags !== null ? () => setOpen(true) : next}
                 disabled={
-                  data[2]?.tags !== null
+                  data.tags !== null
                     ? false
                     : currentStep === steps.length - 1
                 }
@@ -95,13 +94,13 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
             </div>
           </div>          
         </div>
-        <div className="flex w-full justify-center lg:hidden ">
+        <div className="flex w-full justify-center 2xl:w-[376px] 2xl:h-[56px] 2xl:justify-start lg:hidden ">
             <button
               className="btn-success w-full ml-5"
               type="button"
-              onClick={data[2]?.tags !== null ? () => setOpen(true) : next}
+              onClick={data.tags !== null ? () => setOpen(true) : next}
               disabled={
-                data[2]?.tags !== null
+                data.tags !== null
                   ? false
                   : currentStep === steps.length - 1
               }

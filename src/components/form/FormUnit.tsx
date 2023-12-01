@@ -19,6 +19,7 @@ import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
 import { Data, Doc } from "../../../interfaces";
+import { useSearchParams } from 'next/navigation'
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -47,12 +48,15 @@ export default function Form(dataFinal: any) {
   const { previousStep, setPreviousStep } = usePrevs();
   const { currentStep, setCurrentStep } = useSteps();
   const [video, setVideo] = useState<JSX.Element | null>(null);
-  const [data, setData] = useState<typeData[]>([]);
+  const [data, setData] = useState<Doc>([]);
+  const [finalData, setFinalData] = useState<Doc>([]);
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false);
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
+  const searchParams = useSearchParams() 
+  const search = searchParams.get('productID')
 
   const {
     register,
@@ -121,28 +125,39 @@ export default function Form(dataFinal: any) {
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
-    };*/
+    };*/      
 
-    setData(dataFinal.data);
-    setUrl(dataFinal.data[2].videoUrl);
+    const fetchData = async () => {
+      const final:any = dataFinal.data.filter((task:any) => task._id === search)  
+      final.forEach((element:any)=> {
+        setFinalData(element)
+      });     
+    }    
+    console.log("asa", finalData)
+
+    fetchData();
+  }, [dataFinal]);
+
+  useEffect(() => {
+    setData(finalData);
+    setUrl(finalData.videoUrl);
     setVideo(
       <ReactPlayer
-        url={dataFinal.data[2].videoUrl}
+        url={finalData.videoUrl}
         controls={true}
         width="100%"
         height="100%"
         playing={true}
       />
     );
-
-    //fetchData();
-  }, []);
+  }, [finalData])
+  
 
   return (
     <>
       {windowSize.width >= 768 ? (
         <section
-          className="bg-transparent h-scTestP inset-0 flex flex-col justify-between xl:p-14 md:p-4 "
+          className="bg-transparent h-scTestP inset-0 flex flex-col justify-between xl:p-14 md:p-4 items-center"
           suppressHydrationWarning={true}
         >
           <Steps currentStep={currentStep} />
@@ -170,7 +185,7 @@ export default function Form(dataFinal: any) {
                         Valor total
                       </span>
                       <span className="mb-3 font-semibold text-black text-2xl">
-                        {data[2]?.price}
+                        {data.price}
                       </span>
                     </div>
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
@@ -178,7 +193,7 @@ export default function Form(dataFinal: any) {
                         label="Seleccionar ..."
                         className="max-w-xs mb-3 font-light text-base text-[#53545C]"
                       >
-                        {data[2]?.tags.map((items: any, index: number) => {
+                        {data.tags?.map((items: any, index: number) => {
                           return (
                             <SelectItem
                               className="text-black"
@@ -376,7 +391,7 @@ export default function Form(dataFinal: any) {
                             />
                           </div>
                           <h5 className="mb-2 text-xl font-normal tracking-tight text-black ">
-                            {data && data[2]?.name}
+                            {data && data.name}
                           </h5>
                         </div>
                         <div className="border-b-2 border-[#D9D9D9] w-full">
@@ -384,7 +399,7 @@ export default function Form(dataFinal: any) {
                             Valor del producto
                           </span>
                           <span className="mb-3 font-normal text-black text-xl">
-                            {data && data[2]?.price}
+                            {data && data.price}
                           </span>
                         </div>
                         <div className="border-b-2 border-[#D9D9D9] w-full">
