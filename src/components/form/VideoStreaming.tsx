@@ -77,7 +77,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
                   })}
               </ul>
             </div>
-            <div className="lg:flex hidden w-full justify-center">
+            <div className="lg:flex hidden w-full 2xl:w-[376px] 2xl:h-[56px] 2xl:justify-start">
               <button
                 className="btn-success"
                 type="button"
@@ -94,7 +94,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
             </div>
           </div>          
         </div>
-        <div className="flex w-full justify-center 2xl:w-[376px] 2xl:h-[56px] 2xl:justify-start lg:hidden ">
+        <div className="flex w-full justify-center lg:hidden ">
             <button
               className="btn-success w-full ml-5"
               type="button"

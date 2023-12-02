@@ -3,7 +3,7 @@ export interface Data {
 }
 
 export interface Doc {
-    _id:         string;
+    id:         string;
     photoUrls?:  PhotoURL[];
     tags:        string[];
     likes:       string[];
@@ -28,6 +28,6 @@ export enum PhotoURL {
 }
 
 export interface Provider {
-    _id:       string;
+    id:       string;
     avatarUrl: string;
 }

@@ -48,8 +48,8 @@ export default function Form(dataFinal: any) {
   const { previousStep, setPreviousStep } = usePrevs();
   const { currentStep, setCurrentStep } = useSteps();
   const [video, setVideo] = useState<JSX.Element | null>(null);
-  const [data, setData] = useState<Doc>([]);
-  const [finalData, setFinalData] = useState<Doc>([]);
+  const [data, setData] = useState<any>([]);
+  const [finalData, setFinalData] = useState<any>([]);
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false);
