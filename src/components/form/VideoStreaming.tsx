@@ -18,15 +18,17 @@ interface ArrayDeArrays {
 export const VideoStreaming = ({ setOpen, data, video }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
 
+  console.log("tags", data.tags)
+
   /*useEffect(() => {
     setVideo(<ReactPlayer url={`${url}`} controls={true} height="750px" width="464px"/>);
   }, []);*/
 
   return (
-    <div>
-      <div className="flex flex-row items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2 max-w-screen-lg 2xl:pr-14 2xl:py-0">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">{video}</div>
+    <div className="w-full flex items-center justify-center">
+      <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2 max-w-screen-lg 2xl:pr-14 2xl:py-0">
+        <div className="flex flex-col md:flex-row items-center w-full">
+          <div className="w-full h-4/5 rounded-lg m-8 videoPlayer max-w-[464px]">{video}</div>
           <div className="flex flex-col  h-full gap-12 justify-start items-center max-w-[440px]">
             <div className="border-b-2 border-[#D9D9D9] w-full">
               <div className="flex">
@@ -64,22 +66,21 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
                 Variaciones
               </h1>
               <ul className="flex gap-2">
-                {data.length > 0 &&
-                  data.tags?.map((items: any, index: number) => {
+                {data.tags?.length > 0 &&
+                  data.tags?.map((items: any, index: number) => {                    
                     return (
                       <li
                         key={index}
-                        className="mb-2 text-xl font-normal tracking-tight text-black"
-                      >
+                        className="mb-2 text-xl font-normal tracking-tight text-black">
                         {items}
                       </li>
                     );
                   })}
               </ul>
             </div>
-            <div className="lg:flex hidden w-full 2xl:w-[376px] 2xl:h-[56px] 2xl:justify-start">
+            <div className="lg:flex hidden w-full 2xl:h-[56px] 2xl:justify-start">
               <button
-                className="btn-success"
+                className="btn-success 2xl:w-[376px]"
                 type="button"
                 onClick={data.tags !== null ? () => setOpen(true) : next}
                 disabled={

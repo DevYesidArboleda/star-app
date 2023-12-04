@@ -20,6 +20,7 @@ import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
 import { Data, Doc } from "../../../interfaces";
 import { useSearchParams } from 'next/navigation'
+import { dataApi } from "../../../api";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -49,6 +50,9 @@ export default function Form(dataFinal: any) {
   const { currentStep, setCurrentStep } = useSteps();
   const [video, setVideo] = useState<JSX.Element | null>(null);
   const [data, setData] = useState<any>([]);
+  const [department, setDepartment] = useState<any>([]);
+  const [city, setCity] = useState<any>([]);
+  const [cityid, setCityid] = useState();
   const [finalData, setFinalData] = useState<any>([]);
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
@@ -151,6 +155,34 @@ export default function Form(dataFinal: any) {
       />
     );
   }, [finalData])
+
+  useEffect(() => {     
+
+    const fetchDeparment = async () => {
+      const {data} = await dataApi.get<any>("/localities/departments");
+      console.log("deparment", data.departments)
+      setDepartment(data.departments)
+    }    
+
+    fetchDeparment();
+  }, []);
+
+  const handleInputDeparment= (e:any)=>{
+    let index = e.target.selectedIndex;
+    setCityid(e.target.options[index].value)
+    console.log("valor depar",e.target.options[index].value); // obtiene el texto de la opción seleccionada
+  }
+
+  useEffect(() => {     
+
+    const fetchCity = async () => {
+      const {data} = await dataApi.get<any>(`/localities/cities-by-department/${cityid}`);
+      console.log("city", data)
+      setCity(data.cities)
+    }    
+
+    fetchCity();
+  }, [cityid]);
   
 
   return (
@@ -164,7 +196,7 @@ export default function Form(dataFinal: any) {
 
           {/* Form */}
           <form
-            className="mt-12 bg-transparent rounded-md flex justify-center"
+            className="mt-12 bg-transparent rounded-md flex justify-center w-full"
             onSubmit={handleSubmit(processForm)}
           >
             {currentStep === 0 && (
@@ -172,6 +204,7 @@ export default function Form(dataFinal: any) {
                 initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="w-full"
               >
                 <VideoStreaming setOpen={setOpen} data={data} video={video} />
 
@@ -234,6 +267,7 @@ export default function Form(dataFinal: any) {
                 initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="w-full"
               >
                 <div className="flex lg:flex-row justify-between flex-row-reverse">
                   <div className="px-[16.5px] py-[49.5px] lg:w-1/4 bg-Form w-[57%]">
@@ -251,12 +285,29 @@ export default function Form(dataFinal: any) {
                             type="text"
                             id="name"
                             {...register("name")}
-                            placeholder="Nombre completo"
+                            placeholder="Nombres"
                             className="bg-Form-input "
                           />
                           {errors.name?.message && (
                             <p className="mt-2 text-sm text-red-400">
                               {errors.name.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="col-span-full">
+                        <div className="mt-2">
+                          <input
+                            type="text"
+                            id="name"
+                            {...register("lastname")}
+                            placeholder="Apellidos"
+                            className="bg-Form-input "
+                          />
+                          {errors.lastname?.message && (
+                            <p className="mt-2 text-sm text-red-400">
+                              {errors.lastname.message}
                             </p>
                           )}
                         </div>
@@ -314,24 +365,46 @@ export default function Form(dataFinal: any) {
                         </div>
                       </div>
 
-                      <div className="sm:col-span-3">
-                        <label
-                          htmlFor="city"
-                          className="block text-sm font-medium leading-6 text-gray-900"
-                        >
-                          Ciudad
-                        </label>
+                      <div className="xl:col-span-full sm:col-span-3">                        
+                        <div className="mt-2">
+                          <select
+                            id="department"
+                            {...register("department")}
+                            autoComplete=""
+                            placeholder="Departamento"
+                            className="bg-Form-input "
+                            onChange={handleInputDeparment}
+                          >Departamento
+                            {department.length > 0 &&
+                              department.map((items: any, index: number) => {                    
+                                return (                                  
+                                  <option key={index} value={items.dropi_id}>{items.name}</option>                                  
+                                );
+                              })}
+                          </select>
+                          {errors.department?.message && (
+                            <span className="mt-2 text-sm text-red-400">
+                              {errors.department.message}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="xl:col-span-full sm:col-span-3">                        
                         <div className="mt-2">
                           <select
                             id="city"
                             {...register("city")}
-                            autoComplete="city-name"
+                            autoComplete=""
                             placeholder="Ciudad"
                             className="bg-Form-input "
-                          >
-                            <option>Cali</option>
-                            <option>Bogota</option>
-                            <option>Medellin</option>
+                          >Ciudad
+                            {city.length > 0 &&
+                              city.map((items: any, index: number) => {                    
+                                return (                                  
+                                  <option key={index} value={items.dropi_id}>{items.name}</option>                                  
+                                );
+                              })}
                           </select>
                           {errors.city?.message && (
                             <span className="mt-2 text-sm text-red-400">
@@ -359,7 +432,7 @@ export default function Form(dataFinal: any) {
                     </div>
                     <div className="flex w-full lg:hidden pt-8 items-center justify-center">
                       <button
-                        className="btn-success"
+                        className="btn-success md:w-full"
                         type="button"
                         onClick={next}
                         disabled={currentStep === steps.length - 1}
@@ -371,11 +444,11 @@ export default function Form(dataFinal: any) {
                   </div>
 
                   <div className=" lg:w-[74%] w-5/12">
-                    <div className="flex flex-col fle items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow lg:flex-row pr-4 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
+                    <div className="flex flex-col fle items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
                       <div className="lg:w-[380px] h-4/5 rounded-md m-8 videoPlayer w-10/12">
                         {video}
                       </div>
-                      <div className="flex flex-col  h-full gap-12 justify-start items-start">
+                      <div className="flex flex-col  h-full gap-12 justify-start items-start w-full md:max-w-[200px] xl:max-w-[375px] ">
                         <div className="border-b-2 border-[#D9D9D9] w-full">
                           <div className="flex">
                             <h1 className="text-2xl  text-[#53545C] font-bold">
@@ -420,7 +493,7 @@ export default function Form(dataFinal: any) {
                         </div>
                         <div className="hidden justify-center lg:flex">
                           <button
-                            className="btn-success"
+                            className="btn-success "
                             type="button"
                             onClick={next}
                             disabled={currentStep === steps.length - 1}
