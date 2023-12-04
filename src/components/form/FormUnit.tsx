@@ -52,7 +52,7 @@ export default function Form(dataFinal: any) {
   const [data, setData] = useState<any>([]);
   const [department, setDepartment] = useState<any>([]);
   const [city, setCity] = useState<any>([]);
-  const [cityid, setCityid] = useState();
+  const [cityid, setCityid] = useState(0);
   const [finalData, setFinalData] = useState<any>([]);
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
@@ -60,7 +60,7 @@ export default function Form(dataFinal: any) {
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
   const searchParams = useSearchParams() 
-  const search = searchParams.get('productID')
+  const productID = searchParams.get('productID')
 
   const {
     register,
@@ -73,8 +73,16 @@ export default function Form(dataFinal: any) {
     resolver: zodResolver(FormDataSchema),
   });
 
+  const onSubmit = async (data: Inputs) => {
+    // TODO: submit to server
+    // ...
+    
+    console.log("llego aqui", data)
+    reset();
+  };
+
   const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    console.log("data",data);
     reset();
   };
 
@@ -88,7 +96,7 @@ export default function Form(dataFinal: any) {
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        await handleSubmit(processForm)();
+        handleSubmit(processForm)();
       }
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
@@ -132,7 +140,7 @@ export default function Form(dataFinal: any) {
     };*/      
 
     const fetchData = async () => {
-      const final:any = dataFinal.data.filter((task:any) => task._id === search)  
+      const final:any = dataFinal.data.filter((task:any) => task._id === productID)  
       final.forEach((element:any)=> {
         setFinalData(element)
       });     
@@ -160,7 +168,6 @@ export default function Form(dataFinal: any) {
 
     const fetchDeparment = async () => {
       const {data} = await dataApi.get<any>("/localities/departments");
-      console.log("deparment", data.departments)
       setDepartment(data.departments)
     }    
 
@@ -170,18 +177,17 @@ export default function Form(dataFinal: any) {
   const handleInputDeparment= (e:any)=>{
     let index = e.target.selectedIndex;
     setCityid(e.target.options[index].value)
-    console.log("valor depar",e.target.options[index].value); // obtiene el texto de la opción seleccionada
   }
 
   useEffect(() => {     
-
     const fetchCity = async () => {
       const {data} = await dataApi.get<any>(`/localities/cities-by-department/${cityid}`);
-      console.log("city", data)
       setCity(data.cities)
     }    
+      if(cityid!==0){        
+        fetchCity();
+      }
 
-    fetchCity();
   }, [cityid]);
   
 
@@ -278,7 +284,7 @@ export default function Form(dataFinal: any) {
                       Ingresa tus datos
                     </span>
 
-                    <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                    <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
                       <div className="col-span-full">
                         <div className="mt-2">
                           <input

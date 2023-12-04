@@ -2,17 +2,22 @@
 
 import { TFormDataSchemaUser, FormDataSchemaUser } from "../../../lib/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Select, SelectItem } from "@nextui-org/react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { CompletePay } from "./CompletePay";
 import ReactPlayer from "react-player";
+import axios from "axios";
+import { dataApi } from "../../../api";
 
 export default function FormMobile({ data, video }: any) {
   const [variation, setVaration] = useState("");
   const [move, setMove] = useState<boolean>(false);
+  const [department, setDepartment] = useState<any>([]);
+  const [city, setCity] = useState<any>([]);
+  const [cityid, setCityid] = useState(0);
 
   const {
     register,
@@ -26,11 +31,43 @@ export default function FormMobile({ data, video }: any) {
   const onSubmit = async (data: TFormDataSchemaUser) => {
     // TODO: submit to server
     // ...
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log("llego aqui")
-    reset();
-    setMove(true)
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      //await axios.post(`${dataApi}/orders/create-order`, data);
+      console.log("llego aqui mobile", data)
+      reset();
+      setMove(true)
+    } catch (error) {
+      console.error("There was an error!", error);
+    }
+    
   };
+
+  useEffect(() => {     
+
+    const fetchDeparment = async () => {
+      const {data} = await dataApi.get<any>("/localities/departments");
+      setDepartment(data.departments)
+    }    
+
+    fetchDeparment();
+  }, []);
+
+  const handleInputDeparment= (e:any)=>{
+    let index = e.target.selectedIndex;
+    setCityid(e.target.options[index].value)
+  }
+
+  useEffect(() => {     
+    const fetchCity = async () => {
+      const {data} = await dataApi.get<any>(`/localities/cities-by-department/${cityid}`);
+      setCity(data.cities)
+    }    
+      if(cityid!==0){        
+        fetchCity();
+      }
+
+  }, [cityid]);
 
   return (
     <>
@@ -66,6 +103,23 @@ export default function FormMobile({ data, video }: any) {
                       {errors.name?.message && (
                         <p className="mt-2 text-sm text-red-400">
                           {errors.name.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="col-span-full">
+                    <div className="mt-2">
+                      <input
+                        type="text"
+                        id="lastname"
+                        {...register("lastname")}
+                        placeholder="Nombre completo"
+                        className="bg-Form-input"
+                      />
+                      {errors.lastname?.message && (
+                        <p className="mt-2 text-sm text-red-400">
+                          {errors.lastname.message}
                         </p>
                       )}
                     </div>
@@ -123,32 +177,54 @@ export default function FormMobile({ data, video }: any) {
                     </div>
                   </div>
 
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="city"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Ciudad
-                    </label>
-                    <div className="mt-2">
-                      <select
-                        id="city"
-                        {...register("city")}
-                        autoComplete="country-name"
-                        placeholder="Ciudad"
-                        className="bg-Form-input"
-                      >
-                        <option>Cali</option>
-                        <option>Bogota</option>
-                        <option>Medellin</option>
-                      </select>
-                      {errors.city?.message && (
-                        <p className="mt-2 text-sm text-red-400">
-                          {errors.city.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
+                  <div className="xl:col-span-full sm:col-span-3">                        
+                        <div className="mt-2">
+                          <select
+                            id="department"
+                            {...register("department")}
+                            autoComplete=""
+                            placeholder="Departamento"
+                            className="bg-Form-input "
+                            onChange={handleInputDeparment}
+                          >Departamento
+                            {department.length > 0 &&
+                              department.map((items: any, index: number) => {                    
+                                return (                                  
+                                  <option key={index} value={items.dropi_id}>{items.name}</option>                                  
+                                );
+                              })}
+                          </select>
+                          {errors.department?.message && (
+                            <span className="mt-2 text-sm text-red-400">
+                              {errors.department.message}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="xl:col-span-full sm:col-span-3">                        
+                        <div className="mt-2">
+                          <select
+                            id="city"
+                            {...register("city")}
+                            autoComplete=""
+                            placeholder="Ciudad"
+                            className="bg-Form-input "
+                          >Ciudad
+                            {city.length > 0 &&
+                              city.map((items: any, index: number) => {                    
+                                return (                                  
+                                  <option key={index} value={items.dropi_id}>{items.name}</option>                                  
+                                );
+                              })}
+                          </select>
+                          {errors.city?.message && (
+                            <span className="mt-2 text-sm text-red-400">
+                              {errors.city.message}
+                            </span>
+                          )}
+                        </div>
+                      </div>
 
                   <div className="col-span-full">
                     <div className="mt-2">

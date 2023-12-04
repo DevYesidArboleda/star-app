@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 
 import { NavBar } from '../ui';
 
