@@ -21,6 +21,7 @@ import FormMobile from "./FormMobile";
 import { Data, Doc } from "../../../interfaces";
 import { useSearchParams } from 'next/navigation'
 import { dataApi } from "../../../api";
+import { fetchDeparment, fetchCity } from "../utils/funtions";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -60,7 +61,8 @@ export default function Form(dataFinal: any) {
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
   const searchParams = useSearchParams() 
-  const productID = searchParams.get('productID')
+  const product_id = searchParams.get('productID')
+  const user_id = searchParams.get('userID')
 
   const {
     register,
@@ -68,6 +70,7 @@ export default function Form(dataFinal: any) {
     watch,
     reset,
     trigger,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
@@ -82,7 +85,10 @@ export default function Form(dataFinal: any) {
   };
 
   const processForm: SubmitHandler<Inputs> = (data) => {
+    
     console.log("data",data);
+    const newData = {...data, user_id, product_id}
+    console.log('data dfat', newData)
     reset();
   };
 
@@ -140,7 +146,7 @@ export default function Form(dataFinal: any) {
     };*/      
 
     const fetchData = async () => {
-      const final:any = dataFinal.data.filter((task:any) => task._id === productID)  
+      const final:any = dataFinal.data.filter((task:any) => task._id === product_id)  
       final.forEach((element:any)=> {
         setFinalData(element)
       });     
@@ -165,13 +171,7 @@ export default function Form(dataFinal: any) {
   }, [finalData])
 
   useEffect(() => {     
-
-    const fetchDeparment = async () => {
-      const {data} = await dataApi.get<any>("/localities/departments");
-      setDepartment(data.departments)
-    }    
-
-    fetchDeparment();
+      fetchDeparment().then((e)=>{setDepartment(e)})
   }, []);
 
   const handleInputDeparment= (e:any)=>{
@@ -180,12 +180,16 @@ export default function Form(dataFinal: any) {
   }
 
   useEffect(() => {     
-    const fetchCity = async () => {
+    /*const fetchCity = async () => {
       const {data} = await dataApi.get<any>(`/localities/cities-by-department/${cityid}`);
       setCity(data.cities)
     }    
       if(cityid!==0){        
         fetchCity();
+      }*/
+
+      if(cityid!==0){        
+        fetchCity(cityid).then((e:any)=>{setCity(e)})
       }
 
   }, [cityid]);
