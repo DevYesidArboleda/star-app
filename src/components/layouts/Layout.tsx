@@ -35,7 +35,7 @@ export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
           url: 'https://star-app-tau.vercel.app/',
           images: [
             {
-              url: `${thumbnail}`,
+              url: `"${thumbnail}"`,
               width: 1200,
               height: 630,
               alt: 'Texto alternativo de la imagen',
