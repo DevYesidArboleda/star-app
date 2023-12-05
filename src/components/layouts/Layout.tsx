@@ -7,15 +7,15 @@ import { NavBar } from '../ui';
 interface Props {
   title?: string;
   children?:ReactNode;
+  thumbnail?:string;
 }
 
 
 const origin = (typeof window === 'undefined') ? '' : window.location.origin;
 
 
-export const Layout: FC<Props> = ({ children, title }) => {
-
-
+export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
+  console.log("thum", thumbnail)
   return (
       <>
         <Head>
@@ -35,7 +35,7 @@ export const Layout: FC<Props> = ({ children, title }) => {
           url: 'https://star-app-tau.vercel.app/',
           images: [
             {
-              url: 'https://diqyqp4m54tcb.cloudfront.net/logos/moda-inter.jpeg',
+              url: `${thumbnail}`,
               width: 1200,
               height: 630,
               alt: 'Texto alternativo de la imagen',

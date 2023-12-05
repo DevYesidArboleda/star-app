@@ -21,6 +21,7 @@ import { Data, Doc } from "../../../interfaces";
 import { useSearchParams } from 'next/navigation'
 import { dataApi } from "../../../api";
 import { fetchDeparment, fetchCity } from "../utils/funtions";
+import axios from "axios";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -140,15 +141,15 @@ export default function Form(dataFinal: any) {
     };*/      
 
     const fetchData = async () => {
-      const final:any = dataFinal.data.filter((task:any) => task._id === product_id)  
+      const final:any = dataFinal.data
       final.forEach((element:any)=> {
         setFinalData(element)
       });     
-    }    
-    console.log("asa", dataFinal)
+    }        
 
     fetchData();
   }, [dataFinal]);
+
 
   useEffect(() => {
     setData(finalData);
@@ -163,6 +164,7 @@ export default function Form(dataFinal: any) {
       />
     );
   }, [finalData])
+  
 
   useEffect(() => {     
       fetchDeparment().then((e)=>{setDepartment(e)})

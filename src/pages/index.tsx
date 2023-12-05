@@ -5,15 +5,50 @@ import { Layout } from "@/components/layouts/Layout";
 import { GetStaticProps } from "next";
 import { dataApi } from "../../api";
 import { Data, Doc } from "../../interfaces";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
   dataFinal: Doc[];
 }
 
-export default function Home({ dataFinal }: Props) {
+export default function Home() {  
+  const [thumbnail, setThumbnail]  = useState<any>();
+  const [dataFinal, setDataFinal] = useState<any>([]);
+  const searchParams = useSearchParams() 
+  
+  useEffect(()=> {
+    const fechtDataPrueba = async () => {
+      const product_id = searchParams.get('productID')
+      const queryParam = { _id: product_id };
+
+      const mana = await axios.get(`https://martiolo.xyz/api/products/allProducts`, {
+        headers: {            
+        },
+        params: {
+          query: JSON.stringify(queryParam)
+        }
+      })  
+      
+      setDataFinal(mana.data.doc)
+    }
+   
+      fechtDataPrueba()
+     
+  }, [searchParams])
+
+  useEffect(()=>{   
+    dataFinal.forEach((element:any)=> {
+      setThumbnail(element.thumbnail)
+    });  
+    
+  }, [dataFinal])
+
+
   return (
-    <Layout title="Checkout Estrellas">
+    <Layout title="Checkout Estrellas" thumbnail={thumbnail}>
       <div className="">
         <Form data={dataFinal} />
       </div>
@@ -21,7 +56,7 @@ export default function Home({ dataFinal }: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+/*export const getStaticProps: GetStaticProps = async (ctx) => {
   const { data } = await dataApi.get<Data>("/products/allProducts");
   const dataFinal: Doc[] = data.doc;
   return {
@@ -29,4 +64,4 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       dataFinal,
     },
   };
-};
+};*/
