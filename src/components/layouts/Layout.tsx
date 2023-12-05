@@ -25,6 +25,24 @@ export const Layout: FC<Props> = ({ children, title }) => {
             <meta name="keywords" content={ `${ title }`} />
 
         </Head>
+
+        <NextSeo
+        title="Checkout estrellas"
+        description="Checkout para procesar la orden de tus productos"
+        openGraph={{
+          title: 'Checkout estrellas',
+          description: 'Checkout para procesar la orden de tus productos',
+          url: 'https://star-app-tau.vercel.app/',
+          images: [
+            {
+              url: 'https://diqyqp4m54tcb.cloudfront.net/logos/moda-inter.jpeg',
+              width: 1200,
+              height: 630,
+              alt: 'Texto alternativo de la imagen',
+            },
+          ],
+        }}
+      />
       
         <NavBar />
 

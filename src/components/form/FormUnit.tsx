@@ -12,7 +12,6 @@ import { usePrevs } from "../../hooks/useStepsPrev";
 import { Select, SelectItem } from "@nextui-org/react";
 import Modal from "./Modal";
 import Steps from "./Steps";
-import { AddressProduct } from "./AddressProduct";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
@@ -67,28 +66,23 @@ export default function Form(dataFinal: any) {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     trigger,
-    setValue,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
   });
 
-  const onSubmit = async (data: Inputs) => {
-    // TODO: submit to server
-    // ...
-    
-    console.log("llego aqui", data)
-    reset();
-  };
-
-  const processForm: SubmitHandler<Inputs> = (data) => {
-    
-    console.log("data",data);
-    const newData = {...data, user_id, product_id}
-    console.log('data dfat', newData)
+  //Envio de formulario
+  const processForm: SubmitHandler<Inputs> = async (data) => {
+    const client_quantity = 1;
+    const newData = {...data, user_id, product_id, client_quantity}
+    try {
+      await dataApi.post<any>("/orders/create-order", newData)
+      console.log("Se creo la orden")
+    } catch (error) {
+      console.error("Error al enviar los datos:", error);
+    }
     reset();
   };
 
@@ -109,12 +103,12 @@ export default function Form(dataFinal: any) {
     }
   };
 
-  const prev = () => {
+  /*const prev = () => {
     if (currentStep > 0) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
-  };
+  };*/
 
   useEffect(() => {
     /*const fetchData = async () => {
@@ -151,7 +145,7 @@ export default function Form(dataFinal: any) {
         setFinalData(element)
       });     
     }    
-    console.log("asa", finalData)
+    console.log("asa", dataFinal)
 
     fetchData();
   }, [dataFinal]);
@@ -180,18 +174,9 @@ export default function Form(dataFinal: any) {
   }
 
   useEffect(() => {     
-    /*const fetchCity = async () => {
-      const {data} = await dataApi.get<any>(`/localities/cities-by-department/${cityid}`);
-      setCity(data.cities)
-    }    
-      if(cityid!==0){        
-        fetchCity();
-      }*/
-
       if(cityid!==0){        
         fetchCity(cityid).then((e:any)=>{setCity(e)})
       }
-
   }, [cityid]);
   
 
@@ -294,13 +279,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="name"
-                            {...register("name")}
+                            {...register("client_name")}
                             placeholder="Nombres"
                             className="bg-Form-input "
                           />
-                          {errors.name?.message && (
+                          {errors.client_name?.message && (
                             <p className="mt-2 text-sm text-red-400">
-                              {errors.name.message}
+                              {errors.client_name.message}
                             </p>
                           )}
                         </div>
@@ -311,13 +296,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="name"
-                            {...register("lastname")}
+                            {...register("client_surname")}
                             placeholder="Apellidos"
                             className="bg-Form-input "
                           />
-                          {errors.lastname?.message && (
+                          {errors.client_surname?.message && (
                             <p className="mt-2 text-sm text-red-400">
-                              {errors.lastname.message}
+                              {errors.client_surname.message}
                             </p>
                           )}
                         </div>
@@ -328,13 +313,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="number"
                             id="phone"
-                            {...register("phone")}
+                            {...register("client_phone")}
                             placeholder="Telefono"
                             className="bg-Form-input "
                           />
-                          {errors.phone?.message && (
+                          {errors.client_phone?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.phone.message}
+                              {errors.client_phone.message}
                             </span>
                           )}
                         </div>
@@ -345,13 +330,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="email"
                             id="email"
-                            {...register("email")}
+                            {...register("client_email")}
                             placeholder="Correo Electrónico"
                             className="bg-Form-input"
                           />
-                          {errors.email?.message && (
+                          {errors.client_email?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.email.message}
+                              {errors.client_email.message}
                             </span>
                           )}
                         </div>
@@ -362,14 +347,14 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="street"
-                            {...register("street")}
+                            {...register("client_direction")}
                             autoComplete="street-address"
                             placeholder="Dirección"
                             className="bg-Form-input "
                           />
-                          {errors.street?.message && (
+                          {errors.client_direction?.message && (
                             <p className="mt-2 text-sm text-red-400">
-                              {errors.street.message}
+                              {errors.client_direction.message}
                             </p>
                           )}
                         </div>
@@ -379,7 +364,7 @@ export default function Form(dataFinal: any) {
                         <div className="mt-2">
                           <select
                             id="department"
-                            {...register("department")}
+                            {...register("department_id")}
                             autoComplete=""
                             placeholder="Departamento"
                             className="bg-Form-input "
@@ -392,9 +377,9 @@ export default function Form(dataFinal: any) {
                                 );
                               })}
                           </select>
-                          {errors.department?.message && (
+                          {errors.department_id?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.department.message}
+                              {errors.department_id.message}
                             </span>
                           )}
                         </div>
@@ -404,7 +389,7 @@ export default function Form(dataFinal: any) {
                         <div className="mt-2">
                           <select
                             id="city"
-                            {...register("city")}
+                            {...register("city_id")}
                             autoComplete=""
                             placeholder="Ciudad"
                             className="bg-Form-input "
@@ -416,9 +401,9 @@ export default function Form(dataFinal: any) {
                                 );
                               })}
                           </select>
-                          {errors.city?.message && (
+                          {errors.city_id?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.city.message}
+                              {errors.city_id.message}
                             </span>
                           )}
                         </div>
@@ -436,7 +421,14 @@ export default function Form(dataFinal: any) {
                             id="note"
                             placeholder="Notas o información adicional"
                             className="bg-Form-input "
+                            {...register("client_notes")}
+                            autoComplete="street-address"
                           />
+                          {errors.client_notes?.message && (
+                            <p className="mt-2 text-sm text-red-400">
+                              {errors.client_notes.message}
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>
