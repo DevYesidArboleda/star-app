@@ -43,13 +43,13 @@ export const AddressProduct = ({ variation }: any) => {
               <input
                 type="text"
                 id="name"
-                {...register("name")}
+                {...register("client_name")}
                 placeholder="Nombre completo"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
               />
-              {errors.name?.message && (
+              {errors.client_name?.message && (
                 <p className="mt-2 text-sm text-red-400">
-                  {errors.name.message}
+                  {errors.client_name.message}
                 </p>
               )}
             </div>
@@ -60,13 +60,13 @@ export const AddressProduct = ({ variation }: any) => {
               <input
                 type="number"
                 id="phone"
-                {...register("phone")}
+                {...register("client_phone")}
                 placeholder="Telefono"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
               />
-              {errors.phone?.message && (
+              {errors.client_phone?.message && (
                 <p className="mt-2 text-sm text-red-400">
-                  {errors.phone.message}
+                  {errors.client_phone.message}
                 </p>
               )}
             </div>
@@ -77,13 +77,13 @@ export const AddressProduct = ({ variation }: any) => {
               <input
                 type="email"
                 id="email"
-                {...register("email")}
+                {...register("client_email")}
                 placeholder="Correo Electrónico"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
               />
-              {errors.email?.message && (
+              {errors.client_email?.message && (
                 <p className="mt-2 text-sm text-red-400">
-                  {errors.email.message}
+                  {errors.client_email.message}
                 </p>
               )}
             </div>
@@ -94,14 +94,14 @@ export const AddressProduct = ({ variation }: any) => {
               <input
                 type="text"
                 id="street"
-                {...register("street")}
+                {...register("client_direction")}
                 autoComplete="street-address"
                 placeholder="Dirección"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
               />
-              {errors.street?.message && (
+              {errors.client_direction?.message && (
                 <p className="mt-2 text-sm text-red-400">
-                  {errors.street.message}
+                  {errors.client_direction.message}
                 </p>
               )}
             </div>
@@ -117,7 +117,7 @@ export const AddressProduct = ({ variation }: any) => {
             <div className="mt-2">
               <select
                 id="city"
-                {...register("city")}
+                {...register("city_id")}
                 autoComplete="country-name"
                 placeholder="Ciudad"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:max-w-xs sm:text-sm sm:leading-6"
@@ -126,9 +126,9 @@ export const AddressProduct = ({ variation }: any) => {
                 <option>Bogota</option>
                 <option>Medellin</option>
               </select>
-              {errors.city?.message && (
+              {errors.city_id?.message && (
                 <p className="mt-2 text-sm text-red-400">
-                  {errors.city.message}
+                  {errors.city_id.message}
                 </p>
               )}
             </div>
