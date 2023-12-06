@@ -301,7 +301,7 @@ export default function Form(dataFinal: any) {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="w-full"
               >
-                <div className="flex lg:flex-row justify-between flex-row-reverse">
+                <div className="flex lg:flex-row justify-center gap-4 flex-row-reverse">
                   <div className="px-[16.5px] py-[49.5px] lg:w-1/4 bg-Form w-[57%]">
                     <h2 className=" leading-7  text-black text-xl font-medium text-center mb-5">
                       Hacer Pedido
@@ -488,7 +488,7 @@ export default function Form(dataFinal: any) {
                     </div>
                   </div>
 
-                  <div className=" lg:w-[74%] w-5/12">
+                  <div className=" w-3/6">
                     <div className="flex flex-col fle items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
                       <div className="lg:w-[380px] h-4/5 rounded-md m-8 videoPlayer w-10/12">
                         {video}
