@@ -18,7 +18,7 @@ import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
 import { Data, Doc } from "../../../interfaces";
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
 import { dataApi } from "../../../api";
 import { fetchDeparment, fetchCity } from "../utils/funtions";
 import axios from "axios";
@@ -54,15 +54,16 @@ export default function Form(dataFinal: any) {
   const [department, setDepartment] = useState<any>([]);
   const [city, setCity] = useState<any>([]);
   const [cityid, setCityid] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [finalData, setFinalData] = useState<any>([]);
   const [variation, setVaration] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false);
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
-  const searchParams = useSearchParams() 
-  const product_id = searchParams.get('productID')
-  const user_id = searchParams.get('userID')
+  const searchParams = useSearchParams();
+  const product_id = searchParams.get("productID");
+  const user_id = searchParams.get("userID");
 
   const {
     register,
@@ -77,10 +78,10 @@ export default function Form(dataFinal: any) {
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const client_quantity = 1;
-    const newData = {...data, user_id, product_id, client_quantity}
+    const newData = { ...data, user_id, product_id, client_quantity };
     try {
-      await dataApi.post<any>("/orders/create-order", newData)
-      console.log("Se creo la orden")
+      await dataApi.post<any>("/orders/create-order", newData);
+      console.log("Se creo la orden");
     } catch (error) {
       console.error("Error al enviar los datos:", error);
     }
@@ -138,18 +139,17 @@ export default function Form(dataFinal: any) {
       } catch (error) {
         console.error("Error al obtener los datos:", error);
       }
-    };*/      
+    };*/
 
     const fetchData = async () => {
-      const final:any = dataFinal.data
-      final.forEach((element:any)=> {
-        setFinalData(element)
-      });     
-    }        
+      const final: any = dataFinal.data;
+      final.forEach((element: any) => {
+        setFinalData(element);
+      });
+    };
 
     fetchData();
   }, [dataFinal]);
-
 
   useEffect(() => {
     setData(finalData);
@@ -163,24 +163,26 @@ export default function Form(dataFinal: any) {
         playing={true}
       />
     );
-  }, [finalData])
-  
+  }, [finalData]);
 
-  useEffect(() => {     
-      fetchDeparment().then((e)=>{setDepartment(e)})
+  useEffect(() => {
+    fetchDeparment().then((e) => {
+      setDepartment(e);
+    });
   }, []);
 
-  const handleInputDeparment= (e:any)=>{
+  const handleInputDeparment = (e: any) => {
     let index = e.target.selectedIndex;
-    setCityid(e.target.options[index].value)
-  }
+    setCityid(e.target.options[index].value);
+  };
 
-  useEffect(() => {     
-      if(cityid!==0){        
-        fetchCity(cityid).then((e:any)=>{setCity(e)})
-      }
+  useEffect(() => {
+    if (cityid !== 0) {
+      fetchCity(cityid).then((e: any) => {
+        setCity(e);
+      });
+    }
   }, [cityid]);
-  
 
   return (
     <>
@@ -218,6 +220,38 @@ export default function Form(dataFinal: any) {
                         {data.price}
                       </span>
                     </div>
+                    <div className="flex flex-col pb-3 w-full">
+                      <span className="mb-3 font-light text-base text-[#53545C]">
+                        Cantidad
+                      </span>
+                      <div className="flex gap-4">
+                        {quantity===1 ? <button
+                          className="text-[#53545C]"                          
+                        >
+                          -
+                        </button>:<button
+                          className="text-[#53545C]"
+                          onClick={() =>
+                            setQuantity((quantity) => quantity - 1)
+                          }
+                        >
+                          -
+                        </button>}
+                        <span className="text-black">{quantity}</span>
+                        <button
+                          className="text-[#42E184]"
+                          onClick={() =>
+                            setQuantity((quantity) => quantity + 1)
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="mb-3 font-light text-base text-[#53545C]">
+                        Seleccionar Talla
+                      </span>
                     <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
                       <Select
                         label="Seleccionar ..."
@@ -236,6 +270,7 @@ export default function Form(dataFinal: any) {
                           );
                         })}
                       </Select>
+                    </div>
                     </div>
                     <div className="flex flex-col pb-3 w-full">
                       <span className="mb-3 font-light text-base text-[#53545C] ">
@@ -362,7 +397,7 @@ export default function Form(dataFinal: any) {
                         </div>
                       </div>
 
-                      <div className="xl:col-span-full sm:col-span-3">                        
+                      <div className="xl:col-span-full sm:col-span-3">
                         <div className="mt-2">
                           <select
                             id="department"
@@ -371,11 +406,14 @@ export default function Form(dataFinal: any) {
                             placeholder="Departamento"
                             className="bg-Form-input "
                             onChange={handleInputDeparment}
-                          >Departamento
+                          >
+                            Departamento
                             {department.length > 0 &&
-                              department.map((items: any, index: number) => {                    
-                                return (                                  
-                                  <option key={index} value={items.dropi_id}>{items.name}</option>                                  
+                              department.map((items: any, index: number) => {
+                                return (
+                                  <option key={index} value={items.dropi_id}>
+                                    {items.name}
+                                  </option>
                                 );
                               })}
                           </select>
@@ -387,7 +425,7 @@ export default function Form(dataFinal: any) {
                         </div>
                       </div>
 
-                      <div className="xl:col-span-full sm:col-span-3">                        
+                      <div className="xl:col-span-full sm:col-span-3">
                         <div className="mt-2">
                           <select
                             id="city"
@@ -395,11 +433,14 @@ export default function Form(dataFinal: any) {
                             autoComplete=""
                             placeholder="Ciudad"
                             className="bg-Form-input "
-                          >Ciudad
+                          >
+                            Ciudad
                             {city.length > 0 &&
-                              city.map((items: any, index: number) => {                    
-                                return (                                  
-                                  <option key={index} value={items.dropi_id}>{items.name}</option>                                  
+                              city.map((items: any, index: number) => {
+                                return (
+                                  <option key={index} value={items.dropi_id}>
+                                    {items.name}
+                                  </option>
                                 );
                               })}
                           </select>

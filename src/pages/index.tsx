@@ -24,7 +24,7 @@ export default function Home() {
       const product_id = searchParams.get('productID')
       const queryParam = { _id: product_id };
 
-      const mana = await axios.get(`https://martiolo.xyz/api/products/allProducts`, {
+      const dataApi = await axios.get(`https://martiolo.xyz/api/products/allProducts`, {
         headers: {            
         },
         params: {
@@ -32,7 +32,7 @@ export default function Home() {
         }
       })  
       
-      setDataFinal(mana.data.doc)
+      setDataFinal(dataApi.data.doc)
     }
    
       fechtDataPrueba()
