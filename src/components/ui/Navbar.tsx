@@ -5,7 +5,7 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nex
 export const NavBar = () => {
   return (
     
-    <Navbar >
+    <Navbar position="static">
     <NavbarBrand className='grow-0 basis-auto w-[32px] md:w-[64px]'>
     <Image
             src="/logoStar.svg"

@@ -23,45 +23,52 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
   }, []);*/
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2 max-w-screen-lg 2xl:pr-14 2xl:py-0">
+    <div className="w-full flex  justify-center">
+      <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2 max-w-screen-lg 2xl:pr-6 2xl:py-0">
         <div className="flex flex-col md:flex-row items-center w-full">
-          <div className="w-full h-4/5 rounded-lg m-8 videoPlayer max-w-[464px]">{video}</div>
-          <div className="flex flex-col  h-full gap-12 justify-start items-center max-w-[440px]">
+          <div className="w-full  rounded-lg m-8 videoPlayer max-w-[464px]">{video}</div>
+          <div className="flex flex-col  h-full gap-12 justify-between items-center w-full pt-16 pb-8">
+            <div className="flex flex-col 2xl:gap-12 gap-8 w-full">
             <div className="border-b-2 border-[#D9D9D9] w-full">
-              <div className="flex">
-                <h1 className="text-2xl  text-[#53545C] font-bold bottom-2">Producto</h1>
+              <h1 className="text-black font-bold 2xl:text-2xl lg:text-base items-center flex justify-center pb-6">Detalles de la orden</h1>
+            </div>
+            <div className="border-b-2 border-[#D9D9D9] w-full">
+              <div className="flex justify-between">
+                <h1 className="my-3 2xl:text-xl lg:text-base text-[#53545C] font-bold ">Producto</h1>
                 <br />
-                <Image
-                  src="/logoStar.svg"
-                  width={41}
-                  height={41}
-                  alt="Logo Star"
-                  priority={true}
-                />
-              </div>
-              <h5 className="mb-2 text-xl font-normal tracking-tight text-black ">
+                <h5 className="my-3 font-light text-[#53545C] 2xl:text-base text-xs">
                 {data && data.name}
               </h5>
+              </div>
+             
             </div>
-            <div className="border-b-2 border-[#D9D9D9] w-full">
-              <p className="mb-3 font-normal text-black text-xl">
-                Pago contra entrega
-              </p>
+            <div className="border-b-2 border-[#D9D9D9] w-full justify-between flex">
+              <span className="my-3 font-bold text-[#53545C] 2xl:text-xl lg:text-base">
+                Método de pago
+              </span>
+              <span className="my-3 font-light text-[#53545C] 2xl:text-base text-xs">
+                Paga al recibir
+              </span>
             </div>
-            <div className="border-b-2 border-[#D9D9D9] w-full">
-              <p className="mb-3 font-bold text-2xl text-[#53545C] ">
-                Envío gratis
-              </p>
+            <div className="border-b-2 border-[#D9D9D9] w-full justify-between flex">
+              <span className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C] ">
+                Envío 
+              </span>
+              <span className="my-3 font-bold 2xl:text-xl text-base text-[#42E184] ">
+                GRATIS 
+              </span>
             </div>
-            <div className="border-b-2 border-[#D9D9D9] w-full">
-              <p className="mb-2 text-xl font-normal tracking-tight text-black">
-                Description: {data && data.description}
-              </p>
+            <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
+              <span className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C]">
+                Colores disponibles
+              </span>
+              <span className="my-3 2xl:text-base text-xs font-light tracking-tight text-[#53545C]">
+                Por definir
+              </span>
             </div>
-            <div className="border-b-2 border-[#D9D9D9] w-full">
-              <h1 className="mb-3 font-bold text-2xl text-[#53545C]">
-                Variaciones
+            <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
+              <h1 className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C]">
+                Tallas disponibles
               </h1>
               <ul className="flex gap-2">
                 {data.tags?.length > 0 &&
@@ -69,16 +76,17 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
                     return (
                       <li
                         key={index}
-                        className="mb-2 text-xl font-normal tracking-tight text-black">
+                        className="my-3 2xl:text-base text-xs font-light tracking-tight text-[#53545C]">
                         {items}
                       </li>
                     );
                   })}
               </ul>
             </div>
-            <div className="lg:flex hidden w-full 2xl:h-[56px] 2xl:justify-start">
+            </div>
+            <div className="lg:flex hidden w-full 2xl:h-[63px] 2xl:justify-start">
               <button
-                className="btn-success 2xl:w-[376px]"
+                className="btn-success 2xl:w-full"
                 type="button"
                 onClick={data.tags !== null ? () => setOpen(true) : next}
                 disabled={

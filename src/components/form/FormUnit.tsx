@@ -77,7 +77,7 @@ export default function Form(dataFinal: any) {
 
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
-    const client_quantity = 1;
+    const client_quantity = quantity;
     const newData = { ...data, user_id, product_id, client_quantity };
     try {
       await dataApi.post<any>("/orders/create-order", newData);
@@ -455,7 +455,7 @@ export default function Form(dataFinal: any) {
                       <div className="col-span-full">
                         <label
                           htmlFor="city"
-                          className="block text-[10px] font-medium leading-6 text-gray-900"
+                          className="block text-[12px] font-normal leading-6 text-gray-900"
                         >
                           Notas adicionales
                         </label>
