@@ -57,6 +57,7 @@ export default function Form(dataFinal: any) {
   const [quantity, setQuantity] = useState(1);
   const [finalData, setFinalData] = useState<any>([]);
   const [variation, setVaration] = useState("");
+  const [client_notes, setClient_notes] = useState("");
   const [url, setUrl] = useState("");
   const [open, setOpen] = useState<boolean>(false);
   const delta = currentStep - previousStep;
@@ -78,7 +79,7 @@ export default function Form(dataFinal: any) {
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const client_quantity = quantity;
-    const newData = { ...data, user_id, product_id, client_quantity };
+    const newData = { ...data, user_id, product_id, client_quantity, client_notes };
     try {
       await dataApi.post<any>("/orders/create-order", newData);
       console.log("Se creo la orden");
@@ -174,6 +175,12 @@ export default function Form(dataFinal: any) {
   const handleInputDeparment = (e: any) => {
     let index = e.target.selectedIndex;
     setCityid(e.target.options[index].value);
+  };
+
+  //Capturar notas
+  const handleInputNote = (e: any) => {
+    let index = document.getElementById(`note`) as HTMLTextAreaElement;
+    setClient_notes(index.value);
   };
 
   useEffect(() => {
@@ -464,14 +471,9 @@ export default function Form(dataFinal: any) {
                             id="note"
                             placeholder="Notas o información adicional"
                             className="bg-Form-input "
-                            {...register("client_notes")}
                             autoComplete="street-address"
+                            onChange={handleInputNote}
                           />
-                          {errors.client_notes?.message && (
-                            <p className="mt-2 text-sm text-red-400">
-                              {errors.client_notes.message}
-                            </p>
-                          )}
                         </div>
                       </div>
                     </div>
@@ -488,12 +490,12 @@ export default function Form(dataFinal: any) {
                     </div>
                   </div>
 
-                  <div className=" w-3/6">
-                    <div className="flex flex-col h-full items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
-                      <div className="lg:w-[380px]  rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
+                  <div className=" 2xl:w-3/5 xl:w-4/5 lg:w-full">
+                    <div className="flex flex-col h-full items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
+                      <div className="xl:w-[390px] lg:w-full  rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
                         {video}
                       </div>
-                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[200px] xl:max-w-[430px] 2xl:pb-8 2xl:pt-16">
+                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[200px] lg:max-w-full xl:max-w-[430px] 2xl:pb-8 2xl:pt-16 xl:pb-8 xl:pt-16 lg:pb-8 lg:pt-16 md:pr-6">
                         <div className="flex flex-col 2xl:gap-8 gap-6 w-full">
                           <div className="border-b-2 border-[#D9D9D9] w-full">
                             <h1 className="text-black font-bold 2xl:text-2xl lg:text-base items-center flex justify-center pb-6">
@@ -502,25 +504,25 @@ export default function Form(dataFinal: any) {
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full">
                             <div className="flex justify-between">
-                              <h1 className="my-3 2xl:text-xl lg:text-base text-[#53545C] font-bold ">
+                              <h1 className="my-3 2xl:text-xl lg:text-base text-[#53545C] xl:text-xl  font-bold ">
                                 Producto
                               </h1>
                               <br />
-                              <h5 className="my-3 font-light text-[#53545C] 2xl:text-base text-xs">
+                              <h5 className="my-3 font-light text-[#53545C] 2xl:text-base xl:text-base text-xs">
                                 {data && data.name}
                               </h5>
                             </div>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full justify-between flex">
-                            <span className="my-3 font-bold text-[#53545C] 2xl:text-xl lg:text-base">
+                            <span className="my-3 font-bold text-[#53545C] 2xl:text-xl xl:text-xl  lg:text-base">
                               Método de pago
                             </span>
-                            <span className="my-3 font-light text-[#53545C] 2xl:text-base text-xs">
+                            <span className="my-3 font-light text-[#53545C] 2xl:text-base xl:text-base text-xs">
                               Paga al recibir
                             </span>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full justify-between flex">
-                            <span className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C] ">
+                            <span className="my-3 font-bold 2xl:text-xl xl:text-xl  lg:text-base text-[#53545C] ">
                               Envío
                             </span>
                             <span className="my-3 font-bold 2xl:text-xl text-base text-[#42E184] ">
@@ -528,25 +530,25 @@ export default function Form(dataFinal: any) {
                             </span>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
-                            <span className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C]">
+                            <span className="my-3 font-bold 2xl:text-xl xl:text-xl  lg:text-base text-[#53545C]">
                               Color
                             </span>
-                            <span className="my-3 2xl:text-base text-xs font-light tracking-tight text-[#53545C]">
+                            <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
                               Por definir
                             </span>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
-                            <h1 className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C]">
+                            <h1 className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base text-[#53545C]">
                             Tallas
                             </h1>
-                            <span className="my-3 2xl:text-base text-xs font-light tracking-tight text-[#53545C]">
+                            <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
                                {variation}
                             </span>
                           </div>
                         </div>
-                        <div className="hidden justify-center lg:flex w-full">
+                        <div className="hidden justify-center lg:flex w-full ">
                           <button
-                            className="btn-success w-full"
+                            className="btn-success w-full xl:h-[63px]"
                             type="button"
                             onClick={next}
                             disabled={currentStep === steps.length - 1}

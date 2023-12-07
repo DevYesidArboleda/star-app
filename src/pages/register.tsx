@@ -72,22 +72,22 @@ const Register: FC<FormularioProps> = () => {
                   fill="none"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M7.98481 13.3462C4.11719 13.3462 0.814331 13.931 0.814331 16.2729C0.814331 18.6148 4.09624 19.2205 7.98481 19.2205C11.8524 19.2205 15.1543 18.6348 15.1543 16.2938C15.1543 13.9529 11.8734 13.3462 7.98481 13.3462Z"
                     stroke="#6E7079"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M7.98477 10.0059C10.5229 10.0059 12.58 7.94779 12.58 5.40969C12.58 2.8716 10.5229 0.814453 7.98477 0.814453C5.44667 0.814453 3.38858 2.8716 3.38858 5.40969C3.38001 7.93922 5.42382 9.99731 7.95239 10.0059H7.98477Z"
                     stroke="#6E7079"
-                    stroke-width="1.42857"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.42857"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <input
@@ -132,18 +132,18 @@ const Register: FC<FormularioProps> = () => {
                   <path
                     d="M17.4026 6.85107L12.9593 10.4641C12.1198 11.1301 10.9387 11.1301 10.0992 10.4641L5.61841 6.85107"
                     stroke="#6E7079"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M16.4089 19C19.4502 19.0084 21.5 16.5095 21.5 13.4384V6.57001C21.5 3.49883 19.4502 1 16.4089 1H6.59114C3.54979 1 1.5 3.49883 1.5 6.57001V13.4384C1.5 16.5095 3.54979 19.0084 6.59114 19H16.4089Z"
                     stroke="#6E7079"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
@@ -177,25 +177,25 @@ const Register: FC<FormularioProps> = () => {
                   <path
                     d="M13.4235 7.44756V5.30056C13.4235 2.78756 11.3855 0.749556 8.87249 0.749556C6.35949 0.738556 4.31349 2.76656 4.30249 5.28056V5.30056V7.44756"
                     stroke="#5E6366"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M12.6832 19.2495H5.04224C2.94824 19.2495 1.25024 17.5525 1.25024 15.4575V11.1685C1.25024 9.07346 2.94824 7.37646 5.04224 7.37646H12.6832C14.7772 7.37646 16.4752 9.07346 16.4752 11.1685V15.4575C16.4752 17.5525 14.7772 19.2495 12.6832 19.2495Z"
                     stroke="#5E6366"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M8.86292 12.2026V14.4236"
                     stroke="#130F26"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <input
@@ -228,25 +228,25 @@ const Register: FC<FormularioProps> = () => {
                   <path
                     d="M13.4235 7.44756V5.30056C13.4235 2.78756 11.3855 0.749556 8.87249 0.749556C6.35949 0.738556 4.31349 2.76656 4.30249 5.28056V5.30056V7.44756"
                     stroke="#5E6366"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M12.6832 19.2495H5.04224C2.94824 19.2495 1.25024 17.5525 1.25024 15.4575V11.1685C1.25024 9.07346 2.94824 7.37646 5.04224 7.37646H12.6832C14.7772 7.37646 16.4752 9.07346 16.4752 11.1685V15.4575C16.4752 17.5525 14.7772 19.2495 12.6832 19.2495Z"
                     stroke="#5E6366"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M8.86292 12.2026V14.4236"
                     stroke="#130F26"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
                 <input

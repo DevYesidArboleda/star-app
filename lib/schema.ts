@@ -8,8 +8,7 @@ export const FormDataSchema = z.object({
   city_id: z.string().min(1, 'City is required'),
   client_name: z.string().min(1, 'Completed name is required'),
   client_surname: z.string().min(1, 'Completed name is required'),
-  client_phone: z.string().min(1, 'Phone is required'),
-  client_notes:z.string().min(1, 'Phone is required')
+  client_phone: z.string().min(1, 'Phone is required')
 })
 
 export const FormDataSchemaUser = z

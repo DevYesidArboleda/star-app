@@ -42,7 +42,7 @@ body {
 
 @layer components {
   .btn-success {
-    @apply select-none rounded-lg bg-[#42E083]  2xl:py-3 2xl:px-12 py-1 normal-case text-center align-middle font-sans 2xl:text-xl text-base font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none;
+    @apply select-none rounded-lg bg-[#42E083] 2xl:py-3 2xl:px-12 py-1 normal-case text-center align-middle font-sans 2xl:text-xl text-base font-normal text-white shadow-md shadow-slate-800/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none;
   }
 
   .bg-Form {
