@@ -48,7 +48,7 @@ export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
 
         <main style={{
           padding: '0px 20px',
-          height:'calc(100vh - 64px)'
+          minHeight: "100vh"
         }}>
             { children }
         </main>
