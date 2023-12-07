@@ -27,10 +27,10 @@ export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
         </Head>
 
         <NextSeo
-        title="Checkout estrellas"
+        title="Checkout Estrellas"
         description="Checkout para procesar la orden de tus productos"
         openGraph={{
-          title: 'Checkout estrellas',
+          title: 'Checkout Estrellas',
           description: 'Checkout para procesar la orden de tus productos',
           url: 'https://star-app-tau.vercel.app/',
           images: [

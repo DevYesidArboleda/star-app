@@ -225,18 +225,18 @@ export default function Form(dataFinal: any) {
                         Cantidad
                       </span>
                       <div className="flex gap-4">
-                        {quantity===1 ? <button
-                          className="text-[#53545C]"                          
-                        >
-                          -
-                        </button>:<button
-                          className="text-[#53545C]"
-                          onClick={() =>
-                            setQuantity((quantity) => quantity - 1)
-                          }
-                        >
-                          -
-                        </button>}
+                        {quantity === 1 ? (
+                          <button className="text-[#53545C]">-</button>
+                        ) : (
+                          <button
+                            className="text-[#53545C]"
+                            onClick={() =>
+                              setQuantity((quantity) => quantity - 1)
+                            }
+                          >
+                            -
+                          </button>
+                        )}
                         <span className="text-black">{quantity}</span>
                         <button
                           className="text-[#42E184]"
@@ -252,25 +252,25 @@ export default function Form(dataFinal: any) {
                       <span className="mb-3 font-light text-base text-[#53545C]">
                         Seleccionar Talla
                       </span>
-                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
-                      <Select
-                        label="Seleccionar ..."
-                        className="max-w-xs mb-3 font-light text-base text-[#53545C]"
-                      >
-                        {data.tags?.map((items: any, index: number) => {
-                          return (
-                            <SelectItem
-                              className="text-black"
-                              key={index}
-                              value={items}
-                              onClick={() => setVaration(items)}
-                            >
-                              {items}
-                            </SelectItem>
-                          );
-                        })}
-                      </Select>
-                    </div>
+                      <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
+                        <Select
+                          label="Seleccionar ..."
+                          className="max-w-xs mb-3 font-light text-base text-[#53545C]"
+                        >
+                          {data.tags?.map((items: any, index: number) => {
+                            return (
+                              <SelectItem
+                                className="text-black"
+                                key={index}
+                                value={items}
+                                onClick={() => setVaration(items)}
+                              >
+                                {items}
+                              </SelectItem>
+                            );
+                          })}
+                        </Select>
+                      </div>
                     </div>
                     <div className="flex flex-col pb-3 w-full">
                       <span className="mb-3 font-light text-base text-[#53545C] ">
@@ -302,7 +302,7 @@ export default function Form(dataFinal: any) {
                 className="w-full"
               >
                 <div className="flex lg:flex-row justify-center gap-4 flex-row-reverse">
-                  <div className="px-[16.5px] py-[49.5px] lg:w-1/4 bg-Form w-[57%]">
+                  <div className="px-[16.5px] py-[49.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
                     <h2 className=" leading-7  text-black text-xl font-medium text-center mb-5">
                       Hacer Pedido
                     </h2>
@@ -489,56 +489,64 @@ export default function Form(dataFinal: any) {
                   </div>
 
                   <div className=" w-3/6">
-                    <div className="flex flex-col fle items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
-                      <div className="lg:w-[380px] h-4/5 rounded-md m-8 videoPlayer w-10/12">
+                    <div className="flex flex-col h-full items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
+                      <div className="lg:w-[380px]  rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
                         {video}
                       </div>
-                      <div className="flex flex-col  h-full gap-12 justify-start items-start w-full md:max-w-[200px] xl:max-w-[375px] ">
-                        <div className="border-b-2 border-[#D9D9D9] w-full">
-                          <div className="flex">
-                            <h1 className="text-2xl  text-[#53545C] font-bold">
-                              Producto
+                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[200px] xl:max-w-[430px] 2xl:pb-8 2xl:pt-16">
+                        <div className="flex flex-col 2xl:gap-8 gap-6 w-full">
+                          <div className="border-b-2 border-[#D9D9D9] w-full">
+                            <h1 className="text-black font-bold 2xl:text-2xl lg:text-base items-center flex justify-center pb-6">
+                              Detalles de la orden
                             </h1>
-                            <br />
-                            <Image
-                              src="/logoStar.svg"
-                              width={41}
-                              height={41}
-                              alt="Logo Star"
-                              priority={true}
-                            />
                           </div>
-                          <h5 className="mb-2 text-xl font-normal tracking-tight text-black ">
-                            {data && data.name}
-                          </h5>
+                          <div className="border-b-2 border-[#D9D9D9] w-full">
+                            <div className="flex justify-between">
+                              <h1 className="my-3 2xl:text-xl lg:text-base text-[#53545C] font-bold ">
+                                Producto
+                              </h1>
+                              <br />
+                              <h5 className="my-3 font-light text-[#53545C] 2xl:text-base text-xs">
+                                {data && data.name}
+                              </h5>
+                            </div>
+                          </div>
+                          <div className="border-b-2 border-[#D9D9D9] w-full justify-between flex">
+                            <span className="my-3 font-bold text-[#53545C] 2xl:text-xl lg:text-base">
+                              Método de pago
+                            </span>
+                            <span className="my-3 font-light text-[#53545C] 2xl:text-base text-xs">
+                              Paga al recibir
+                            </span>
+                          </div>
+                          <div className="border-b-2 border-[#D9D9D9] w-full justify-between flex">
+                            <span className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C] ">
+                              Envío
+                            </span>
+                            <span className="my-3 font-bold 2xl:text-xl text-base text-[#42E184] ">
+                              GRATIS
+                            </span>
+                          </div>
+                          <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
+                            <span className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C]">
+                              Color
+                            </span>
+                            <span className="my-3 2xl:text-base text-xs font-light tracking-tight text-[#53545C]">
+                              Por definir
+                            </span>
+                          </div>
+                          <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
+                            <h1 className="my-3 font-bold 2xl:text-xl lg:text-base text-[#53545C]">
+                            Tallas
+                            </h1>
+                            <span className="my-3 2xl:text-base text-xs font-light tracking-tight text-[#53545C]">
+                               {variation}
+                            </span>
+                          </div>
                         </div>
-                        <div className="border-b-2 border-[#D9D9D9] w-full">
-                          <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
-                            Valor del producto
-                          </span>
-                          <span className="mb-3 font-normal text-black text-xl">
-                            {data && data.price}
-                          </span>
-                        </div>
-                        <div className="border-b-2 border-[#D9D9D9] w-full">
-                          <span className=" flex flex-col mb-3 font-bold text-2xl text-[#53545C] ">
-                            Valor del envío
-                          </span>
-                          <span className="mb-3 font-light text-xl text-black ">
-                            Gratis
-                          </span>
-                        </div>
-                        <div className="border-b-2 border-[#D9D9D9] w-full">
-                          <h1 className="mb-3 font-bold text-2xl text-[#53545C]">
-                            Detalles
-                          </h1>
-                          <span className="text-black font-light text-xl">
-                            Variaciones: {variation}
-                          </span>
-                        </div>
-                        <div className="hidden justify-center lg:flex">
+                        <div className="hidden justify-center lg:flex w-full">
                           <button
-                            className="btn-success "
+                            className="btn-success w-full"
                             type="button"
                             onClick={next}
                             disabled={currentStep === steps.length - 1}

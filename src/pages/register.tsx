@@ -46,8 +46,8 @@ const Register: FC<FormularioProps> = () => {
         <form onSubmit={onSubmit}>
           <div className="flex flex-col bg-[#E7ECEF]
            h-screen justify-center items-center ">
-            <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow  ">
-              <div className="py-[22px] px-[40px] md:py-[44px] md:px-[161px]">
+            <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow  w-full 2xl:max-w-[876px] xl:max-w-[876px] lg:max-w-[876px] max-w-[680px]">
+              <div className="py-[22px] px-[40px] md:py-[14px] md:px-[161px]">
                 <Image
                   src="/logoStar.svg"
                   width={140}
@@ -57,15 +57,12 @@ const Register: FC<FormularioProps> = () => {
                 />
               </div>
               <div className="flex flex-col pb-[60px]">
-                <span className="px-[34px] text-black font-medium text-center">
+                <span className="px-[34px] text-black font-medium text-center text-xl">
                   Empieza a generar ventas con{" "}
                   <b className="text-[#42E083] font-medium">Estrellas</b>
                 </span>
-                <span className="text-center text-[#8B8D97] text-sm font-normal">
-                  Crea una cuenta
-                </span>
               </div>
-              <div className="relative  mb-7">
+              <div className="relative  mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="pointer-events-none w-4 h-4 absolute top-1/2 transform -translate-y-1/2 left-3"
@@ -123,7 +120,7 @@ const Register: FC<FormularioProps> = () => {
                 )}
               </div>
 
-              <div className="relative text-black mb-7">
+              <div className="relative text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
                 <svg
                   width="23"
                   height="20"
@@ -168,7 +165,7 @@ const Register: FC<FormularioProps> = () => {
                 {errors.email && <span>{errors.email.message}</span>}
               </div>
 
-              <div className="relative text-black mb-7">
+              <div className="relative text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
                 <svg
                   width="23"
                   height="20"
@@ -219,7 +216,7 @@ const Register: FC<FormularioProps> = () => {
                 {errors.password && <span>{errors.password.message}</span>}
               </div>
 
-              <div className="relative text-black mb-7">
+              <div className="relative text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
                 <svg
                   width="23"
                   height="20"
@@ -276,7 +273,7 @@ const Register: FC<FormularioProps> = () => {
                 )}
               </div>
 
-              <div className="flex flex-row text-black mb-7">
+              <div className="flex flex-row text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
                 <input
                   type="checkbox"
                   {...register("aceptaTerminos", {
