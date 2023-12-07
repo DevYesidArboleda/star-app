@@ -28,17 +28,17 @@ const Steps = ( { currentStep }:any ) => {
             <li key={step.name} className="md:flex-auto ml-0 w-full ">
               {currentStep > index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#42E083]  after:border-4 after:inline-block ">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">                    
+                  <span className="flex items-center justify-center w-6 h-6 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-9 lg:w-9  shrink-0">                    
                   </span>
                 </div>
               ) : currentStep === index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
-                  <span className="flex items-center justify-center w-10 h-10 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-12 lg:w-12  shrink-0">                    
+                  <span className="flex items-center justify-center w-6 h-6 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-9 lg:w-9  shrink-0">                    
                   </span>
                 </div>
               ) : (
                 <div className="flex w-full items-center after:content-[''] after:w-full after:h-1 after:border-b  after:border-[#DCDCDC] after:border-4 after:inline-block text-[#DCDCDC]">
-                  <div className="border-[#DCDCDC] border-4  flex items-center justify-center w-10 h-10 bg-transparent rounded-full lg:h-12 lg:w-12  shrink-0"></div>
+                  <div className="border-[#DCDCDC] border-4  flex items-center justify-center w-6 h-6 bg-transparent rounded-full lg:h-9 lg:w-9  shrink-0"></div>
                 </div>
               )}
             </li>

@@ -26,7 +26,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
     <div className="w-full flex  justify-center">
       <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-4 py-2 max-w-screen-lg 2xl:pr-6 2xl:py-0">
         <div className="flex flex-col md:flex-row items-center w-full">
-          <div className="w-full  rounded-lg m-8 videoPlayer max-w-[464px]">{video}</div>
+          <div className="w-full  rounded-lg m-8 videoPlayer max-h-[750px] max-w-[464px]">{video}</div>
           <div className="flex flex-col  h-full gap-12 justify-between items-center w-full pt-16 pb-8">
             <div className="flex flex-col 2xl:gap-12 gap-8 w-full">
             <div className="border-b-2 border-[#D9D9D9] w-full">
