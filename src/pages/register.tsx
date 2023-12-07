@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { Layout } from "@/components/layouts/Layout";
 import { useSearchParams } from "next/navigation";
+import { dataApi } from "../../api";
 
 interface FormularioProps {}
 
@@ -38,8 +39,14 @@ const Register: FC<FormularioProps> = () => {
   const password = useRef<string | null>(null);
   password.current = watch("password", "");
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const newData = { ...data, product_id };
+    try {
+      await dataApi.post<any>("/orders/create-order", newData);
+      console.log("Se creo la orden");
+    } catch (error) {
+      console.error("Error al enviar los datos:", error);
+    }
     reset();
   });
 
