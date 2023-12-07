@@ -495,10 +495,10 @@ export default function Form(dataFinal: any) {
                       <div className="xl:w-[390px] lg:w-full  rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
                         {video}
                       </div>
-                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[200px] lg:max-w-full xl:max-w-[430px] 2xl:pb-8 2xl:pt-16 xl:pb-8 xl:pt-16 lg:pb-8 lg:pt-16 md:pr-6">
+                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[200px] lg:max-w-full xl:max-w-[430px] 2xl:pb-8 2xl:pt-16 xl:pb-8 xl:pt-16 lg:pb-8 lg:pt-16 lg:pr-0 md:pr-6">
                         <div className="flex flex-col 2xl:gap-8 gap-6 w-full">
                           <div className="border-b-2 border-[#D9D9D9] w-full">
-                            <h1 className="text-black font-bold 2xl:text-2xl lg:text-base items-center flex justify-center pb-6">
+                            <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-base items-center flex justify-center pb-6">
                               Detalles de la orden
                             </h1>
                           </div>
