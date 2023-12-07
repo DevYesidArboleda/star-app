@@ -4,8 +4,9 @@ import Link from 'next/link'
 
 
 
-export const CompletePay   = () => {
+export const CompletePay   = ({user_id}:any) => {
     const [completePay, setCompletePay] = useState<boolean>()
+    console.log("llego",user_id)
     
 
   return (
@@ -30,7 +31,7 @@ export const CompletePay   = () => {
         </div>
         <div className='pb-[50px]'>
             <button className='btn-success ' >
-                <Link href="/register">Quiero ser una estrella</Link>
+                <Link href={`/register?userID=${user_id}`}>Quiero ser una estrella</Link>
             </button>
         </div>
     </div>

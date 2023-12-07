@@ -3,6 +3,7 @@ import React, { FC, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { Layout } from "@/components/layouts/Layout";
+import { useSearchParams } from "next/navigation";
 
 interface FormularioProps {}
 
@@ -14,7 +15,9 @@ interface FormData {
   aceptaTerminos: boolean;
 }
 
-const Register: FC<FormularioProps> = () => {
+const Register: FC<FormularioProps> = () => {  
+  const searchParams = useSearchParams();
+  const product_id = searchParams.get("productID");
   const {
     register,
     handleSubmit,

@@ -566,7 +566,7 @@ export default function Form(dataFinal: any) {
 
             {currentStep === 2 && (
               <>
-                <CompletePay />
+                <CompletePay user_id={user_id} />
               </>
             )}
           </form>
