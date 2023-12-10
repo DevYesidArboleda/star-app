@@ -32,7 +32,7 @@ export default function Home() {
         }
       })  
       
-      setDataFinal(dataApi.data.doc)
+      setDataFinal(dataApi.data.data)
     }
    
       fechtDataPrueba()
