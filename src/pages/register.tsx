@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Layout } from "@/components/layouts/Layout";
 import { useSearchParams } from "next/navigation";
 import { dataApi } from "../../api";
-import UserModal from "@/components/Modal/userModal";
+import UserModal from "@/components/Modal/UserModal";
 
 interface FormularioProps {}
 
