@@ -300,7 +300,7 @@ export default function Form(dataFinal: any) {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="w-full"
               >
-                <div className="flex lg:flex-row justify-center gap-4 flex-row-reverse">
+              <div className="flex lg:flex-row justify-center lg:gap-4 gap-2 flex-row-reverse lg:bg-transparent md:bg-white  md:border-gray-200 rounded-lg">
                   <div className="px-[16.5px] py-[49.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
                     <h2 className=" leading-7  text-black text-xl font-medium text-center mb-5">
                       Hacer Pedido
@@ -309,7 +309,7 @@ export default function Form(dataFinal: any) {
                       Ingresa tus datos
                     </span>
 
-                    <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
+                    <div className="mt-2 flex flex-col gap-6">
                       <div className="col-span-full">
                         <div className="mt-2">
                           <input
@@ -483,12 +483,12 @@ export default function Form(dataFinal: any) {
                   </div>
 
                   <div className=" 2xl:w-3/5 xl:w-4/5 lg:w-full">
-                    <div className="flex flex-col h-full items-center bg-white border border-gray-200 rounded-lg justify-start max-w-[936px] shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-2 lg:py-2 md:pr-1 md:py-2 py-2">
-                      <div className="xl:w-[390px] lg:w-full  rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
+                    <div className="flex flex-col h-full items-center lg:bg-white lg:border lg:border-gray-200 lg:rounded-lg justify-start max-w-[936px] lg:shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-6 lg:py-2 md:pr-1 md:py-2 py-2">
+                      <div className="xl:w-[390px] lg:w-full md:w-[364px] lg:h-auto md:h-[272px] rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
                         {video}
                       </div>
-                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[200px] lg:max-w-full xl:max-w-[430px] 2xl:pb-8 2xl:pt-16 xl:pb-8 xl:pt-16 lg:pb-8 lg:pt-16 lg:pr-0 md:pr-6">
-                        <div className="flex flex-col 2xl:gap-8 gap-6 w-full">
+                      <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[364px] lg:max-w-full xl:max-w-[430px] 2xl:pb-8 2xl:pt-16 xl:pb-8 xl:pt-16 lg:pb-8 lg:pt-16 lg:pr-0 md:pr-0">
+                        <div className="flex flex-col 2xl:gap-8 gap-2 w-full">
                           <div className="border-b-2 border-[#D9D9D9] w-full">
                             <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-base items-center flex justify-center pb-6">
                               Detalles de la orden
@@ -540,7 +540,7 @@ export default function Form(dataFinal: any) {
                         </div>
                         <div className="hidden justify-center lg:flex w-full ">
                           <button
-                            className="btn-success w-full xl:h-[63px]"
+                            className="btn-success w-full xl:h-[63px] lg:h-[63px]"
                             type="button"
                             onClick={next}
                             disabled={currentStep === steps.length - 1}

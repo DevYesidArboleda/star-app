@@ -50,7 +50,7 @@ body {
   }
 
   .bg-Form {
-    @apply bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-row pr-8;
+    @apply lg:bg-white lg:border lg:border-gray-200 rounded-lg justify-evenly lg:shadow md:flex-row pr-8;
   }
 
   .bg-Form-input {
