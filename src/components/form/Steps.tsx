@@ -28,12 +28,12 @@ const Steps = ( { currentStep }:any ) => {
             <li key={step.name} className="md:flex-auto ml-0 w-full ">
               {currentStep > index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC] after:content-[''] after:w-full after:h-1 after:border-b after:border-[#42E083]  after:border-4 after:inline-block ">
-                  <span className="flex items-center justify-center w-6 h-6 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-9 lg:w-9  shrink-0">                    
+                  <span className="flex items-center justify-center w-6 h-6 bg-[#53545C] rounded-full border-[#53545C] border-4 lg:h-9 lg:w-9  shrink-0">                    
                   </span>
                 </div>
               ) : currentStep === index ? (
                 <div className="flex flex-row w-full items-center text-[#DCDCDC]  after:content-[''] after:w-full after:h-1 after:border-b  after:border-4 after:inline-block after:border-[#DCDCDC]">
-                  <span className="flex items-center justify-center w-6 h-6 bg-[#53545C] rounded-full border-[#42E083] border-4 lg:h-9 lg:w-9  shrink-0">                    
+                  <span className="flex items-center justify-center w-6 h-6 bg-[#53545C] rounded-full border-[#53545C] border-4 lg:h-9 lg:w-9  shrink-0">                    
                   </span>
                 </div>
               ) : (

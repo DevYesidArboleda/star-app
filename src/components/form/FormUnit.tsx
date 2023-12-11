@@ -278,17 +278,9 @@ export default function Form(dataFinal: any) {
                           })}
                         </Select>
                       </div>
-                    </div>
-                    <div className="flex flex-col pb-3 w-full">
-                      <span className="mb-3 font-light text-base text-[#53545C] ">
-                        Valor envío
-                      </span>
-                      <span className="mb-3 font-semibold text-black text-2xl">
-                        Gratis
-                      </span>
-                    </div>
+                    </div>                    
                     <button
-                      className="btn-success flex w-full items-center text-center justify-center"
+                      className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
                       type="button"
                       onClick={next}
                       disabled={currentStep === steps.length - 1}
