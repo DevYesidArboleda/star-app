@@ -10,7 +10,7 @@ import { VideoStreaming } from "./VideoStreaming";
 import { useSteps } from "../../hooks/useSteps";
 import { usePrevs } from "../../hooks/useStepsPrev";
 import { Select, SelectItem } from "@nextui-org/react";
-import Modal from "./Modal";
+import Modal from "../Modal/Modal";
 import Steps from "./Steps";
 import Image from "next/image";
 import ReactPlayer from "react-player";
