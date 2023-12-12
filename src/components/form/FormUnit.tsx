@@ -300,8 +300,8 @@ export default function Form(dataFinal: any) {
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="w-full"
               >
-              <div className="flex lg:flex-row justify-center lg:gap-4 gap-2 flex-row-reverse lg:bg-transparent md:bg-white  md:border-gray-200 rounded-lg">
-                  <div className="px-[16.5px] py-[49.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
+              <div className="flex lg:flex-row lg:justify-center md:justify-around lg:gap-4 gap-2 flex-row-reverse lg:bg-transparent md:bg-white  md:border-gray-200 rounded-lg">
+                  <div className="px-[16.5px] lg:py-[49.5px] md:py-[20.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
                     <h2 className=" leading-7  text-black text-xl font-medium text-center mb-5">
                       Hacer Pedido
                     </h2>
@@ -309,7 +309,7 @@ export default function Form(dataFinal: any) {
                       Ingresa tus datos
                     </span>
 
-                    <div className="mt-2 flex flex-col gap-6">
+                    <div className="mt-2 flex flex-col xl:gap-6 lg:gap-4 md:gap-4">
                       <div className="col-span-full">
                         <div className="mt-2">
                           <input
@@ -482,16 +482,19 @@ export default function Form(dataFinal: any) {
                     </div>
                   </div>
 
-                  <div className=" 2xl:w-3/5 xl:w-4/5 lg:w-full">
-                    <div className="flex flex-col h-full items-center lg:bg-white lg:border lg:border-gray-200 lg:rounded-lg justify-start max-w-[936px] lg:shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-6 lg:py-2 md:pr-1 md:py-2 py-2">
-                      <div className="xl:w-[390px] lg:w-full md:w-[364px] lg:h-auto md:h-[272px] rounded-md m-8 videoPlayer w-10/12 max-h-[750px]">
+                  <div className=" 2xl:w-3/5 xl:w-4/5 lg:w-full lg:py-0 md:pt-5">
+                    <div className="flex flex-col-reverse h-full items-center lg:bg-white lg:border lg:border-gray-200 lg:rounded-lg justify-start max-w-[936px] lg:shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-6 lg:py-2 md:pr-1 md:py-2 py-2">
+                      <div className="xl:w-[390px] lg:w-full md:w-[364px] lg:h-auto md:h-[272px] rounded-md lg:m-8 md:m-4 videoPlayer w-10/12 max-h-[750px]">
                         {video}
                       </div>
                       <div className="flex flex-col  h-full gap-12 justify-between items-start w-full md:max-w-[364px] lg:max-w-full xl:max-w-[430px] 2xl:pb-8 2xl:pt-16 xl:pb-8 xl:pt-16 lg:pb-8 lg:pt-16 lg:pr-0 md:pr-0">
-                        <div className="flex flex-col 2xl:gap-8 gap-2 w-full">
-                          <div className="border-b-2 border-[#D9D9D9] w-full">
-                            <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-base items-center flex justify-center pb-6">
+                        <div className="flex flex-col 2xl:gap-8 xl:gap-6 lg:gap-2 md:gap-0 w-full">
+                          <div className="border-b-2 lg:border-[#D9D9D9] border-transparent w-full">
+                            <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-base items-center lg:flex md:hidden justify-center pb-6">
                               Detalles de la orden
+                            </h1>
+                            <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-base items-center lg:hidden md:flex justify-center pb-6">
+                              Resumen de la compra
                             </h1>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full">
@@ -535,6 +538,14 @@ export default function Form(dataFinal: any) {
                             </h1>
                             <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
                                {variation}
+                            </span>
+                          </div>
+                          <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
+                            <h1 className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base text-[#53545C]">
+                            Total
+                            </h1>
+                            <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
+                              {data && data.price}
                             </span>
                           </div>
                         </div>
