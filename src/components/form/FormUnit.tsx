@@ -302,10 +302,10 @@ export default function Form(dataFinal: any) {
               >
               <div className="flex lg:flex-row lg:justify-center md:justify-around lg:gap-4 gap-2 flex-row-reverse lg:bg-transparent md:bg-white  md:border-gray-200 rounded-lg">
                   <div className="px-[16.5px] lg:py-[49.5px] md:py-[20.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
-                    <h2 className=" leading-7  text-black text-xl font-medium text-center mb-5">
+                    <h2 className=" leading-7  text-black lg:text-xl md:text-base lg:font-medium md:font-bold text-center mb-5">
                       Hacer Pedido
                     </h2>
-                    <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97]">
+                    <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97] md:hidden lg:flex">
                       Ingresa tus datos
                     </span>
 
@@ -462,7 +462,7 @@ export default function Form(dataFinal: any) {
                           <textarea
                             id="note"
                             placeholder="Notas o información adicional"
-                            className="bg-Form-input "
+                            className="bg-Form-input md:h-20"
                             autoComplete="street-address"
                             onChange={handleInputNote}
                           />
@@ -482,8 +482,8 @@ export default function Form(dataFinal: any) {
                     </div>
                   </div>
 
-                  <div className=" 2xl:w-3/5 xl:w-4/5 lg:w-full lg:py-0 md:pt-5">
-                    <div className="flex flex-col-reverse h-full items-center lg:bg-white lg:border lg:border-gray-200 lg:rounded-lg justify-start max-w-[936px] lg:shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-6 lg:py-2 md:pr-1 md:py-2 py-2">
+                  <div className=" 2xl:w-3/5 xl:w-4/5 lg:w-full lg:py-0 md:pt-4">
+                    <div className="flex flex-col-reverse h-full items-center lg:bg-white lg:border lg:border-gray-200 lg:rounded-lg justify-start max-w-[936px] lg:shadow lg:flex-row pr-4 2xl:pr-6 xl:pr-6 lg:pr-6 lg:py-2 md:pr-1 md:py-1 py-2">
                       <div className="xl:w-[390px] lg:w-full md:w-[364px] lg:h-auto md:h-[272px] rounded-md lg:m-8 md:m-4 videoPlayer w-10/12 max-h-[750px]">
                         {video}
                       </div>
