@@ -218,6 +218,8 @@ export default function Form(dataFinal: any) {
   useEffect(() => {
     if (windowSize.width <= 700) {
       handleClick();
+      //Para prod se quita la resta
+      //setCurrentStep(-1);
     }
   }, []);
 
@@ -600,10 +602,10 @@ export default function Form(dataFinal: any) {
               ) : (
                 <div>
                   <div className="flex flex-col items-center w-full bg-white border border-gray-200 rounded-lg">
-                    <div id="">
-                      <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
+                    <div className="">
+                      <div className="w-auto mx-4 mt-4 pb-6 videoPlayer flex flex-col gap-3 border-b-1 border-[#D9D9D9]">
                         {video}
-                        <button className="btn-success w-full">
+                        <button className="btn-success w-full h-[54px]">
                           <Link
                             activeClass="active"
                             to="page1"
@@ -611,14 +613,16 @@ export default function Form(dataFinal: any) {
                             smooth={true}
                             offset={0}
                             duration={500}
+                            className="w-full flex text-center items-center justify-center"
                           >
-                            1
+                            Comprar ahora
                           </Link>
                         </button>
                       </div>
                     </div>
-                    <div id="page1">
-                      <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
+
+                    <div id="page1" className="flex flex-col">
+                      <div className="w-full px-12 pt-10 pb-9">
                         <h1 className="w-full flex justify-center mb-4 text-black text-xl">
                           Detalles de la compra
                         </h1>
@@ -683,6 +687,23 @@ export default function Form(dataFinal: any) {
                           </div>
                         </div>
                       </div>
+                      <button className="flex w-full">
+                          <Link
+                            activeClass="active"
+                            to="page2"
+                            spy={true}
+                            smooth={true}
+                            offset={0}
+                            duration={500}
+                            className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
+                          >
+                            Comprar ahora
+                          </Link>
+                        </button>
+                    </div>
+
+                    <div id="page2">
+
                     </div>
                   </div>
                 </div>
