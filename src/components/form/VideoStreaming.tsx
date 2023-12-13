@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import next, { steps } from "@/components/form/FormUnit";
 import { useSteps } from "../../hooks/useSteps";
 import Image from "next/image";
 import { usePrevs } from "../../hooks/useStepsPrev";
+import { UseWindowSize } from "@/hooks/UseWindowSize";
 
 interface typeData {
   name: string;
@@ -17,10 +18,33 @@ interface ArrayDeArrays {
 
 export const VideoStreaming = ({ setOpen, data, video }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
+  const myElementRef = useRef<HTMLButtonElement>(null);
+  const windowSize = UseWindowSize();
 
   /*useEffect(() => {
     setVideo(<ReactPlayer url={`${url}`} controls={true} height="750px" width="464px"/>);
   }, []);*/
+
+  const handleClick = () => {
+    // Verifica que la referencia exista antes de intentar simular el clic
+    if (myElementRef.current) {
+      // Crea un evento de clic personalizado
+      const clickEvent = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      });
+
+      // Simula el clic usando dispatchEvent en la referencia del elemento
+      myElementRef.current.dispatchEvent(clickEvent);
+    }
+  };
+
+  useEffect(() => {
+    if(windowSize.width <= 700 ){            
+      handleClick()
+    }
+  }, []);
 
   return (
     <div className="w-full flex  justify-center">
@@ -93,6 +117,7 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
             <div className="lg:flex  w-full 2xl:h-[63px] xl:h-[63px] h-[35px] 2xl:justify-start">
               <button
                 className="btn-success w-full "
+                ref={myElementRef}
                 type="button"
                 onClick={data.tags !== null ? () => setOpen(true) : next}
                 disabled={
@@ -107,6 +132,12 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
         </div>
         
       </div>
+      <div>
+      {/* Agrega la referencia al elemento */}
+            
+      {/* Botón que simula el clic en el otro botón */}
+      <button className="hidden" onClick={handleClick}>Simular Clic</button>
+    </div>
     </div>
   );
 };

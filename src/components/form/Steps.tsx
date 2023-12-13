@@ -18,7 +18,7 @@ const Steps = ( { currentStep }:any ) => {
     <>
         <nav
         aria-label="Progress"
-        className="flex items-center w-full justify-center max-w-[770px]"
+        className="md:flex items-center w-full justify-center max-w-[770px] hidden"
       >
         <ol
           role="list"

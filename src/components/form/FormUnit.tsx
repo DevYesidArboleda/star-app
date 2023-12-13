@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { FormDataSchema } from "../../../lib/schema";
@@ -21,6 +21,7 @@ import { Data, Doc } from "../../../interfaces";
 import { useSearchParams } from "next/navigation";
 import { dataApi } from "../../../api";
 import { fetchDeparment, fetchCity } from "../utils/funtions";
+import { Link, Button } from "react-scroll";
 import axios from "axios";
 
 type Inputs = z.infer<typeof FormDataSchema>;
@@ -65,12 +66,14 @@ export default function Form(dataFinal: any) {
   const searchParams = useSearchParams();
   const product_id = searchParams.get("productID");
   const user_id = searchParams.get("userID");
+  const myElementRef = useRef<HTMLButtonElement>(null);
 
   const {
     register,
     handleSubmit,
     reset,
     trigger,
+    watch,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(FormDataSchema),
@@ -79,7 +82,13 @@ export default function Form(dataFinal: any) {
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const client_quantity = quantity;
-    const newData = { ...data, user_id, product_id, client_quantity, client_notes };
+    const newData = {
+      ...data,
+      user_id,
+      product_id,
+      client_quantity,
+      client_notes,
+    };
     try {
       await dataApi.post<any>("/orders/create-order", newData);
       console.log("Se creo la orden");
@@ -191,116 +200,141 @@ export default function Form(dataFinal: any) {
     }
   }, [cityid]);
 
+  const handleClick = () => {
+    // Verifica que la referencia exista antes de intentar simular el clic
+    if (myElementRef.current) {
+      // Crea un evento de clic personalizado
+      const clickEvent = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      });
+
+      // Simula el clic usando dispatchEvent en la referencia del elemento
+      myElementRef.current.dispatchEvent(clickEvent);
+    }
+  };
+
+  useEffect(() => {
+    if (windowSize.width <= 700) {
+      handleClick();
+      setCurrentStep(-1);
+    }
+  }, []);
+
   return (
     <>
-      {windowSize.width >= 768 ? (
-        <section
-          className="bg-transparent h-scTestP inset-0 flex flex-col justify-between xl:p-14 md:p-4 items-center"
-          suppressHydrationWarning={true}
+      <section
+        className="bg-transparent h-scTestP inset-0 flex flex-col justify-between xl:p-14 md:p-4 items-center"
+        suppressHydrationWarning={true}
+      >
+        <Steps currentStep={currentStep} />
+
+        {/* Form */}
+        <form
+          className="mt-12 bg-transparent rounded-md flex justify-center w-full"
+          onSubmit={handleSubmit(processForm)}
         >
-          <Steps currentStep={currentStep} />
+          {currentStep === 0 && (
+            <motion.div
+              initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="w-full"
+            >
+              <VideoStreaming setOpen={setOpen} data={data} video={video} />
 
-          {/* Form */}
-          <form
-            className="mt-12 bg-transparent rounded-md flex justify-center w-full"
-            onSubmit={handleSubmit(processForm)}
-          >
-            {currentStep === 0 && (
-              <motion.div
-                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="w-full"
-              >
-                <VideoStreaming setOpen={setOpen} data={data} video={video} />
-
-                <Modal isOpen={open} onClose={() => setOpen(false)}>
-                  <div className="">
-                    <h1 className="w-full flex justify-center mb-4 text-black text-xl">
-                      Detalles de la compra
-                    </h1>
-                    <div className="flex flex-col pb-3 w-full">
-                      <span className="mb-3 font-light text-base text-[#53545C]">
-                        Valor total
-                      </span>
-                      <span className="mb-3 font-semibold text-black text-2xl">
-                        {data.price}
-                      </span>
-                    </div>
-                    <div className="flex flex-col pb-3 w-full">
-                      <span className="mb-3 font-light text-base text-[#53545C]">
-                        Cantidad
-                      </span>
-                      <div className="flex gap-4">
-                        {quantity === 1 ? (
-                          <button className="text-[#53545C]">-</button>
-                        ) : (
-                          <button
-                            className="text-[#53545C]"
-                            onClick={() =>
-                              setQuantity((quantity) => quantity - 1)
-                            }
-                          >
-                            -
-                          </button>
-                        )}
-                        <span className="text-black">{quantity}</span>
+              <Modal isOpen={open} onClose={() => setOpen(false)}>
+                <div className="">
+                  <h1 className="w-full flex justify-center mb-4 text-black text-xl">
+                    Detalles de la compra
+                  </h1>
+                  <div className="flex flex-col pb-3 w-full">
+                    <span className="mb-3 font-light text-base text-[#53545C]">
+                      Valor total
+                    </span>
+                    <span className="mb-3 font-semibold text-black text-2xl">
+                      {data.price}
+                    </span>
+                  </div>
+                  <div className="flex flex-col pb-3 w-full">
+                    <span className="mb-3 font-light text-base text-[#53545C]">
+                      Cantidad
+                    </span>
+                    <div className="flex gap-4">
+                      {quantity === 1 ? (
+                        <button className="text-[#53545C]">-</button>
+                      ) : (
                         <button
-                          className="text-[#42E184]"
+                          className="text-[#53545C]"
                           onClick={() =>
-                            setQuantity((quantity) => quantity + 1)
+                            setQuantity((quantity) => quantity - 1)
                           }
                         >
-                          +
+                          -
                         </button>
-                      </div>
+                      )}
+                      <span className="text-black">{quantity}</span>
+                      <button
+                        className="text-[#42E184]"
+                        onClick={() => setQuantity((quantity) => quantity + 1)}
+                      >
+                        +
+                      </button>
                     </div>
-                    <div className="flex flex-col">
-                      <span className="mb-3 font-light text-base text-[#53545C]">
-                        Seleccionar Talla
-                      </span>
-                      <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
-                        <Select
-                          label="Seleccionar ..."
-                          className="max-w-xs mb-3 font-light text-base text-[#53545C]"
-                        >
-                          {data.tags?.map((items: any, index: number) => {
-                            return (
-                              <SelectItem
-                                className="text-black"
-                                key={index}
-                                value={items}
-                                onClick={() => setVaration(items)}
-                              >
-                                {items}
-                              </SelectItem>
-                            );
-                          })}
-                        </Select>
-                      </div>
-                    </div>                    
-                    <button
-                      className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
-                      type="button"
-                      onClick={next}
-                      disabled={currentStep === steps.length - 1}
-                      data-ripple-light="true"
-                    >
-                      Continuar
-                    </button>
                   </div>
-                </Modal>
-              </motion.div>
-            )}
+                  <div className="flex flex-col">
+                    <span className="mb-3 font-light text-base text-[#53545C]">
+                      Seleccionar Talla
+                    </span>
+                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
+                      <Select
+                        label="Seleccionar ..."
+                        className="max-w-xs mb-3 font-light text-base text-[#53545C]"
+                      >
+                        {data.tags?.map((items: any, index: number) => {
+                          return (
+                            <SelectItem
+                              className="text-black"
+                              key={index}
+                              value={items}
+                              onClick={() => setVaration(items)}
+                            >
+                              {items}
+                            </SelectItem>
+                          );
+                        })}
+                      </Select>
+                    </div>
+                  </div>
+                  <button
+                    className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
+                    type="button"
+                    onClick={next}
+                    ref={myElementRef}
+                    disabled={currentStep === steps.length - 1}
+                    data-ripple-light="true"
+                  >
+                    Continuar
+                  </button>
+                  {/* Botón que simula el clic en el otro botón */}
+                  <button className="hidden" onClick={handleClick}>
+                    Simular Clic
+                  </button>
+                </div>
+              </Modal>
+            </motion.div>
+          )}
 
-            {currentStep === 1 && (
-              <motion.div
-                initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="w-full"
-              >
-              <div className="flex lg:flex-row lg:justify-center md:justify-around lg:gap-4 gap-2 flex-row-reverse lg:bg-transparent md:bg-white  md:border-gray-200 rounded-lg">
+          {currentStep === 1 && (
+            <motion.div
+              initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="w-full"
+            >
+              {windowSize.width >= 768 ? (
+                <div className="flex lg:flex-row lg:justify-center md:justify-around lg:gap-4 gap-2 flex-row-reverse lg:bg-transparent md:bg-white  md:border-gray-200 rounded-lg">
                   <div className="px-[16.5px] lg:py-[49.5px] md:py-[20.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
                     <h2 className=" leading-7  text-black lg:text-xl md:text-base lg:font-medium md:font-bold text-center mb-5">
                       Hacer Pedido
@@ -534,15 +568,15 @@ export default function Form(dataFinal: any) {
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
                             <h1 className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base text-[#53545C]">
-                            Tallas
+                              Tallas
                             </h1>
                             <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
-                               {variation}
+                              {variation}
                             </span>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
                             <h1 className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base text-[#53545C]">
-                            Total
+                              Total
                             </h1>
                             <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
                               {data && data.price}
@@ -564,25 +598,106 @@ export default function Form(dataFinal: any) {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            )}
+              ) : (
+                <div>
+                  <div className="flex flex-col items-center w-full bg-white border border-gray-200 rounded-lg">
+                    <div id="">
+                      <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
+                        {video}
+                        <button className="btn-success w-full">
+                          <Link
+                            activeClass="active"
+                            to="page1"
+                            spy={true}
+                            smooth={true}
+                            offset={0}
+                            duration={500}
+                          >
+                            1
+                          </Link>
+                        </button>
+                      </div>
+                    </div>
+                    <div id="page1">
+                      <div className="w-auto h-4/5 rounded-md m-8 videoPlayer">
+                        <h1 className="w-full flex justify-center mb-4 text-black text-xl">
+                          Detalles de la compra
+                        </h1>
+                        <div className="flex flex-col pb-3 w-full">
+                          <span className="mb-3 font-light text-base text-[#53545C]">
+                            Valor total
+                          </span>
+                          <span className="mb-3 font-semibold text-black text-2xl">
+                            {data.price}
+                          </span>
+                        </div>
+                        <div className="flex flex-col pb-3 w-full">
+                          <span className="mb-3 font-light text-base text-[#53545C]">
+                            Cantidad
+                          </span>
+                          <div className="flex gap-4">
+                            {quantity === 1 ? (
+                              <button className="text-[#53545C]">-</button>
+                            ) : (
+                              <button
+                                className="text-[#53545C]"
+                                onClick={() =>
+                                  setQuantity((quantity) => quantity - 1)
+                                }
+                              >
+                                -
+                              </button>
+                            )}
+                            <span className="text-black">{quantity}</span>
+                            <button
+                              className="text-[#42E184]"
+                              onClick={() =>
+                                setQuantity((quantity) => quantity + 1)
+                              }
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="mb-3 font-light text-base text-[#53545C]">
+                            Seleccionar Talla
+                          </span>
+                          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
+                            <Select
+                              label="Seleccionar ..."
+                              className="max-w-xs mb-3 font-light text-base text-[#53545C]"
+                            >
+                              {data.tags?.map((items: any, index: number) => {
+                                return (
+                                  <SelectItem
+                                    className="text-black"
+                                    key={index}
+                                    value={items}
+                                    onClick={() => setVaration(items)}
+                                  >
+                                    {items}
+                                  </SelectItem>
+                                );
+                              })}
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
 
-            {currentStep === 2 && (
-              <>
-                <CompletePay user_id={user_id} />
-              </>
-            )}
-          </form>
-        </section>
-      ) : (
-        <section
-          className=" bg-[#E7ECEF] flex "
-          suppressHydrationWarning={true}
-        >
-          {/* Mobile */}
-          <FormMobile data={data} video={video} />
-        </section>
-      )}
+          {currentStep === 2 && (
+            <>
+              <CompletePay user_id={user_id} />
+            </>
+          )}
+        </form>
+      </section>
     </>
   );
 }
