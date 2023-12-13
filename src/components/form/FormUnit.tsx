@@ -218,7 +218,6 @@ export default function Form(dataFinal: any) {
   useEffect(() => {
     if (windowSize.width <= 700) {
       handleClick();
-      setCurrentStep(-1);
     }
   }, []);
 
