@@ -219,7 +219,7 @@ export default function Form(dataFinal: any) {
     if (windowSize.width <= 700) {
       handleClick();
       //Para prod se quita la resta
-      //setCurrentStep(-1);
+      setCurrentStep(-1);
     }
   }, []);
 
