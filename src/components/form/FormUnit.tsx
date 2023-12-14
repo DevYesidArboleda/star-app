@@ -233,7 +233,7 @@ export default function Form(dataFinal: any) {
 
         {/* Form */}
         <form
-          className="mt-12 bg-transparent rounded-md flex justify-center w-full"
+          className="md:mt-12 mt-4 bg-transparent rounded-md flex justify-center w-full"
           onSubmit={handleSubmit(processForm)}
         >
           {currentStep === 0 && (
@@ -621,26 +621,26 @@ export default function Form(dataFinal: any) {
                       </div>
                     </div>
 
-                    <div id="page1" className="flex flex-col">
+                    <div id="page1" className="flex flex-col w-full">
                       <div className="w-full px-12 pt-10 pb-9">
-                        <h1 className="w-full flex justify-center mb-4 text-black text-xl">
+                        <h1 className="w-full flex justify-center mb-4 text-black text-base">
                           Detalles de la compra
                         </h1>
-                        <div className="flex flex-col pb-3 w-full">
+                        <div className="flex flex-col pb-3 w-full border-b-1 border-[#D9D9D9] mb-3">
                           <span className="mb-3 font-light text-base text-[#53545C]">
                             Valor total
                           </span>
-                          <span className="mb-3 font-semibold text-black text-2xl">
-                            {data.price}
+                          <span className="mb-3 font-semibold text-black text-base">
+                            $ {data.price}
                           </span>
                         </div>
-                        <div className="flex flex-col pb-3 w-full">
+                        <div className="flex flex-col pb-3 w-full border-b-1 border-[#D9D9D9] mb-3">
                           <span className="mb-3 font-light text-base text-[#53545C]">
                             Cantidad
                           </span>
                           <div className="flex gap-4">
                             {quantity === 1 ? (
-                              <button className="text-[#53545C]">-</button>
+                              <button className="text-[#53545C] w-3">-</button>
                             ) : (
                               <button
                                 className="text-[#53545C]"
@@ -687,23 +687,266 @@ export default function Form(dataFinal: any) {
                           </div>
                         </div>
                       </div>
-                      <button className="flex w-full">
-                          <Link
-                            activeClass="active"
-                            to="page2"
-                            spy={true}
-                            smooth={true}
-                            offset={0}
-                            duration={500}
-                            className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
-                          >
-                            Comprar ahora
-                          </Link>
-                        </button>
+                      <button className="flex w-full px-4 pb-16">
+                        <Link
+                          activeClass="active"
+                          to="page2"
+                          spy={true}
+                          smooth={true}
+                          offset={0}
+                          duration={500}
+                          className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
+                        >
+                          Continuar
+                        </Link>
+                      </button>
                     </div>
 
-                    <div id="page2">
+                    <div id="page2" className="w-full">
+                      <div className="px-4 bg-Form w-full ">                        
+                        <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97] w-full flex justify-center">
+                          Ingresa tus datos
+                        </span>
 
+                        <div className="mt-2 flex flex-col gap-4 pb-6 mb-4 border-b-1 border-[#D9D9D9]">
+                          <div className="col-span-full">
+                            <div className="mt-2">
+                              <input
+                                type="text"
+                                id="name"
+                                {...register("client_name")}
+                                placeholder="Nombres"
+                                className="bg-Form-input text-xs h-[52px]"
+                              />
+                              {errors.client_name?.message && (
+                                <p className="mt-2 text-sm text-red-400">
+                                  {errors.client_name.message}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="col-span-full">
+                            <div className="mt-2">
+                              <input
+                                type="text"
+                                id="name"
+                                {...register("client_surname")}
+                                placeholder="Apellidos"
+                                className="bg-Form-input text-xs h-[52px]"
+                              />
+                              {errors.client_surname?.message && (
+                                <p className="mt-2 text-sm text-red-400">
+                                  {errors.client_surname.message}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="col-span-full">
+                            <div className="mt-1">
+                              <input
+                                type="number"
+                                id="phone"
+                                {...register("client_phone")}
+                                placeholder="Telefono"
+                                className="bg-Form-input text-xs h-[52px]"
+                              />
+                              {errors.client_phone?.message && (
+                                <span className="mt-2 text-sm text-red-400">
+                                  {errors.client_phone.message}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="col-span-full">
+                            <div className="mt-2">
+                              <input
+                                type="email"
+                                id="email"
+                                {...register("client_email")}
+                                placeholder="Correo Electrónico"
+                                className="bg-Form-input text-xs h-[52px]"
+                              />
+                              {errors.client_email?.message && (
+                                <span className="mt-2 text-sm text-red-400">
+                                  {errors.client_email.message}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="col-span-full">
+                            <div className="mt-2">
+                              <input
+                                type="text"
+                                id="street"
+                                {...register("client_direction")}
+                                autoComplete="street-address"
+                                placeholder="Dirección"
+                                className="bg-Form-input text-xs h-[52px]"
+                              />
+                              {errors.client_direction?.message && (
+                                <p className="mt-2 text-sm text-red-400">
+                                  {errors.client_direction.message}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="xl:col-span-full sm:col-span-3">
+                            <div className="mt-2">
+                              <select
+                                id="department"
+                                {...register("department_id")}
+                                autoComplete=""
+                                placeholder="Departamento"
+                                className="bg-Form-input text-xs h-[52px]"
+                                onChange={handleInputDeparment}
+                              >
+                                Departamento
+                                {department.length > 0 &&
+                                  department.map(
+                                    (items: any, index: number) => {
+                                      return (
+                                        <option
+                                          key={index}
+                                          value={items.dropi_id}
+                                        >
+                                          {items.name}
+                                        </option>
+                                      );
+                                    }
+                                  )}
+                              </select>
+                              {errors.department_id?.message && (
+                                <span className="mt-2 text-sm text-red-400">
+                                  {errors.department_id.message}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="xl:col-span-full sm:col-span-3">
+                            <div className="mt-2">
+                              <select
+                                id="city"
+                                {...register("city_id")}
+                                autoComplete=""
+                                placeholder="Ciudad"
+                                className="bg-Form-input text-xs h-[52px]"
+                              >
+                                Ciudad
+                                {city.length > 0 &&
+                                  city.map((items: any, index: number) => {
+                                    return (
+                                      <option
+                                        key={index}
+                                        value={items.dropi_id}
+                                      >
+                                        {items.name}
+                                      </option>
+                                    );
+                                  })}
+                              </select>
+                              {errors.city_id?.message && (
+                                <span className="mt-2 text-sm text-red-400">
+                                  {errors.city_id.message}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="col-span-full">
+                            <label
+                              htmlFor="city"
+                              className="block text-[12px] font-normal leading-6 text-gray-900"
+                            >
+                              Notas adicionales
+                            </label>
+                            <div className="mt-2">
+                              <textarea
+                                id="note"
+                                placeholder="Notas o información adicional"
+                                className="bg-Form-input h-28 text-xs"
+                                autoComplete="street-address"
+                                onChange={handleInputNote}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col px-16 w-full">
+                          <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">                            
+                            <h1 className="text-black font-bold text-base items-center flex justify-center pb-6">
+                              Resumen 
+                            </h1>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full">
+                            <div className="flex justify-between">
+                              <h1 className="my-4 text-xs text-[#53545C]  font-bold ">
+                                Producto
+                              </h1>
+                              <br />
+                              <h5 className="my-4 font-light text-[#53545C] text-xs">
+                                {data && data.name}
+                              </h5>
+                            </div>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
+                            <span className="my-4 font-bold text-[#53545C] text-xs">
+                              Método de pago
+                            </span>
+                            <span className="my-4 font-light text-[#53545C] text-xs">
+                              Paga al recibir
+                            </span>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
+                            <span className="my-4 font-bold text-xs text-[#53545C] ">
+                              Envío
+                            </span>
+                            <span className="my-4 font-bold 2xl:text-xl text-xs text-[#42E184] ">
+                              GRATIS
+                            </span>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
+                            <span className="my-4 font-bold text-xs text-[#53545C]">
+                              Color
+                            </span>
+                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                              Por definir
+                            </span>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
+                            <h1 className="my-4 font-bold text-xs text-[#53545C]">
+                              Tallas
+                            </h1>
+                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                              {variation}
+                            </span>
+                          </div>
+                          <div className="w-full flex justify-between pb-6">
+                            <h1 className="my-4 font-bold text-xs text-[#53545C]">
+                              Total
+                            </h1>
+                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                              {data && data.price}
+                            </span>
+                          </div>
+                        </div>
+                        <div className=" justify-center flex w-full pb-4">
+                          <button
+                            className="btn-success w-full h-[54px] text-base"
+                            type="button"
+                            onClick={next}
+                            disabled={currentStep === steps.length - 1}
+                            data-ripple-light="true"
+                          >
+                            Finalizar Compra
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
