@@ -17,7 +17,7 @@ export const CompletePay   = ({user_id}:any) => {
             width={1024}
             height={1024}
             alt="Logo Star"
-            className='rounded-lg'
+            className='rounded-lg '
             priority={true}/>
         </div>
         <div className=''>

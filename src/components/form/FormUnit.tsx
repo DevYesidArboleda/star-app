@@ -23,6 +23,7 @@ import { dataApi } from "../../../api";
 import { fetchDeparment, fetchCity } from "../utils/funtions";
 import { Link, Button } from "react-scroll";
 import axios from "axios";
+import ErrorModel from "../Modal/ErrorModal";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -59,8 +60,11 @@ export default function Form(dataFinal: any) {
   const [finalData, setFinalData] = useState<any>([]);
   const [variation, setVaration] = useState("");
   const [client_notes, setClient_notes] = useState("");
+  const [move, setMove] = useState<boolean>(false);
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
   const [open, setOpen] = useState<boolean>(false);
+  const [openError, setOpenError] = useState<boolean>(false);
   const delta = currentStep - previousStep;
   const windowSize = UseWindowSize();
   const searchParams = useSearchParams();
@@ -71,13 +75,13 @@ export default function Form(dataFinal: any) {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     trigger,
-    watch,
-    formState: { errors },
+    formState: { errors }
   } = useForm<Inputs>({
-    resolver: zodResolver(FormDataSchema),
-  });
+    resolver: zodResolver(FormDataSchema)
+  })
 
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
@@ -90,12 +94,24 @@ export default function Form(dataFinal: any) {
       client_notes,
     };
     try {
-      await dataApi.post<any>("/orders/create-order", newData);
+      console.log(data)
+      const response = await dataApi.post<any>("/orders/create-order", newData);      
+      console.log(response)
+      if(response.data.ok){
+        setMove(true)
+      }
       console.log("Se creo la orden");
-    } catch (error) {
+    } catch (error:any) {
       console.error("Error al enviar los datos:", error);
+      console.log(error.response.data.stack.message)
+      setError(error.response.data.stack.message)
+      handleErrorModal();
     }
     reset();
+  };
+
+  const handleErrorModal = () => {
+    setOpenError(true);
   };
 
   type FieldName = keyof Inputs;
@@ -108,7 +124,8 @@ export default function Form(dataFinal: any) {
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        handleSubmit(processForm)();
+        console.log("esta llegando a la vaina")
+        await handleSubmit(processForm)()
       }
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
@@ -219,7 +236,7 @@ export default function Form(dataFinal: any) {
     if (windowSize.width <= 700) {
       handleClick();
       //Para prod se quita la resta
-      //setCurrentStep(-1);
+      setCurrentStep(-1);
     }
   }, []);
 
@@ -954,7 +971,14 @@ export default function Form(dataFinal: any) {
             </motion.div>
           )}
 
-          {currentStep === 2 && (
+          
+          <ErrorModel isOpen={openError} onClose={() => setOpen(false)}>
+                    <div>
+                      <span className="text-sm text-black p-4">{error}</span>
+                    </div>
+                  </ErrorModel>
+
+          {move === true && (
             <>
               <CompletePay user_id={user_id} />
             </>

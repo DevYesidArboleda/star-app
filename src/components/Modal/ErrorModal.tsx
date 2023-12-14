@@ -7,7 +7,7 @@ interface ModalProps {
     children: ReactNode;
   }
   
-  const UserModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const ErrorModel: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     return (
       <div className={`fixed inset-0 flex justify-center items-center transition-colors ${isOpen ? "visible bg-black/20": "invisible"}`} onClick={onClose}>
         <div className={`bg-white rounded-lg shadow p-2 w-[440px] ${isOpen ? "scale-100 opacity-100": "scale-110 opacity-0"}`} onClick={(e)=>e.stopPropagation()}>          
@@ -18,4 +18,4 @@ interface ModalProps {
     )
   };
   
-  export default UserModal;
+  export default ErrorModel;

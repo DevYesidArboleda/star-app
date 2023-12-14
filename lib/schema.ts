@@ -4,10 +4,10 @@ import { z } from 'zod'
 export const FormDataSchema = z.object({
   client_email: z.string().min(1, 'Email is required').email('Invalid email address'),
   client_direction: z.string().min(1, 'Street is required'),
-  department_id: z.string().min(1, 'Street is required'),
+  department_id: z.string().min(1, 'depatament is required'),
   city_id: z.string().min(1, 'City is required'),
-  client_name: z.string().min(1, 'Completed name is required'),
-  client_surname: z.string().min(1, 'Completed name is required'),
+  client_name: z.string().min(1, ' name is required'),
+  client_surname: z.string().min(1, 'surnameis required'),
   client_phone: z.string().min(1, 'Phone is required')
 })
 

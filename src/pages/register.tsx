@@ -371,7 +371,7 @@ const Register: FC<FormularioProps> = () => {
                   ¡Felicidades!
                 </span>
                 <br />
-                <span className="text-base font-normal text-black text-center pb-10">
+                <span className="text-base font-normal text-black text-center pb-10 px-6">
                   Has creado tu cuenta en estrellas de manera exitosa
                 </span>
               </div>
