@@ -94,14 +94,14 @@ export const AddressProduct = ({ variation }: any) => {
               <input
                 type="text"
                 id="street"
-                {...register("direction")}
+                {...register("street")}
                 autoComplete="street-address"
                 placeholder="Dirección"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-sky-600 sm:text-sm sm:leading-6"
               />
-              {errors.direction?.message && (
+              {errors.street?.message && (
                 <p className="mt-2 text-sm text-red-400">
-                  {errors.direction.message}
+                  {errors.street.message}
                 </p>
               )}
             </div>

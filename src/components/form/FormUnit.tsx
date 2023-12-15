@@ -78,22 +78,22 @@ export default function Form(dataFinal: any) {
     watch,
     reset,
     trigger,
-    formState: { errors }
+    formState: { errors },
   } = useForm<Inputs>({
-    resolver: zodResolver(FormDataSchema)
-  })
+    resolver: zodResolver(FormDataSchema),
+  });
 
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const client_quantity = quantity;
     const dataClient: any = {
       client_name: data.name,
-      client_direction:data.direction,
+      client_direction: data.street,
       department_id: data.department,
       city_id: data.city,
-      client_surname: data.surname,
+      client_surname: data.lastname,
       client_phone: data.phone,
-      client_email: data.email
+      client_email: data.email,
     };
 
     const newData = {
@@ -104,20 +104,22 @@ export default function Form(dataFinal: any) {
       client_notes,
     };
     try {
-      console.log(dataClient)
-      const response = await dataApi.post<any>("/orders/create-order", newData);      
-      console.log(response)
-      if(response.data.ok){
-        setMove(true)
+      console.log(dataClient);
+      const response = await dataApi.post<any>("/orders/create-order", newData);
+      console.log(response);
+      if (response.data.ok) {
+        setMove(true);
       }
       console.log("Se creo la orden");
-    } catch (error:any) {
+    } catch (error: any) {
       console.error("Error al enviar los datos:", error);
-      console.log(error.response.data.stack.message)
-      setError(error.response.data.stack.message)
+      console.log(error.response.data.stack.message);
+      setError(error.response.data.stack.message);      
       handleErrorModal();
+      prev()
+      //setTimeout(() => setOpenError(false), 10000)
     }
-    reset();
+    //reset();
   };
 
   const handleErrorModal = () => {
@@ -134,20 +136,20 @@ export default function Form(dataFinal: any) {
 
     if (currentStep < steps.length - 1) {
       if (currentStep === steps.length - 2) {
-        console.log("esta llegando a la vaina")
-        await handleSubmit(processForm)()
+        console.log("esta llegando a la vaina");
+        await handleSubmit(processForm)();
       }
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);
     }
   };
 
-  /*const prev = () => {
+  const prev = () => {
     if (currentStep > 0) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step - 1);
     }
-  };*/
+  };
 
   useEffect(() => {
     /*const fetchData = async () => {
@@ -377,12 +379,12 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="name"
-                            {...register("name")}
+                            {...register("name", { pattern: /^[A-Za-z]+$/i })}
                             placeholder="Nombres"
                             className="bg-Form-input "
                           />
                           {errors.name?.message && (
-                            <p className="mt-2 text-sm text-red-400">
+                            <p className="mt-1 text-sm text-red-400">
                               {errors.name.message}
                             </p>
                           )}
@@ -393,14 +395,14 @@ export default function Form(dataFinal: any) {
                         <div className="mt-2">
                           <input
                             type="text"
-                            id="name"
-                            {...register("surname")}
+                            id="lastname"
+                            {...register("lastname")}
                             placeholder="Apellidos"
                             className="bg-Form-input "
                           />
-                          {errors.surname?.message && (
-                            <p className="mt-2 text-sm text-red-400">
-                              {errors.surname.message}
+                          {errors.lastname?.message && (
+                            <p className="mt-1 text-sm text-red-400">
+                              {errors.lastname.message}
                             </p>
                           )}
                         </div>
@@ -416,7 +418,7 @@ export default function Form(dataFinal: any) {
                             className="bg-Form-input "
                           />
                           {errors.phone?.message && (
-                            <span className="mt-2 text-sm text-red-400">
+                            <span className="mt-1 text-sm text-red-400">
                               {errors.phone.message}
                             </span>
                           )}
@@ -433,7 +435,7 @@ export default function Form(dataFinal: any) {
                             className="bg-Form-input"
                           />
                           {errors.email?.message && (
-                            <span className="mt-2 text-sm text-red-400">
+                            <span className="mt-1 text-sm text-red-400">
                               {errors.email.message}
                             </span>
                           )}
@@ -445,14 +447,14 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="street"
-                            {...register("direction")}
+                            {...register("street")}
                             autoComplete="street-address"
                             placeholder="Dirección"
                             className="bg-Form-input "
                           />
-                          {errors.direction?.message && (
-                            <p className="mt-2 text-sm text-red-400">
-                              {errors.direction.message}
+                          {errors.street?.message && (
+                            <p className="mt-1 text-sm text-red-400">
+                              {errors.street.message}
                             </p>
                           )}
                         </div>
@@ -479,7 +481,7 @@ export default function Form(dataFinal: any) {
                               })}
                           </select>
                           {errors.department?.message && (
-                            <span className="mt-2 text-sm text-red-400">
+                            <span className="mt-1 text-sm text-red-400">
                               {errors.department.message}
                             </span>
                           )}
@@ -730,7 +732,7 @@ export default function Form(dataFinal: any) {
                     </div>
 
                     <div id="page2" className="w-full">
-                      <div className="px-4 bg-Form w-full ">                        
+                      <div className="px-4 bg-Form w-full ">
                         <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97] w-full flex justify-center">
                           Ingresa tus datos
                         </span>
@@ -741,7 +743,12 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="text"
                                 id="name"
-                                {...register("name")}
+                                {...register("name", {
+                                  pattern: {
+                                    value: /[A-Za-z]/,
+                                    message: "Nombre no válido",
+                                  },
+                                })}
                                 placeholder="Nombres"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
@@ -757,14 +764,14 @@ export default function Form(dataFinal: any) {
                             <div className="mt-2">
                               <input
                                 type="text"
-                                id="name"
-                                {...register("surname")}
+                                id="lastname"
+                                {...register("lastname")}
                                 placeholder="Apellidos"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.surname?.message && (
-                                <p className="mt-2 text-sm text-red-400">
-                                  {errors.surname.message}
+                              {errors.lastname?.message && (
+                                <p className="mt-1 text-sm text-red-400">
+                                  {errors.lastname.message}
                                 </p>
                               )}
                             </div>
@@ -780,7 +787,7 @@ export default function Form(dataFinal: any) {
                                 className="bg-Form-input text-xs h-[52px]"
                               />
                               {errors.phone?.message && (
-                                <span className="mt-2 text-sm text-red-400">
+                                <span className="mt-1 text-sm text-red-400">
                                   {errors.phone.message}
                                 </span>
                               )}
@@ -809,14 +816,14 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="text"
                                 id="street"
-                                {...register("direction")}
+                                {...register("street")}
                                 autoComplete="street-address"
                                 placeholder="Dirección"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.direction?.message && (
-                                <p className="mt-2 text-sm text-red-400">
-                                  {errors.direction.message}
+                              {errors.street?.message && (
+                                <p className="mt-1 text-sm text-red-400">
+                                  {errors.street.message}
                                 </p>
                               )}
                             </div>
@@ -848,7 +855,7 @@ export default function Form(dataFinal: any) {
                                   )}
                               </select>
                               {errors.department?.message && (
-                                <span className="mt-2 text-sm text-red-400">
+                                <span className="mt-1 text-sm text-red-400">
                                   {errors.department.message}
                                 </span>
                               )}
@@ -878,7 +885,7 @@ export default function Form(dataFinal: any) {
                                   })}
                               </select>
                               {errors.city?.message && (
-                                <span className="mt-2 text-sm text-red-400">
+                                <span className="mt-1 text-sm text-red-400">
                                   {errors.city.message}
                                 </span>
                               )}
@@ -905,9 +912,9 @@ export default function Form(dataFinal: any) {
                         </div>
 
                         <div className="flex flex-col px-16 w-full">
-                          <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">                            
+                          <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">
                             <h1 className="text-black font-bold text-base items-center flex justify-center pb-6">
-                              Resumen 
+                              Resumen
                             </h1>
                           </div>
                           <div className="border-b-1 border-[#D9D9D9] w-full">
@@ -981,12 +988,49 @@ export default function Form(dataFinal: any) {
             </motion.div>
           )}
 
-          
-          <ErrorModel isOpen={openError} onClose={() => setOpen(false)}>
-                    <div>
-                      <span className="text-sm text-black p-4">{error}</span>
-                    </div>
-                  </ErrorModel>
+          <ErrorModel isOpen={openError} onClose={() => setOpenError(false)}>
+            <div className="gap-2">
+              <div className="flex justify-center w-full gap-2">
+                <svg
+                  fill="#000000"
+                  version="1.1"
+                  id="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 478.125 478.125"
+                  className="w-8"
+                >
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g
+                    id="SVGRepo_tracerCarrier"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  ></g>
+                  <g id="SVGRepo_iconCarrier">
+                    {" "}
+                    <g>
+                      {" "}
+                      <g>
+                        {" "}
+                        <g>
+                          {" "}
+                          <circle
+                            cx="239.904"
+                            cy="314.721"
+                            r="35.878"
+                          ></circle>{" "}
+                          <path d="M256.657,127.525h-31.9c-10.557,0-19.125,8.645-19.125,19.125v101.975c0,10.48,8.645,19.125,19.125,19.125h31.9 c10.48,0,19.125-8.645,19.125-19.125V146.65C275.782,136.17,267.138,127.525,256.657,127.525z"></path>
+                          <path d="M239.062,0C106.947,0,0,106.947,0,239.062s106.947,239.062,239.062,239.062c132.115,0,239.062-106.947,239.062-239.062 S371.178,0,239.062,0z M239.292,409.734c-94.171,0-170.595-76.348-170.595-170.596c0-94.248,76.347-170.595,170.595-170.595 s170.595,76.347,170.595,170.595C409.887,333.387,333.464,409.734,239.292,409.734z"></path>{" "}
+                        </g>{" "}
+                      </g>{" "}
+                    </g>{" "}
+                  </g>
+                </svg>
+              </div>
+              <span className="flex justify-center text-sm text-justify text-black p-4">
+                {error}
+              </span>
+            </div>
+          </ErrorModel>
 
           {move === true && (
             <>
