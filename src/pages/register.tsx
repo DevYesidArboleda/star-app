@@ -31,18 +31,7 @@ const Register: FC<FormularioProps> = () => {
     watch,
     setValue,
     reset,
-  } = useForm<FormData>({
-    defaultValues: {
-      name: "",
-      email: "",
-      surname: "",
-      cedula: 0,
-      phone: 0,
-      password: "",
-      /*confirmPassword: "",
-      aceptaTerminos: false,*/
-    },
-  });
+  } = useForm<FormData>();
 
   const password = useRef<string | null>(null);
   password.current = watch("password", "");
