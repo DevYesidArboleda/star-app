@@ -86,15 +86,25 @@ export default function Form(dataFinal: any) {
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const client_quantity = quantity;
+    const dataClient: any = {
+      client_name: data.name,
+      client_direction:data.direction,
+      department_id: data.department,
+      city_id: data.city,
+      client_surname: data.surname,
+      client_phone: data.phone,
+      client_email: data.email
+    };
+
     const newData = {
-      ...data,
+      ...dataClient,
       user_id,
       product_id,
       client_quantity,
       client_notes,
     };
     try {
-      console.log(data)
+      console.log(dataClient)
       const response = await dataApi.post<any>("/orders/create-order", newData);      
       console.log(response)
       if(response.data.ok){
@@ -367,13 +377,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="name"
-                            {...register("client_name")}
+                            {...register("name")}
                             placeholder="Nombres"
                             className="bg-Form-input "
                           />
-                          {errors.client_name?.message && (
+                          {errors.name?.message && (
                             <p className="mt-2 text-sm text-red-400">
-                              {errors.client_name.message}
+                              {errors.name.message}
                             </p>
                           )}
                         </div>
@@ -384,13 +394,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="name"
-                            {...register("client_surname")}
+                            {...register("surname")}
                             placeholder="Apellidos"
                             className="bg-Form-input "
                           />
-                          {errors.client_surname?.message && (
+                          {errors.surname?.message && (
                             <p className="mt-2 text-sm text-red-400">
-                              {errors.client_surname.message}
+                              {errors.surname.message}
                             </p>
                           )}
                         </div>
@@ -401,13 +411,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="number"
                             id="phone"
-                            {...register("client_phone")}
+                            {...register("phone")}
                             placeholder="Telefono"
                             className="bg-Form-input "
                           />
-                          {errors.client_phone?.message && (
+                          {errors.phone?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.client_phone.message}
+                              {errors.phone.message}
                             </span>
                           )}
                         </div>
@@ -418,13 +428,13 @@ export default function Form(dataFinal: any) {
                           <input
                             type="email"
                             id="email"
-                            {...register("client_email")}
+                            {...register("email")}
                             placeholder="Correo Electrónico"
                             className="bg-Form-input"
                           />
-                          {errors.client_email?.message && (
+                          {errors.email?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.client_email.message}
+                              {errors.email.message}
                             </span>
                           )}
                         </div>
@@ -435,14 +445,14 @@ export default function Form(dataFinal: any) {
                           <input
                             type="text"
                             id="street"
-                            {...register("client_direction")}
+                            {...register("direction")}
                             autoComplete="street-address"
                             placeholder="Dirección"
                             className="bg-Form-input "
                           />
-                          {errors.client_direction?.message && (
+                          {errors.direction?.message && (
                             <p className="mt-2 text-sm text-red-400">
-                              {errors.client_direction.message}
+                              {errors.direction.message}
                             </p>
                           )}
                         </div>
@@ -452,7 +462,7 @@ export default function Form(dataFinal: any) {
                         <div className="mt-2">
                           <select
                             id="department"
-                            {...register("department_id")}
+                            {...register("department")}
                             autoComplete=""
                             placeholder="Departamento"
                             className="bg-Form-input "
@@ -468,9 +478,9 @@ export default function Form(dataFinal: any) {
                                 );
                               })}
                           </select>
-                          {errors.department_id?.message && (
+                          {errors.department?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.department_id.message}
+                              {errors.department.message}
                             </span>
                           )}
                         </div>
@@ -480,7 +490,7 @@ export default function Form(dataFinal: any) {
                         <div className="mt-2">
                           <select
                             id="city"
-                            {...register("city_id")}
+                            {...register("city")}
                             autoComplete=""
                             placeholder="Ciudad"
                             className="bg-Form-input "
@@ -495,9 +505,9 @@ export default function Form(dataFinal: any) {
                                 );
                               })}
                           </select>
-                          {errors.city_id?.message && (
+                          {errors.city?.message && (
                             <span className="mt-2 text-sm text-red-400">
-                              {errors.city_id.message}
+                              {errors.city.message}
                             </span>
                           )}
                         </div>
@@ -731,13 +741,13 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="text"
                                 id="name"
-                                {...register("client_name")}
+                                {...register("name")}
                                 placeholder="Nombres"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.client_name?.message && (
+                              {errors.name?.message && (
                                 <p className="mt-2 text-sm text-red-400">
-                                  {errors.client_name.message}
+                                  {errors.name.message}
                                 </p>
                               )}
                             </div>
@@ -748,13 +758,13 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="text"
                                 id="name"
-                                {...register("client_surname")}
+                                {...register("surname")}
                                 placeholder="Apellidos"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.client_surname?.message && (
+                              {errors.surname?.message && (
                                 <p className="mt-2 text-sm text-red-400">
-                                  {errors.client_surname.message}
+                                  {errors.surname.message}
                                 </p>
                               )}
                             </div>
@@ -765,13 +775,13 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="number"
                                 id="phone"
-                                {...register("client_phone")}
+                                {...register("phone")}
                                 placeholder="Telefono"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.client_phone?.message && (
+                              {errors.phone?.message && (
                                 <span className="mt-2 text-sm text-red-400">
-                                  {errors.client_phone.message}
+                                  {errors.phone.message}
                                 </span>
                               )}
                             </div>
@@ -782,13 +792,13 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="email"
                                 id="email"
-                                {...register("client_email")}
+                                {...register("email")}
                                 placeholder="Correo Electrónico"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.client_email?.message && (
+                              {errors.email?.message && (
                                 <span className="mt-2 text-sm text-red-400">
-                                  {errors.client_email.message}
+                                  {errors.email.message}
                                 </span>
                               )}
                             </div>
@@ -799,14 +809,14 @@ export default function Form(dataFinal: any) {
                               <input
                                 type="text"
                                 id="street"
-                                {...register("client_direction")}
+                                {...register("direction")}
                                 autoComplete="street-address"
                                 placeholder="Dirección"
                                 className="bg-Form-input text-xs h-[52px]"
                               />
-                              {errors.client_direction?.message && (
+                              {errors.direction?.message && (
                                 <p className="mt-2 text-sm text-red-400">
-                                  {errors.client_direction.message}
+                                  {errors.direction.message}
                                 </p>
                               )}
                             </div>
@@ -816,7 +826,7 @@ export default function Form(dataFinal: any) {
                             <div className="mt-2">
                               <select
                                 id="department"
-                                {...register("department_id")}
+                                {...register("department")}
                                 autoComplete=""
                                 placeholder="Departamento"
                                 className="bg-Form-input text-xs h-[52px]"
@@ -837,9 +847,9 @@ export default function Form(dataFinal: any) {
                                     }
                                   )}
                               </select>
-                              {errors.department_id?.message && (
+                              {errors.department?.message && (
                                 <span className="mt-2 text-sm text-red-400">
-                                  {errors.department_id.message}
+                                  {errors.department.message}
                                 </span>
                               )}
                             </div>
@@ -849,7 +859,7 @@ export default function Form(dataFinal: any) {
                             <div className="mt-2">
                               <select
                                 id="city"
-                                {...register("city_id")}
+                                {...register("city")}
                                 autoComplete=""
                                 placeholder="Ciudad"
                                 className="bg-Form-input text-xs h-[52px]"
@@ -867,9 +877,9 @@ export default function Form(dataFinal: any) {
                                     );
                                   })}
                               </select>
-                              {errors.city_id?.message && (
+                              {errors.city?.message && (
                                 <span className="mt-2 text-sm text-red-400">
-                                  {errors.city_id.message}
+                                  {errors.city.message}
                                 </span>
                               )}
                             </div>
