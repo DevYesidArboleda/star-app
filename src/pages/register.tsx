@@ -42,6 +42,7 @@ const Register: FC<FormularioProps> = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     const referred_by = user_id;
+    console.log(data)
     const newData = { ...data, referred_by };
     try {
       const response = await dataApi.post<any>("/users/be-an-star", newData);
@@ -85,6 +86,7 @@ const Register: FC<FormularioProps> = () => {
                 </span>
               </div>
               <div className="relative  mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
+                <div className="absolute inset-y-0 flex items-center h-[36px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="pointer-events-none w-4 h-4 absolute top-1/2 transform -translate-y-1/2 left-3"
@@ -112,6 +114,7 @@ const Register: FC<FormularioProps> = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+                </div>
                 <input
                   type="text"
                   className="bg-Form-input px-4 w-full pl-8"
@@ -132,17 +135,18 @@ const Register: FC<FormularioProps> = () => {
                   })}
                 />
                 {errors.name?.type === "required" && (
-                  <span>name requerido</span>
+                  <span className="text-red-500 text-sm">name requerido</span>
                 )}
                 {errors.name?.type === "maxLength" && (
-                  <span>name no debe ser mayor a 20 caracteres</span>
+                  <span className="text-red-500 text-sm">name no debe ser mayor a 20 caracteres</span>
                 )}
                 {errors.name?.type === "minLength" && (
-                  <span>name debe ser mayor a 2 caracteres</span>
+                  <span className="text-red-500 text-sm">name debe ser mayor a 2 caracteres</span>
                 )}
               </div>
 
               <div className="relative  mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
+                <div className="absolute inset-y-0 flex items-center h-[36px]">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="pointer-events-none w-4 h-4 absolute top-1/2 transform -translate-y-1/2 left-3"
@@ -170,6 +174,7 @@ const Register: FC<FormularioProps> = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+                </div>
                 <input
                   type="text"
                   className="bg-Form-input px-4 w-full pl-8"
@@ -190,13 +195,13 @@ const Register: FC<FormularioProps> = () => {
                   })}
                 />
                 {errors.surname?.type === "required" && (
-                  <span>surname requerido</span>
+                  <span className="text-red-500 text-sm">surname requerido</span>
                 )}
                 {errors.surname?.type === "maxLength" && (
-                  <span>surname no debe ser mayor a 20 caracteres</span>
+                  <span className="text-red-500 text-sm">surname no debe ser mayor a 20 caracteres</span>
                 )}
                 {errors.surname?.type === "minLength" && (
-                  <span>surname debe ser mayor a 2 caracteres</span>
+                  <span className="text-red-500 text-sm">surname debe ser mayor a 2 caracteres</span>
                 )}
               </div>
 
@@ -212,7 +217,7 @@ const Register: FC<FormularioProps> = () => {
                     },
                   })}
                 />
-                {errors.cedula && <span>{errors.cedula.message}</span>}
+                {errors.cedula && <span className="text-red-500 text-sm">{errors.cedula.message}</span>}
               </div>
 
               <div className="relative text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
@@ -227,10 +232,11 @@ const Register: FC<FormularioProps> = () => {
                     },
                   })}
                 />
-                {errors.phone && <span>{errors.phone.message}</span>}
+                {errors.phone && <span className="text-red-500 text-sm">{errors.phone.message}</span>}
               </div>
 
               <div className="relative text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
+                <div className="absolute inset-y-0 flex items-center h-[36px]">
                 <svg
                   width="23"
                   height="20"
@@ -256,6 +262,7 @@ const Register: FC<FormularioProps> = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+                </div>
 
                 <input
                   type="email"
@@ -272,10 +279,11 @@ const Register: FC<FormularioProps> = () => {
                     },
                   })}
                 />
-                {errors.email && <span>{errors.email.message}</span>}
+                {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
               </div>
 
               <div className="relative text-black mb-7 w-full 2xl:max-w-[533px] xl:max-w-[533px] max-w-[503px]">
+                <div className="absolute inset-y-0 flex items-center h-[36px]">
                 <svg
                   width="23"
                   height="20"
@@ -308,6 +316,7 @@ const Register: FC<FormularioProps> = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
+                </div>
                 <input
                   type="password"
                   className="bg-Form-input px-4 w-full pl-8"
@@ -323,7 +332,7 @@ const Register: FC<FormularioProps> = () => {
                     },
                   })}
                 />
-                {errors.password && <span>{errors.password.message}</span>}
+                {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
               </div>
 
               <div className="mb-8">
