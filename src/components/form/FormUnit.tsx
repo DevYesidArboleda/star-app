@@ -248,7 +248,7 @@ export default function Form(dataFinal: any) {
     if (windowSize.width <= 700) {
       handleClick();
       //Para prod se quita la resta
-      //setCurrentStep(-1);
+      setCurrentStep(-1);
     }
   }, []);
 
@@ -911,7 +911,7 @@ export default function Form(dataFinal: any) {
                           </div>
                         </div>
 
-                        <div className="flex flex-col px-16 w-full">
+                        <div className="flex flex-col px-2 w-full">
                           <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">
                             <h1 className="text-black font-bold text-base items-center flex justify-center pb-6">
                               Resumen
