@@ -51,7 +51,9 @@ export default function Home() {
 
         setDataFinal(dataApi.data.data.products);
       } else {
-        setLoadingContent(true);
+        if(product_id !== null){
+          setLoadingContent(true);
+        }
       }
     };
 
@@ -80,7 +82,7 @@ export default function Home() {
                     width={48}
                     height={48}
                   />
-                  <span className="text-green-400 text-xl">
+                  <span className="text-green-400 text-xl text-center">
                     Por favor contacta con tu vendedor
                   </span>
                   <span className="text-black text-base font-medium">
