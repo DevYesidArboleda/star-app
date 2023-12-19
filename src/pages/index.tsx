@@ -24,7 +24,7 @@ export default function Home() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    setLoading(<p>Cargando.......</p>)
+    //setLoading(<p>Cargando.......</p>);
     const fechtDataPrueba = async () => {
       const product_id = searchParams.get("productID");
       const queryParam = { _id: product_id };
@@ -51,15 +51,7 @@ export default function Home() {
 
         setDataFinal(dataApi.data.data.products);
       } else {
-        setLoading(
-          <div className="flex items-center justify-center h-screen">
-            <div className="bg-white  border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
-            <Image src="/img/task_alt.svg" alt="" width={48} height={48}/>
-              <span className="text-green-400 text-xl">Por favor contacta con tu vendedor</span>
-              <span className="text-black text-base font-medium">información no valida !</span>              
-            </div>
-          </div>
-        )  
+        setLoadingContent(true);
       }
     };
 
@@ -75,12 +67,30 @@ export default function Home() {
   return (
     <Layout title="Checkout Estrellas" thumbnail={thumbnail}>
       <div className="">
-        
         {validPage ? (
           <Form data={dataFinal} />
         ) : (
-          <Loading >
-            {loading}
+          <Loading>
+            {loadingContent ? (
+              <div className="flex items-center justify-center h-screen">
+                <div className="bg-white  border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
+                  <Image
+                    src="/img/task_alt.svg"
+                    alt=""
+                    width={48}
+                    height={48}
+                  />
+                  <span className="text-green-400 text-xl">
+                    Por favor contacta con tu vendedor
+                  </span>
+                  <span className="text-black text-base font-medium">
+                    información no valida !
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <p>Cargando.......</p>
+            )}
           </Loading>
         )}
       </div>
