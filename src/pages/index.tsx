@@ -8,6 +8,7 @@ import { Data, Doc } from "../../interfaces";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
+import Loading from "@/components/loading/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
@@ -17,10 +18,13 @@ interface Props {
 export default function Home() {
   const [thumbnail, setThumbnail] = useState<any>();
   const [dataFinal, setDataFinal] = useState<any>([]);
-  const searchParams = useSearchParams();
   const [validPage, setValidPage] = useState<boolean>(false);
+  const [loading, setLoading] = useState<JSX.Element | null>(null);
+  const [loadingContent, setLoadingContent] = useState<boolean>(false);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
+    setLoading(<p>Cargando.......</p>)
     const fechtDataPrueba = async () => {
       const product_id = searchParams.get("productID");
       const queryParam = { _id: product_id };
@@ -46,6 +50,16 @@ export default function Home() {
         console.log(dataApi);
 
         setDataFinal(dataApi.data.data.products);
+      } else {
+        setLoading(
+          <div className="flex items-center justify-center h-screen">
+            <div className="bg-white  border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
+            <Image src="/img/task_alt.svg" alt="" width={48} height={48}/>
+              <span className="text-green-400 text-xl">Por favor contacta con tu vendedor</span>
+              <span className="text-black text-base font-medium">información no valida !</span>              
+            </div>
+          </div>
+        )  
       }
     };
 
@@ -61,16 +75,13 @@ export default function Home() {
   return (
     <Layout title="Checkout Estrellas" thumbnail={thumbnail}>
       <div className="">
-        {validPage === true ? (
+        
+        {validPage ? (
           <Form data={dataFinal} />
         ) : (
-          <div className="flex items-center justify-center h-screen">
-            <div className="bg-white  border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
-            <Image src="/img/task_alt.svg" alt="" width={48} height={48}/>
-              <span className="text-green-400 text-xl">Por favor contacta con tu vendedor</span>
-              <span className="text-black text-base font-medium">Información no valida !</span>              
-            </div>
-          </div>
+          <Loading >
+            {loading}
+          </Loading>
         )}
       </div>
     </Layout>
