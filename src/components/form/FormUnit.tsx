@@ -114,9 +114,9 @@ export default function Form(dataFinal: any) {
     } catch (error: any) {
       console.error("Error al enviar los datos:", error);
       console.log(error.response.data.stack.message);
-      setError(error.response.data.stack.message);      
+      setError(error.response.data.stack.message);
       handleErrorModal();
-      prev()
+      prev();
       //setTimeout(() => setOpenError(false), 10000)
     }
     //reset();
@@ -248,13 +248,13 @@ export default function Form(dataFinal: any) {
     if (windowSize.width <= 700) {
       handleClick();
       //Para prod se quita la resta
-      //setCurrentStep(-1);
+      setCurrentStep(-1);
     }
   }, []);
 
   const prueba = () => {
-    console.log("llego hasta aqui props entre componentes")
-  }
+    console.log("llego hasta aqui props entre componentes");
+  };
 
   return (
     <>
@@ -276,7 +276,12 @@ export default function Form(dataFinal: any) {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="w-full"
             >
-              <VideoStreaming setOpen={setOpen} data={data} video={video} next={next}/>
+              <VideoStreaming
+                setOpen={setOpen}
+                data={data}
+                video={video}
+                next={next}
+              />
 
               <Modal isOpen={open} onClose={() => setOpen(false)}>
                 <div className="">
@@ -317,29 +322,23 @@ export default function Form(dataFinal: any) {
                       </button>
                     </div>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="mb-3 font-light text-base text-[#53545C]">
-                      Seleccionar Talla
-                    </span>
-                    <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
-                      <Select
-                        label="Seleccionar ..."
-                        className="max-w-xs mb-3 font-light text-base text-[#53545C]"
-                      >
-                        {data.tags?.map((items: any, index: number) => {
-                          return (
-                            <SelectItem
-                              className="text-black"
-                              key={index}
-                              value={items}
-                              onClick={() => setVaration(items)}
-                            >
-                              {items}
-                            </SelectItem>
-                          );
-                        })}
-                      </Select>
-                    </div>
+                  <div className="flex flex-col">                  
+                    
+                      {data.attributes?.map((attribute:any, index:number) => (
+                        <div key={index} className="flex flex-col">
+                          <label className="mb-3 font-light text-base text-[#53545C]">Seleccionar {attribute.description}</label>
+                          <Select
+                          label="Seleccionar ..."
+                          className="max-w-xs mb-3 font-light text-base text-[#53545C]">
+                            {attribute.values.map((value:any, valueIndex:number) => (
+                              <SelectItem key={valueIndex} value={value.value} className="text-black" onClick={() => setVaration(value.value)}>
+                                {value.value}
+                              </SelectItem>
+                            ))}
+                          </Select>
+                        </div>
+                      ))}
+                    
                   </div>
                   <button
                     className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
@@ -597,7 +596,7 @@ export default function Form(dataFinal: any) {
                               Color
                             </span>
                             <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
-                              Por definir
+                              {variation}
                             </span>
                           </div>
                           <div className="border-b-2 border-[#D9D9D9] w-full flex justify-between">
@@ -995,7 +994,7 @@ export default function Form(dataFinal: any) {
           <ErrorModel isOpen={openError} onClose={() => setOpenError(false)}>
             <div className="gap-2">
               <div className="flex justify-center w-full gap-2">
-              <Image src="/img/task_alt.svg" alt="" width={32} height={32}/>
+                <Image src="/img/task_alt.svg" alt="" width={32} height={32} />
               </div>
               <span className="flex justify-center text-sm text-justify text-black p-4">
                 {error}

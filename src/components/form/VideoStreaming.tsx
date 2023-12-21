@@ -29,7 +29,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
     // Verifica que la referencia exista antes de intentar simular el clic
     if (myElementRef.current) {
       // Crea un evento de clic personalizado
-      const clickEvent = new MouseEvent('click', {
+      const clickEvent = new MouseEvent("click", {
         bubbles: true,
         cancelable: true,
         view: window,
@@ -41,10 +41,11 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
   };
 
   useEffect(() => {
-    if(windowSize.width <= 700 ){            
-      handleClick()
+    if (windowSize.width <= 700) {
+      handleClick();
     }
   }, []);
+  console.log(data);
 
   return (
     <div className="w-full flex  justify-center">
@@ -54,7 +55,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
             {video}
           </div>
           <div className="flex flex-col  h-full gap-12 justify-between items-center w-full 2xl:pt-16 xl:pt-16 pt-8 pb-8">
-            <div className="flex flex-col 2xl:gap-12 xl:gap-8 gap-3 w-full">
+            <div className="flex flex-col 2xl:gap-8 xl:gap-6 gap-3 w-full">
               <div className="border-b-2 border-[#E3E8EF] w-full md:mb-4">
                 <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-xs items-center flex justify-center pb-6">
                   Detalles de la orden
@@ -87,41 +88,35 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
                   GRATIS
                 </span>
               </div>
-              <div className="border-b-2 border-[#E3E8EF] w-full flex justify-between">
-                <span className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-xs md:text-xs text-[#53545C]">
-                  Colores disponibles
-                </span>
-                <span className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]">
-                  Por definir
-                </span>
-              </div>
-              <div className="border-b-2 border-[#E3E8EF] w-full flex justify-between">
-                <h1 className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base md:text-xs text-[#53545C]">
-                  Tallas disponibles
-                </h1>
-                <ul className="flex gap-2">
-                  {data.tags?.length > 0 &&
-                    data.tags?.map((items: any, index: number) => {
-                      return (
-                        <li
-                          key={index}
-                          className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]"
-                        >
-                          {items}
+            
+              <div className="flex flex-col 2xl:gap-8 xl:gap-6 gap-4">
+                {data.attributes?.map((attribute: any, index: number) => (
+                  <div key={index} className="border-b-2 border-[#E3E8EF] w-full flex justify-between">
+                    <label className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base md:text-xs text-[#53545C]">
+                      {attribute.description}
+                    </label>
+                    <ul className="flex gap-2">
+                      {attribute.values.map((value:any, valueIndex:number) => (
+                        <li className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]" key={valueIndex}>
+                          {value.value}
                         </li>
-                      );
-                    })}
-                </ul>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
+            
             </div>
             <div className="lg:flex  w-full 2xl:h-[63px] xl:h-[63px] h-[35px] 2xl:justify-start">
               <button
                 className="btn-success w-full "
                 ref={myElementRef}
                 type="button"
-                onClick={data.tags?.length !== 0 ? () => setOpen(true) : next}
+                onClick={data.attributes?.length !== 0 ? () => setOpen(true) : next}
                 disabled={
-                  data.tags?.length !== 0 ? false : currentStep === steps.length - 1
+                  data.attributes?.length !== 0
+                    ? false
+                    : currentStep === steps.length - 1
                 }
                 data-ripple-light="true"
               >
@@ -130,14 +125,15 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
             </div>
           </div>
         </div>
-        
       </div>
       <div>
-      {/* Agrega la referencia al elemento */}
-            
-      {/* Botón que simula el clic en el otro botón */}
-      <button className="hidden" onClick={handleClick}>Simular Clic</button>
-    </div>
+        {/* Agrega la referencia al elemento */}
+
+        {/* Botón que simula el clic en el otro botón */}
+        <button className="hidden" onClick={handleClick}>
+          Simular Clic
+        </button>
+      </div>
     </div>
   );
 };
