@@ -19,7 +19,6 @@ export default function Home() {
   const [thumbnail, setThumbnail] = useState<any>();
   const [dataFinal, setDataFinal] = useState<any>([]);
   const [validPage, setValidPage] = useState<boolean>(false);
-  const [loading, setLoading] = useState<JSX.Element | null>(null);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
   const searchParams = useSearchParams();
 

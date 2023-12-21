@@ -16,7 +16,7 @@ interface ArrayDeArrays {
   TypeData: typeData[][];
 }
 
-export const VideoStreaming = ({ setOpen, data, video }: any) => {
+export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
   const myElementRef = useRef<HTMLButtonElement>(null);
   const windowSize = UseWindowSize();
@@ -119,9 +119,9 @@ export const VideoStreaming = ({ setOpen, data, video }: any) => {
                 className="btn-success w-full "
                 ref={myElementRef}
                 type="button"
-                onClick={data.tags !== null ? () => setOpen(true) : next}
+                onClick={data.tags?.length !== 0 ? () => setOpen(true) : next}
                 disabled={
-                  data.tags !== null ? false : currentStep === steps.length - 1
+                  data.tags?.length !== 0 ? false : currentStep === steps.length - 1
                 }
                 data-ripple-light="true"
               >

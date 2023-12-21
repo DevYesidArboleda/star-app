@@ -252,6 +252,10 @@ export default function Form(dataFinal: any) {
     }
   }, []);
 
+  const prueba = () => {
+    console.log("llego hasta aqui props entre componentes")
+  }
+
   return (
     <>
       <section
@@ -272,7 +276,7 @@ export default function Form(dataFinal: any) {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="w-full"
             >
-              <VideoStreaming setOpen={setOpen} data={data} video={video} />
+              <VideoStreaming setOpen={setOpen} data={data} video={video} next={next}/>
 
               <Modal isOpen={open} onClose={() => setOpen(false)}>
                 <div className="">
