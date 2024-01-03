@@ -23,13 +23,10 @@ export default function Home(metada : any){
   const [validPage, setValidPage] = useState<boolean>(false);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  console.log(metada)
   
   const product_id = searchParams.get("productID");
-  const targetId = "65836baa5e69f1449f26459c";
   //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
   const final:any = metada.metadata?.filter((task:any) => task._id === product_id)
-  console.log("aaa", final)
 
   useEffect(() => {
     //setLoading(<p>Cargando.......</p>);
@@ -70,7 +67,7 @@ export default function Home(metada : any){
   useEffect(() => {    
     setThumbnail(final[0]?.thumbnail);
     setProductNamel(final[0]?.name)
-  }, [dataFinal]);
+  }, [final]);
 
   return (
     <Layout title="Checkout Estrellas" thumbnail={thumbnail} name={productName}>
