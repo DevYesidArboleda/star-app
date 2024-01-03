@@ -1,8 +1,8 @@
 export interface Data {
-    doc: Doc[];
+    doc: products[];
 }
 
-export interface Doc {
+export interface products {
     id:         string;
     photoUrls?:  PhotoURL[];
     tags:        string[];

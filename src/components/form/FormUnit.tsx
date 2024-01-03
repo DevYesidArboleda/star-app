@@ -17,7 +17,6 @@ import ReactPlayer from "react-player";
 import { CompletePay } from "./CompletePay";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import FormMobile from "./FormMobile";
-import { Data, Doc } from "../../../interfaces";
 import { useSearchParams } from "next/navigation";
 import { dataApi } from "../../../api";
 import { fetchDeparment, fetchCity } from "../utils/funtions";
@@ -259,7 +258,7 @@ export default function Form(dataFinal: any) {
     if (windowSize.width <= 700) {
       handleClick();
       //Para prod se quita la resta
-      setCurrentStep(-1);
+      //setCurrentStep(-1);
     }
   }, []);
 

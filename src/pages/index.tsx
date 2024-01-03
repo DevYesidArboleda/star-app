@@ -4,29 +4,36 @@ import Form from "@/components/form/FormUnit";
 import { Layout } from "@/components/layouts/Layout";
 import { GetStaticProps } from "next";
 import { dataApi } from "../../api";
-import { Data, Doc } from "../../interfaces";
+import { Data, products } from "../../interfaces";
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Loading from "@/components/loading/Loading";
+import { log } from "console";
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
-  dataFinal: Doc[];
+  metada: products[];
 }
 
-export default function Home() {
+export default function Home(metada : any){
   const [thumbnail, setThumbnail] = useState<any>();
   const [productName, setProductNamel] = useState<any>();
   const [dataFinal, setDataFinal] = useState<any>([]);
   const [validPage, setValidPage] = useState<boolean>(false);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
   const searchParams = useSearchParams();
+  console.log(metada)
+  
+  const product_id = searchParams.get("productID");
+  const targetId = "65836baa5e69f1449f26459c";
+  //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
+  const final:any = metada.metadata?.filter((task:any) => task._id === product_id)
+  console.log("aaa", final)
 
   useEffect(() => {
     //setLoading(<p>Cargando.......</p>);
     const fechtDataPrueba = async () => {
-      const product_id = searchParams.get("productID");
       const queryParam = { _id: product_id };
       const isValidMongoId = (id: string) => {
         const mongoIdPattern = /^[0-9a-fA-F]{24}$/;
@@ -60,11 +67,9 @@ export default function Home() {
     fechtDataPrueba();
   }, [searchParams]);
 
-  useEffect(() => {
-    dataFinal.forEach((element: any) => {
-      setThumbnail(element.thumbnail);
-      setProductNamel(element.name)
-    });
+  useEffect(() => {    
+    setThumbnail(final[0]?.thumbnail);
+    setProductNamel(final[0]?.name)
   }, [dataFinal]);
 
   return (
@@ -101,12 +106,24 @@ export default function Home() {
   );
 }
 
-/*export const getStaticProps: GetStaticProps = async (ctx) => {
-  const { data } = await dataApi.get<Data>("/products/allProducts");
-  const dataFinal: Doc[] = data.doc;
-  return {
-    props: {
-      dataFinal,
-    },
-  };
-};*/
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  
+  try {
+    // Obtener metadatos automáticamente en el servidor
+    const response = await dataApi.get(`/products/allProducts`);
+    const metadata:any = response.data.data.products;
+    return {
+      props: {
+        metadata,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      props: {
+        metadata: null,
+      },
+    };
+  }
+};
