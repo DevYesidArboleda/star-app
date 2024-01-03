@@ -17,6 +17,7 @@ interface Props {
 
 export default function Home() {
   const [thumbnail, setThumbnail] = useState<any>();
+  const [productName, setProductNamel] = useState<any>();
   const [dataFinal, setDataFinal] = useState<any>([]);
   const [validPage, setValidPage] = useState<boolean>(false);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
@@ -62,11 +63,12 @@ export default function Home() {
   useEffect(() => {
     dataFinal.forEach((element: any) => {
       setThumbnail(element.thumbnail);
+      setProductNamel(element.name)
     });
   }, [dataFinal]);
 
   return (
-    <Layout title="Checkout Estrellas" thumbnail={thumbnail}>
+    <Layout title="Checkout Estrellas" thumbnail={thumbnail} name={productName}>
       <div className="">
         {validPage ? (
           <Form data={dataFinal} />

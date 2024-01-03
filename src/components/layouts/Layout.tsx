@@ -8,15 +8,14 @@ interface Props {
   title?: string;
   children?:ReactNode;
   thumbnail?:string;
+  name?:string;
 }
 
 
 const origin = (typeof window === 'undefined') ? '' : window.location.origin;
 
 
-export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
-
-  console.log("thum", thumbnail)
+export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
   
   return (
       <>        
@@ -25,12 +24,12 @@ export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
         title="Checkout Estrellas"
         description="Checkout para procesar la orden de tus productos"
         openGraph={{
-          title: 'Checkout Estrellas',
+          title: `${name}`,
           description: 'Checkout para procesar la orden de tus productos',
           url: 'https://star-app-tau.vercel.app/',
           images: [
             {
-              url: "https://dxhor1jdmuueh.cloudfront.net/thumbnails/2152341759.png",
+              url: `${thumbnail}`,
               width: 1200,
               height: 630,
               alt: 'Texto alternativo de la imagen',
