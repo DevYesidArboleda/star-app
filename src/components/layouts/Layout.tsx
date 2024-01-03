@@ -15,6 +15,8 @@ const origin = (typeof window === 'undefined') ? '' : window.location.origin;
 
 
 export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
+
+  console.log("thum", thumbnail)
   
   return (
       <>        
@@ -28,7 +30,7 @@ export const Layout: FC<Props> = ({ children, title, thumbnail }) => {
           url: 'https://star-app-tau.vercel.app/',
           images: [
             {
-              url: `${thumbnail}`,
+              url: "https://dxhor1jdmuueh.cloudfront.net/thumbnails/2152341759.png",
               width: 1200,
               height: 630,
               alt: 'Texto alternativo de la imagen',
