@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import { FormDataSchema } from "../../../lib/schema";
@@ -24,6 +24,8 @@ import { fetchDeparment, fetchCity } from "../utils/funtions";
 import { Link, Button } from "react-scroll";
 import axios from "axios";
 import ErrorModel from "../Modal/ErrorModal";
+import { Combobox, Transition } from "@headlessui/react";
+import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 type Inputs = z.infer<typeof FormDataSchema>;
 
@@ -47,6 +49,15 @@ interface typeData {
   price: number;
   tags: string[];
 }
+
+const people = [
+  { id: 1, name: "Wade Cooper" },
+  { id: 2, name: "Arlene Mccoy" },
+  { id: 3, name: "Devon Webb" },
+  { id: 4, name: "Tom Cook" },
+  { id: 5, name: "Tanya Fox" },
+  { id: 6, name: "Hellen Schmidt" },
+];
 
 export default function Form(dataFinal: any) {
   const { previousStep, setPreviousStep } = usePrevs();
@@ -248,13 +259,39 @@ export default function Form(dataFinal: any) {
     if (windowSize.width <= 700) {
       handleClick();
       //Para prod se quita la resta
-      //setCurrentStep(-1);
+      setCurrentStep(-1);
     }
   }, []);
 
-  const prueba = () => {
-    console.log("llego hasta aqui props entre componentes");
+  const handleSelectChange = () => {
+    // Realizar la búsqueda en el arreglo aquí
+    const resultado = data.attributes.find((attribute: any) => {
+      return attribute.values.some((value: any) => value.value === variation);
+    });
+
+    if (resultado) {
+      console.log(`Descripción: ${resultado.description}`);
+      console.log(`Es variación: ${resultado.isVariation}`);
+      console.log(`Valor seleccionado: ${variation}`);
+    }
   };
+
+  const [selectedAttribute, setSelectedAttribute] = useState(data.attributes);
+  const [query, setQuery] = useState("");
+
+  const filteredAttributes =
+    query === ""
+      ? data.variations
+      : data.variations.filter((attribute: any) => {
+          return (
+            attribute.stock.toLowerCase().includes(query.toLowerCase()) ||
+            attribute.values.some((value: any) =>
+              value.value.toLowerCase().includes(query.toLowerCase())
+            )
+          );
+        });
+
+        console.log("aja", variation)
 
   return (
     <>
@@ -322,24 +359,120 @@ export default function Form(dataFinal: any) {
                       </button>
                     </div>
                   </div>
-                  <div className="flex flex-col">                  
-                    
-                      {data.attributes?.map((attribute:any, index:number) => (
-                        <div key={index} className="flex flex-col">
-                          <label className="mb-3 font-light text-base text-[#53545C]">Seleccionar {attribute.description}</label>
-                          <Select
+                  <span className="py-4 text-black">Opcion 1</span>
+                  <div className="flex flex-col">
+                    {data.attributes?.map((attribute: any, index: number) => (
+                      <div key={index} className="flex flex-col">
+                        <label className="mb-3 font-light text-base text-[#53545C]">
+                          Seleccionar {attribute.description}
+                        </label>
+                        <Select
                           label="Seleccionar ..."
-                          className="max-w-xs mb-3 font-light text-base text-[#53545C]">
-                            {attribute.values.map((value:any, valueIndex:number) => (
-                              <SelectItem key={valueIndex} value={value.value} className="text-black" onClick={() => setVaration(value.value)}>
+                          className="max-w-xs mb-3 font-light text-base text-[#53545C]"
+                          onChange={handleSelectChange}
+                        >
+                          {attribute.values.map(
+                            (value: any, valueIndex: number) => (
+                              <SelectItem
+                                key={valueIndex}
+                                value={value.value}
+                                className="text-black"
+                                onClick={() => setVaration(value.value)}
+                              >
                                 {value.value}
                               </SelectItem>
-                            ))}
-                          </Select>
-                        </div>
-                      ))}
-                    
+                            )
+                          )}
+                        </Select>
+                      </div>
+                    ))}
                   </div>
+
+                  <span className="py-4 text-black">Opcion 2</span>          
+                  <div className="flex static top-16 w-72 pb-4">
+                    <Combobox
+                      value={selectedAttribute}
+                      onChange={setSelectedAttribute}
+                    >
+                      <div className="relative mt-1">
+                        <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+                          <Combobox.Input
+                            className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+                            displayValue={(attribute: any) =>
+                              attribute.values.map((value: any) => value.value).join(' / ')
+                            }
+                            onChange={(event) => setQuery(event.target.value)}
+                          />
+                          <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+                            <ChevronUpDownIcon
+                              className="h-5 w-5 text-gray-400"
+                              aria-hidden="true"
+                            />
+                          </Combobox.Button>
+                        </div>
+                        <Transition
+                          as={Fragment}
+                          leave="transition ease-in duration-100"
+                          leaveFrom="opacity-100"
+                          leaveTo="opacity-0"
+                          afterLeave={() => setQuery('')}
+                        >
+                        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                          {filteredAttributes?.length === 0 && query !== "" ? (
+                            <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
+                              Nothing found.
+                            </div>
+                          ) : (
+                            filteredAttributes?.map((attribute: any) => (
+                              <Combobox.Option
+                                key={attribute.stock}
+                                onClick={() => setVaration(attribute.id)}
+                                className={({ active }) =>
+                                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                    active
+                                      ? "bg-teal-600 text-black"
+                                      : "text-gray-900"
+                                  }`
+                                }
+                                value={attribute}
+                              >
+                                {({ selected, active }) => (
+                                  <>
+                                    <span
+                                      className={`block truncate ${
+                                        selected ? "font-medium" : "font-normal"
+                                      }`}
+                                    >
+                                      <div className="flex flex-row gap-1 ">
+                                      {attribute.values.map(
+                                        (value: any, valueIndex: number) => (
+                                          value.value
+                                        )
+                                      ).join(' / ')}
+                                      </div>
+                                    </span>
+                                    {selected ? (
+                                      <span
+                                        className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                          active
+                                            ? "text-black"
+                                            : "text-teal-600"
+                                        }`}
+                                      >
+                                        {/* Puedes mantener tu icono de check aquí */}
+                                      </span>
+                                    ) : null}
+                                  </>
+                                )}
+                              </Combobox.Option>
+                            ))
+                          )}
+                        </Combobox.Options>
+                        </Transition> 
+                      </div>
+                    </Combobox>
+                  </div>
+
                   <button
                     className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
                     type="button"
