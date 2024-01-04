@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Inter } from "next/font/google";
 import Form from "@/components/form/FormUnit";
 import { Layout } from "@/components/layouts/Layout";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetServerSideProps } from "next";
 import { dataApi } from "../../api";
 import { Data, products } from "../../interfaces";
 import { useEffect, useRef, useState } from "react";
@@ -103,7 +103,7 @@ export default function Home(metada : any){
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps<any> = async (ctx) => {
   
   try {
     // Obtener metadatos automáticamente en el servidor
