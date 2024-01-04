@@ -70,19 +70,8 @@ export default function Home({metadata} : any){
   }, []);
 
   return (
-    <>
-    <Head>
-            <title>{ "title" || 'Checkout' }</title>
-            <meta name="author" content="Dropi" />
-            <meta name="description" content={`"Checkout de ordenes ${ "title" }"`} />
-            <meta name="keywords" content={ `"${ "title" }"`} />
-            <meta property="og:title" content={`"${metadata[0].name}"`} />
-            <meta property="og:description" content="Checkout para procesar la orden de tus productos" />
-            <meta property="og:image" content={`"${metadata[0].thumbnail}"`} />
-
-        </Head>  
-
-    <Layout title="Checkout Estrellas" thumbnail={thumbnail} name={productName}>
+    <>    
+    <Layout title="Checkout Estrellas" thumbnail={metadata[0].thumbnail} name={metadata[0].name}>
       <div className="">
         {validPage ? (
           <Form data={dataFinal} />
