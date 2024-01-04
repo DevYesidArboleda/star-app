@@ -23,11 +23,10 @@ export default function Home({metadata} : any){
   const [validPage, setValidPage] = useState<boolean>(false);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  console.log(metadata[0].thumbnail)
   
   const product_id = searchParams.get("productID");
   //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
-  //const final:any = metada.metadata?.filter((task:any) => task._id === product_id)
+  //const final:any = metadata?.filter((task:any) => task._id === product_id)
 
   useEffect(() => {
     //setLoading(<p>Cargando.......</p>);
@@ -117,11 +116,22 @@ export default function Home({metadata} : any){
   );
 }
 
-export const getServerSideProps: GetServerSideProps<any> = async (ctx) => {
-  
+export const getServerSideProps: GetServerSideProps<any> = async (context) => {
+  const { query } = context;
+
+  // Extrae productID de los parámetros de la URL
+  const productID = query.productID as string;
+  const queryParam = { _id: productID };
+
   try {
     // Obtener metadatos automáticamente en el servidor
-    const response = await dataApi.get(`/products/allProducts`);
+    const response = await dataApi.get(`/products/allProducts`,
+    {
+      headers: {},
+      params: {
+        query: JSON.stringify(queryParam),
+      },
+    });
     const metadata:any = response.data.data.products;
     return {
       props: {
