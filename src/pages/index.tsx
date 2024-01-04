@@ -9,24 +9,25 @@ import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Loading from "@/components/loading/Loading";
-import { log } from "console";
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
   metada: products[];
 }
 
-export default function Home(metada : any){
+export default function Home({metadata} : any){
   const [thumbnail, setThumbnail] = useState<any>();
   const [productName, setProductNamel] = useState<any>();
   const [dataFinal, setDataFinal] = useState<any>([]);
   const [validPage, setValidPage] = useState<boolean>(false);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
   const searchParams = useSearchParams();
+  console.log(metadata)
   
   const product_id = searchParams.get("productID");
   //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
-  const final:any = metada.metadata?.filter((task:any) => task._id === product_id)
+  //const final:any = metada.metadata?.filter((task:any) => task._id === product_id)
 
   useEffect(() => {
     //setLoading(<p>Cargando.......</p>);
@@ -65,11 +66,23 @@ export default function Home(metada : any){
   }, [searchParams]);
 
   useEffect(() => {    
-    setThumbnail(final[0]?.thumbnail);
-    setProductNamel(final[0]?.name)
-  }, [final]);
+    //setThumbnail(final[0]?.thumbnail);
+    //setProductNamel(final[0]?.name)
+  }, []);
 
   return (
+    <>
+    <Head>
+            <title>{ "title" || 'Checkout' }</title>
+            <meta name="author" content="Dropi" />
+            <meta name="description" content={`"Checkout de ordenes ${ "title" }"`} />
+            <meta name="keywords" content={ `"${ "title" }"`} />
+            <meta property="og:title" content={`"${productName}"`} />
+            <meta property="og:description" content="Checkout para procesar la orden de tus productos" />
+            <meta property="og:image" content={`"${metadata[0].thumbnail}"`} />
+
+        </Head>  
+
     <Layout title="Checkout Estrellas" thumbnail={thumbnail} name={productName}>
       <div className="">
         {validPage ? (
@@ -100,6 +113,7 @@ export default function Home(metada : any){
         )}
       </div>
     </Layout>
+    </>
   );
 }
 
