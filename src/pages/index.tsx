@@ -23,7 +23,7 @@ export default function Home({metadata} : any){
   const [validPage, setValidPage] = useState<boolean>(false);
   const [loadingContent, setLoadingContent] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  console.log(metadata)
+  console.log(metadata[0].thumbnail)
   
   const product_id = searchParams.get("productID");
   //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
@@ -77,7 +77,7 @@ export default function Home({metadata} : any){
             <meta name="author" content="Dropi" />
             <meta name="description" content={`"Checkout de ordenes ${ "title" }"`} />
             <meta name="keywords" content={ `"${ "title" }"`} />
-            <meta property="og:title" content={`"${productName}"`} />
+            <meta property="og:title" content={`"${metadata[0].name}"`} />
             <meta property="og:description" content="Checkout para procesar la orden de tus productos" />
             <meta property="og:image" content={`"${metadata[0].thumbnail}"`} />
 
