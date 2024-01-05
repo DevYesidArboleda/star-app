@@ -18,7 +18,8 @@ const origin = (typeof window === 'undefined') ? '' : window.location.origin;
 export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
   
   return (
-      <>   
+      <>                  
+
         <NextSeo
         title="Checkout Estrellas"
         description="Checkout para procesar la orden de tus productos"
