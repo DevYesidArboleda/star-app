@@ -20,12 +20,12 @@ export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
   return (
       <>                  
 
-<Head>
+        <Head>
             <title>{ title || 'Checkout' }</title>
             <meta name="author" content="Dropi" />
             <meta name="description" content={`Checkout de ordenes ${ title }`} />
             <meta name="keywords" content={ `${ title }`} />
-            <meta property="og:title" content="Informacion del producto" />
+            <meta property="og:title" content={ `${name}`} />
             <meta property="og:description" content="Checkout para procesar la orden de tus productos" />
             <meta property="og:image" content={`${thumbnail}`} />
 
