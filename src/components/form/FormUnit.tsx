@@ -96,6 +96,7 @@ export default function Form(dataFinal: any) {
   //Envio de formulario
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const client_quantity = quantity;
+    const variation_id = variation;
     const dataClient: any = {
       client_name: data.name,
       client_direction: data.street,
@@ -112,6 +113,7 @@ export default function Form(dataFinal: any) {
       product_id,
       client_quantity,
       client_notes,
+      variation_id,
     };
     try {
       console.log(dataClient);
@@ -290,7 +292,73 @@ export default function Form(dataFinal: any) {
           );
         });
 
-        console.log("aja", variation)
+  console.log("aja", variation);
+
+  const [selectedVariations, setSelectedVariations] = useState<{
+    [key: string]: string;
+  }>({});
+  const [existingVariationId, setExistingVariationId] = useState<string | null>(
+    null
+  );
+  const [combinationUnavailable, setCombinationUnavailable] =
+    useState<boolean>(false);
+
+  const handleVariationChange = (
+    attributeName: string,
+    valueId: string,
+    variationId: string
+  ) => {
+    const newVariations = { ...selectedVariations, [attributeName]: valueId };
+
+    // Verificar si ambos selectores están diligenciados
+    if (Object.values(newVariations).every((value) => !!value)) {
+      const existingVariation = findExistingVariation(newVariations);
+
+      if (existingVariation) {
+        setExistingVariationId(existingVariation.id);
+        setCombinationUnavailable(false); // La combinación está disponible
+      } else {
+        setExistingVariationId(null);
+        setCombinationUnavailable(true); // La combinación no está disponible
+      }
+    } else {
+      // Si alguno de los selectores no está diligenciado, reiniciar la verificación, el mensaje y bloquear los selectores siguientes
+      setExistingVariationId(null);
+      setCombinationUnavailable(false);
+      resetNextSelectors(attributeName);
+    }
+
+    setSelectedVariations(newVariations);
+  };
+
+  const resetNextSelectors = (currentAttributeName: string) => {
+    // Reiniciar los valores de los selectores siguientes al actual
+    const attributeIndex = data.attributes?.findIndex(
+      (attribute: any) => attribute.description === currentAttributeName
+    );
+
+    if (attributeIndex !== undefined && data.attributes) {
+      data.attributes.slice(attributeIndex + 1).forEach((attribute: any) => {
+        setSelectedVariations((prevVariations) => ({
+          ...prevVariations,
+          [attribute.description]: "",
+        }));
+      });
+    }
+  };
+
+  const findExistingVariation = (newVariations: { [key: string]: string }) => {
+    return data.variations?.find((variation: any) => {
+      return Object.entries(newVariations).every(([key, value]) => {
+        return variation.values.some(
+          (v: any) => v.attribute_name === key && v.id === value
+        );
+      });
+    });
+  };
+
+  console.log("na", existingVariationId);
+  
 
   return (
     <>
@@ -387,7 +455,7 @@ export default function Form(dataFinal: any) {
                     ))}
                   </div>
 
-                  <span className="py-4 text-black">Opcion 2</span>          
+                  <span className="py-4 text-black">Opcion 2</span>
                   <div className="flex static top-16 w-72 pb-4">
                     <Combobox
                       value={selectedAttribute}
@@ -398,7 +466,9 @@ export default function Form(dataFinal: any) {
                           <Combobox.Input
                             className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
                             displayValue={(attribute: any) =>
-                              attribute.values.map((value: any) => value.value).join(' / ')
+                              attribute.values
+                                .map((value: any) => value.value)
+                                .join(" / ")
                             }
                             onChange={(event) => setQuery(event.target.value)}
                           />
@@ -414,62 +484,128 @@ export default function Form(dataFinal: any) {
                           leave="transition ease-in duration-100"
                           leaveFrom="opacity-100"
                           leaveTo="opacity-0"
-                          afterLeave={() => setQuery('')}
+                          afterLeave={() => setQuery("")}
                         >
-                        <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-                          {filteredAttributes?.length === 0 && query !== "" ? (
-                            <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
-                              Nothing found.
-                            </div>
-                          ) : (
-                            filteredAttributes?.map((attribute: any) => (
-                              <Combobox.Option
-                                key={attribute.stock}
-                                onClick={() => setVaration(attribute.id)}
-                                className={({ active }) =>
-                                  `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                                    active
-                                      ? "bg-teal-600 text-black"
-                                      : "text-gray-900"
-                                  }`
-                                }
-                                value={attribute}
-                              >
-                                {({ selected, active }) => (
-                                  <>
-                                    <span
-                                      className={`block truncate ${
-                                        selected ? "font-medium" : "font-normal"
-                                      }`}
-                                    >
-                                      <div className="flex flex-row gap-1 ">
-                                      {attribute.values.map(
-                                        (value: any, valueIndex: number) => (
-                                          value.value
-                                        )
-                                      ).join(' / ')}
-                                      </div>
-                                    </span>
-                                    {selected ? (
+                          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                            {filteredAttributes?.length === 0 &&
+                            query !== "" ? (
+                              <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
+                                Nothing found.
+                              </div>
+                            ) : (
+                              filteredAttributes?.map((attribute: any) => (
+                                <Combobox.Option
+                                  key={attribute.stock}
+                                  onClick={() => setVaration(attribute.id)}
+                                  className={({ active }) =>
+                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                      active
+                                        ? "bg-teal-600 text-black"
+                                        : "text-gray-900"
+                                    }`
+                                  }
+                                  value={attribute}
+                                >
+                                  {({ selected, active }) => (
+                                    <>
                                       <span
-                                        className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                          active
-                                            ? "text-black"
-                                            : "text-teal-600"
+                                        className={`block truncate ${
+                                          selected
+                                            ? "font-medium"
+                                            : "font-normal"
                                         }`}
                                       >
-                                        {/* Puedes mantener tu icono de check aquí */}
+                                        <div className="flex flex-row gap-1 ">
+                                          {attribute.values
+                                            .map(
+                                              (
+                                                value: any,
+                                                valueIndex: number
+                                              ) => value.value
+                                            )
+                                            .join(" / ")}
+                                        </div>
                                       </span>
-                                    ) : null}
-                                  </>
-                                )}
-                              </Combobox.Option>
-                            ))
-                          )}
-                        </Combobox.Options>
-                        </Transition> 
+                                      {selected ? (
+                                        <span
+                                          className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                            active
+                                              ? "text-black"
+                                              : "text-teal-600"
+                                          }`}
+                                        >
+                                          {/* Puedes mantener tu icono de check aquí */}
+                                        </span>
+                                      ) : null}
+                                    </>
+                                  )}
+                                </Combobox.Option>
+                              ))
+                            )}
+                          </Combobox.Options>
+                        </Transition>
                       </div>
                     </Combobox>
+                  </div>
+
+                  <span>opcion 3</span>
+                  <div className="text-black">
+                    {data.attributes?.map((attribute: any, index: number) => (
+                      <div key={attribute.id} className="flex flex-col">
+                        <label
+                          htmlFor={attribute.description}
+                        >{`Seleccionar ${attribute.description}:`}</label>
+                        <select
+                          key={attribute.stock}
+                          id={attribute.description}
+                          className="rounded bg-gray-300 p-2 text-center appearance-none relative transition duration-500 transform border focus:outline-none focus:border-blue-500"
+                          onChange={(e) =>
+                            handleVariationChange(
+                              attribute.description,
+                              e.target.value,
+                              e.target.selectedOptions[0]?.getAttribute(
+                                "data-value-id"
+                              ) || ""
+                            )
+                          }
+                          value={
+                            selectedVariations[attribute.description] || ""
+                          }
+                        >
+                          <option value="" disabled className="text-gray-600">
+                            Seleccionar ...
+                          </option>
+                          {attribute.values.map((value: any) => (
+                            <option
+                              key={value.id}
+                              value={value.id}
+                              data-value-id={value.id}
+                              className="text-gray-800"
+                            >
+                              {value.value}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    ))}
+
+                    {combinationUnavailable && (
+                      <div>
+                        <p>¡La combinación seleccionada no está disponible!</p>
+                      </div>
+                    )}
+
+                    {existingVariationId && !combinationUnavailable && (
+                      <div>
+                        <h2>ID de la Variación Existente:</h2>
+                        <p>{existingVariationId}</p>
+                      </div>
+                    )}
+
+                    <div>
+                      <h2>Variaciones Seleccionadas:</h2>
+                      <pre>{JSON.stringify(selectedVariations, null, 2)}</pre>
+                    </div>
                   </div>
 
                   <button
@@ -477,7 +613,7 @@ export default function Form(dataFinal: any) {
                     type="button"
                     onClick={next}
                     ref={myElementRef}
-                    disabled={currentStep === steps.length - 1}
+                    disabled={existingVariationId === null}
                     data-ripple-light="true"
                   >
                     Continuar
