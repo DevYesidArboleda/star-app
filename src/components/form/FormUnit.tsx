@@ -358,7 +358,7 @@ export default function Form(dataFinal: any) {
   };
 
   console.log("na", existingVariationId);
-  
+  console.log("naa", variation);
 
   return (
     <>
@@ -426,7 +426,8 @@ export default function Form(dataFinal: any) {
                       </button>
                     </div>
                   </div>
-                  <span className="py-4 text-black">Opcion 1</span>
+
+                  {/* <span className="py-4 text-black">Opcion 1</span>
                   <div className="flex flex-col">
                     {data.attributes?.map((attribute: any, index: number) => (
                       <div key={index} className="flex flex-col">
@@ -453,9 +454,9 @@ export default function Form(dataFinal: any) {
                         </Select>
                       </div>
                     ))}
-                  </div>
+                  </div> */}
 
-                  <span className="py-4 text-black">Opcion 2</span>
+                  {/* <span className="py-4 text-black">Opcion 2</span>
                   <div className="flex static top-16 w-72 pb-4">
                     <Combobox
                       value={selectedAttribute}
@@ -534,7 +535,6 @@ export default function Form(dataFinal: any) {
                                               : "text-teal-600"
                                           }`}
                                         >
-                                          {/* Puedes mantener tu icono de check aquí */}
                                         </span>
                                       ) : null}
                                     </>
@@ -546,19 +546,20 @@ export default function Form(dataFinal: any) {
                         </Transition>
                       </div>
                     </Combobox>
-                  </div>
+                  </div> 
 
-                  <span>opcion 3</span>
-                  <div className="text-black">
+                  <span>opcion 3</span>*/}
+                  <div className="text-black pb-3">
                     {data.attributes?.map((attribute: any, index: number) => (
                       <div key={attribute.id} className="flex flex-col">
                         <label
                           htmlFor={attribute.description}
+                          className="mb-3 font-light text-base text-[#53545C]"
                         >{`Seleccionar ${attribute.description}:`}</label>
                         <select
                           key={attribute.stock}
                           id={attribute.description}
-                          className="rounded bg-gray-300 p-2 text-center appearance-none relative transition duration-500 transform border focus:outline-none focus:border-blue-500"
+                          className="rounded-medium bg-default-100  p-4 text-star appearance-none  transition duration-500 transform border-none focus:outline-none text-foreground-500 text-ellipsis text-sm font-light"
                           onChange={(e) =>
                             handleVariationChange(
                               attribute.description,
@@ -568,11 +569,16 @@ export default function Form(dataFinal: any) {
                               ) || ""
                             )
                           }
+                          onClick={() => setVaration(attribute.id)}
                           value={
                             selectedVariations[attribute.description] || ""
                           }
                         >
-                          <option value="" disabled className="text-gray-600">
+                          <option
+                            value=""
+                            disabled
+                            className="text-foreground-500 text-ellipsis text-sm font-light"
+                          >
                             Seleccionar ...
                           </option>
                           {attribute.values.map((value: any) => (
@@ -580,7 +586,7 @@ export default function Form(dataFinal: any) {
                               key={value.id}
                               value={value.id}
                               data-value-id={value.id}
-                              className="text-gray-800"
+                              className="text-foreground-500 text-ellipsis text-small"
                             >
                               {value.value}
                             </option>
@@ -590,22 +596,22 @@ export default function Form(dataFinal: any) {
                     ))}
 
                     {combinationUnavailable && (
-                      <div>
+                      <div className="text-red-500 py-2">
                         <p>¡La combinación seleccionada no está disponible!</p>
                       </div>
                     )}
 
-                    {existingVariationId && !combinationUnavailable && (
+                    {/*existingVariationId && !combinationUnavailable && (
                       <div>
                         <h2>ID de la Variación Existente:</h2>
                         <p>{existingVariationId}</p>
                       </div>
-                    )}
+                    )*/}
 
-                    <div>
+                    {/* <div>
                       <h2>Variaciones Seleccionadas:</h2>
                       <pre>{JSON.stringify(selectedVariations, null, 2)}</pre>
-                    </div>
+                    </div> */}
                   </div>
 
                   <button
@@ -613,7 +619,7 @@ export default function Form(dataFinal: any) {
                     type="button"
                     onClick={next}
                     ref={myElementRef}
-                    disabled={existingVariationId === null}
+                    disabled={windowSize.width >= 768 && existingVariationId === null}
                     data-ripple-light="true"
                   >
                     Continuar
@@ -963,27 +969,79 @@ export default function Form(dataFinal: any) {
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <span className="mb-3 font-light text-base text-[#53545C]">
-                            Seleccionar Talla
-                          </span>
-                          <div className="flex w-full flex-wrap md:flex-nowrap gap-4 mb-3">
-                            <Select
-                              label="Seleccionar ..."
-                              className="max-w-xs mb-3 font-light text-base text-[#53545C]"
-                            >
-                              {data.tags?.map((items: any, index: number) => {
-                                return (
-                                  <SelectItem
-                                    className="text-black"
-                                    key={index}
-                                    value={items}
-                                    onClick={() => setVaration(items)}
+                          <div className="text-black ">
+                            {data.attributes?.map(
+                              (attribute: any, index: number) => (
+                                <div
+                                  key={attribute.id}
+                                  className="flex flex-col"
+                                >
+                                  <label
+                                    htmlFor={attribute.description}
+                                    className="mb-3 font-light text-base text-[#53545C]"
+                                  >{`Seleccionar ${attribute.description}:`}</label>
+                                  <select
+                                    key={attribute.stock}
+                                    id={attribute.description}
+                                    className="rounded-medium bg-default-100  p-4 text-star appearance-none  transition duration-500 transform border-none focus:outline-none text-foreground-500 text-ellipsis text-sm font-light"
+                                    onChange={(e) =>
+                                      handleVariationChange(
+                                        attribute.description,
+                                        e.target.value,
+                                        e.target.selectedOptions[0]?.getAttribute(
+                                          "data-value-id"
+                                        ) || ""
+                                      )
+                                    }
+                                    onClick={() => setVaration(attribute.id)}
+                                    value={
+                                      selectedVariations[
+                                        attribute.description
+                                      ] || ""
+                                    }
                                   >
-                                    {items}
-                                  </SelectItem>
-                                );
-                              })}
-                            </Select>
+                                    <option
+                                      value=""
+                                      disabled
+                                      className="text-foreground-500 text-ellipsis text-sm font-light"
+                                    >
+                                      Seleccionar ...
+                                    </option>
+                                    {attribute.values.map((value: any) => (
+                                      <option
+                                        key={value.id}
+                                        value={value.id}
+                                        data-value-id={value.id}
+                                        className="text-foreground-500 text-ellipsis text-small"
+                                      >
+                                        {value.value}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                              )
+                            )}
+
+                            {combinationUnavailable && (
+                              <div className="text-red-500 pt-2">
+                                <p>
+                                  ¡La combinación seleccionada no está
+                                  disponible!
+                                </p>
+                              </div>
+                            )}
+
+                            {/*existingVariationId && !combinationUnavailable && (
+                      <div>
+                        <h2>ID de la Variación Existente:</h2>
+                        <p>{existingVariationId}</p>
+                      </div>
+                    )*/}
+
+                            {/* <div>
+                      <h2>Variaciones Seleccionadas:</h2>
+                      <pre>{JSON.stringify(selectedVariations, null, 2)}</pre>
+                    </div> */}
                           </div>
                         </div>
                       </div>
