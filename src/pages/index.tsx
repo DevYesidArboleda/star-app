@@ -95,7 +95,9 @@ export default function Home({metadata} : any){
                 </div>
               </div>
             ) : (
-              <p>Cargando.......</p>
+              <div className="flex items-center justify-center w-full h-full">
+                <p>Cargando.......</p>
+              </div>
             )}
           </Loading>
         )}
