@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 
 import { NavBar } from '../ui';
+import { Providers } from '@/store/Providers';
 
 interface Props {
   title?: string;
@@ -37,7 +38,9 @@ export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
           padding: '0px 20px',
           minHeight: "calc(100vh - 64px)"
         }}>
-            { children }
+            <Providers>
+              { children }
+            </Providers>
         </main>
       
       </>
