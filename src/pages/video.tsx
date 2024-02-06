@@ -8,7 +8,7 @@ const Video = () => {
         <Layout>
           <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
           <ListProduct/>
-      </main>
+        </main>
         </Layout>
   )
 }
