@@ -10,6 +10,8 @@ import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import Loading from "@/components/loading/Loading";
 import Head from 'next/head';
+import VideoList from "@/components/videoComponents/VideoList";
+import ListProduct from "@/components/videoComponents/ListProduct";
 
 const inter = Inter({ subsets: ["latin"] });
 interface Props {
@@ -74,7 +76,11 @@ export default function Home({metadata} : any){
     <Layout title="Checkout Estrellas" thumbnail={metadata[0]?.thumbnail} name={metadata[0]?.name}>
       <div className="">
         {validPage ? (
-          <Form data={dataFinal} />
+          //<Form data={dataFinal} />
+            <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
+          <VideoList />   
+          <ListProduct/>     
+        </main>
         ) : (
           <Loading>
             {loadingContent ? (

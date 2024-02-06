@@ -1,12 +1,15 @@
 import { Layout } from '@/components/layouts/Layout';
-import VideoList from '@/components/videoComponents/VideoList';
+import ListProduct from '@/components/videoComponents/ListProduct';
+
 import React from 'react'
 
 const Video = () => {
   return (
-        <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
-        <VideoList />        
+        <Layout>
+          <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
+          <ListProduct/>
       </main>
+        </Layout>
   )
 }
 

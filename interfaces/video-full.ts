@@ -31,3 +31,8 @@ export interface Provider {
     id:       string;
     avatarUrl: string;
 }
+
+export interface SimpleCatalog {
+    id: string;
+    name: string;
+}
