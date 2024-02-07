@@ -249,7 +249,7 @@ export default function Form(dataFinal: any) {
 
   useEffect(() => {
     if (windowSize.width <= 700) {
-      handleClick();
+      //handleClick();
       //Para prod se quita la resta
       //setCurrentStep(-1);
     }
@@ -361,7 +361,7 @@ export default function Form(dataFinal: any) {
 
         {/* Form */}
         <form
-          className="md:mt-12 mt-4 bg-transparent rounded-md flex justify-center w-full"
+          className={`md:mt-12 ${currentStep === 0 ? "" : "p-4" } bg-transparent rounded-md flex justify-center w-full`}
           onSubmit={handleSubmit(processForm)}
         >
           {currentStep === 0 && (

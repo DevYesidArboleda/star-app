@@ -47,93 +47,122 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
   }, []);
 
   return (
-    <div className="w-full flex  justify-center">
-      <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-0 py-2 max-w-screen-lg 2xl:pr-6 2xl:py-0">
-        <div className="flex flex-col md:flex-row items-center w-full">
-          <div className="w-full  rounded-lg m-8 videoPlayer max-h-[750px] 2xl:max-w-[464px] lg:max-w-[464px] max-w-[262px]">
+    <>
+      {windowSize.width <= 700 ? (
+        <div> 
+          <section className="bg-black snap-start h-video h-screen flex justify-center items-center">
             {video}
-          </div>
-          <div className="flex flex-col  h-full gap-12 justify-between items-center w-full 2xl:pt-16 xl:pt-16 pt-8 pb-8">
-            <div className="flex flex-col 2xl:gap-8 xl:gap-6 gap-3 w-full">
-              <div className="border-b-2 border-[#E3E8EF] w-full md:mb-4">
-                <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-xs items-center flex justify-center pb-6">
-                  Detalles de la orden
-                </h1>
+            <button
+                    className=" fixed bottom-0 btn-success w-full h-[54px] text-base"
+                    type="button"
+                    data-ripple-light="true"
+                    onClick={
+                      data.attributes?.length !== 0 ? () => setOpen(true) : next
+                    }
+                  >
+                    ¡Comprar Ahora!
+                  </button>
+          </section>
+        </div>
+      ) : (
+        <div className="w-full flex  justify-center">
+          <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-0 py-2 max-w-screen-lg 2xl:pr-6 2xl:py-0">
+            <div className="flex flex-col md:flex-row items-center w-full">
+              <div className="w-full  rounded-lg m-8 videoPlayer max-h-[750px] 2xl:max-w-[464px] lg:max-w-[464px] max-w-[262px]">
+                {video}
               </div>
-              <div className="border-b-2 border-[#E3E8EF] w-full">
-                <div className="flex justify-between">
-                  <h1 className="my-3 2xl:text-xl xl:text-xl lg:text-xs md:text-xs text-[#53545C] font-bold ">
-                    Producto
-                  </h1>
-                  <br />
-                  <h5 className="my-3 font-light text-[#53545C] 2xl:text-base xl:text-base text-xs">
-                    {data && data.name}
-                  </h5>
+              <div className="flex flex-col  h-full gap-12 justify-between items-center w-full 2xl:pt-16 xl:pt-16 pt-8 pb-8">
+                <div className="flex flex-col 2xl:gap-8 xl:gap-6 gap-3 w-full">
+                  <div className="border-b-2 border-[#E3E8EF] w-full md:mb-4">
+                    <h1 className="text-black font-bold 2xl:text-2xl xl:text-2xl lg:text-xs items-center flex justify-center pb-6">
+                      Detalles de la orden
+                    </h1>
+                  </div>
+                  <div className="border-b-2 border-[#E3E8EF] w-full">
+                    <div className="flex justify-between">
+                      <h1 className="my-3 2xl:text-xl xl:text-xl lg:text-xs md:text-xs text-[#53545C] font-bold ">
+                        Producto
+                      </h1>
+                      <br />
+                      <h5 className="my-3 font-light text-[#53545C] 2xl:text-base xl:text-base text-xs">
+                        {data && data.name}
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="border-b-2 border-[#E3E8EF] w-full justify-between flex">
+                    <span className="my-3 font-bold text-[#53545C] 2xl:text-xl xl:text-xl lg:text-xs md:text-xs">
+                      Método de pago
+                    </span>
+                    <span className="my-3 font-light text-[#53545C] 2xl:text-base xl:text-base text-xs">
+                      Paga al recibir
+                    </span>
+                  </div>
+                  <div className="border-b-2 border-[#E3E8EF] w-full justify-between flex">
+                    <span className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-xs md:text-xs text-[#53545C] ">
+                      Envío
+                    </span>
+                    <span className="my-3 font-bold 2xl:text-xl text-base text-[#42E184] ">
+                      GRATIS
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col 2xl:gap-8 xl:gap-6 gap-4">
+                    {data.attributes?.map((attribute: any, index: number) => (
+                      <div
+                        key={index}
+                        className="border-b-2 border-[#E3E8EF] w-full flex justify-between"
+                      >
+                        <label className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base md:text-xs text-[#53545C]">
+                          {attribute.description}
+                        </label>
+                        <ul className="flex gap-2">
+                          {attribute.values.map(
+                            (value: any, valueIndex: number) => (
+                              <li
+                                className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]"
+                                key={valueIndex}
+                              >
+                                {value.value}
+                              </li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="lg:flex  w-full 2xl:h-[63px] xl:h-[63px] h-[35px] 2xl:justify-start">
+                  <button
+                    className="btn-success w-full "
+                    ref={myElementRef}
+                    type="button"
+                    onClick={
+                      data.attributes?.length !== 0 ? () => setOpen(true) : next
+                    }
+                    disabled={
+                      data.attributes?.length !== 0
+                        ? false
+                        : currentStep === steps.length - 1
+                    }
+                    data-ripple-light="true"
+                  >
+                    Comprar producto
+                  </button>
                 </div>
               </div>
-              <div className="border-b-2 border-[#E3E8EF] w-full justify-between flex">
-                <span className="my-3 font-bold text-[#53545C] 2xl:text-xl xl:text-xl lg:text-xs md:text-xs">
-                  Método de pago
-                </span>
-                <span className="my-3 font-light text-[#53545C] 2xl:text-base xl:text-base text-xs">
-                  Paga al recibir
-                </span>
-              </div>
-              <div className="border-b-2 border-[#E3E8EF] w-full justify-between flex">
-                <span className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-xs md:text-xs text-[#53545C] ">
-                  Envío
-                </span>
-                <span className="my-3 font-bold 2xl:text-xl text-base text-[#42E184] ">
-                  GRATIS
-                </span>
-              </div>
-            
-              <div className="flex flex-col 2xl:gap-8 xl:gap-6 gap-4">
-                {data.attributes?.map((attribute: any, index: number) => (
-                  <div key={index} className="border-b-2 border-[#E3E8EF] w-full flex justify-between">
-                    <label className="my-3 font-bold 2xl:text-xl xl:text-xl lg:text-base md:text-xs text-[#53545C]">
-                      {attribute.description}
-                    </label>
-                    <ul className="flex gap-2">
-                      {attribute.values.map((value:any, valueIndex:number) => (
-                        <li className="my-3 2xl:text-base xl:text-base text-xs font-light tracking-tight text-[#53545C]" key={valueIndex}>
-                          {value.value}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            
-            </div>
-            <div className="lg:flex  w-full 2xl:h-[63px] xl:h-[63px] h-[35px] 2xl:justify-start">
-              <button
-                className="btn-success w-full "
-                ref={myElementRef}
-                type="button"
-                onClick={data.attributes?.length !== 0 ? () => setOpen(true) : next}
-                disabled={
-                  data.attributes?.length !== 0
-                    ? false
-                    : currentStep === steps.length - 1
-                }
-                data-ripple-light="true"
-              >
-                Comprar producto
-              </button>
             </div>
           </div>
-        </div>
-      </div>
-      <div>
-        {/* Agrega la referencia al elemento */}
+          <div>
+            {/* Agrega la referencia al elemento */}
 
-        {/* Botón que simula el clic en el otro botón */}
-        <button className="hidden" onClick={handleClick}>
-          Simular Clic
-        </button>
-      </div>
-    </div>
+            {/* Botón que simula el clic en el otro botón */}
+            <button className="hidden" onClick={handleClick}>
+              Simular Clic
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
