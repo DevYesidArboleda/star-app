@@ -32,7 +32,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
       const clickEvent = new MouseEvent("click", {
         bubbles: true,
         cancelable: true,
-        div: window,
+        view: window,
       });
 
       // Simula el clic usando dispatchEvent en la referencia del elemento
