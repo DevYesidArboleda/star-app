@@ -93,7 +93,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
                 </div>
 
             <button
-              className=" fixed bottom-0 btn-success w-full h-[54px] text-2xl font-bold"
+              className=" fixed bottom-0 btn-success w-full h-[54px] text-2xl font-bold text-[#53545C]"
               type="button"
               data-ripple-light="true"
               onClick={

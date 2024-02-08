@@ -898,31 +898,10 @@ export default function Form(dataFinal: any) {
                 </div>
               ) : (
                 <div>
-                  <div className="flex flex-col items-center w-full bg-white border border-gray-200 rounded-lg">
-                    <div className="">
-                      <div className="w-auto mx-4 mt-4 pb-6 videoPlayer flex flex-col gap-3 border-b-1 border-[#D9D9D9]">
-                        {video}
-                        <button className="btn-success w-full h-[54px]">
-                          <Link
-                            activeClass="active"
-                            to="page1"
-                            spy={true}
-                            smooth={true}
-                            offset={0}
-                            duration={500}
-                            className="w-full flex text-center items-center justify-center"
-                          >
-                            Comprar ahora
-                          </Link>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div id="page1" className="flex flex-col w-full">
-                      <div className="w-full px-12 pt-10 pb-9">
-                        <h1 className="w-full flex justify-center mb-4 text-black text-base">
-                          Detalles de la compra
-                        </h1>
+                  <span className="text-base text-center items-center font-bold w-full flex content-center text-black py-2 justify-center">Detalles de la compra</span>
+                  <div className="flex flex-col items-center w-full ">                    
+                    <div id="page1" className="flex flex-col w-full gap-4">
+                      <div className="w-full px-12 pt-10 pb-9 bg-white border border-gray-200 rounded-lg">                        
                         <div className="flex flex-col pb-3 w-full border-b-1 border-[#D9D9D9] mb-3">
                           <span className="mb-3 font-light text-base text-[#53545C]">
                             Valor total
@@ -1035,8 +1014,67 @@ export default function Form(dataFinal: any) {
                     </div> */}
                           </div>
                         </div>
-                      </div>
-                      <button className="flex w-full px-4 pb-16">
+                      </div>                      
+
+                      <div className="flex flex-col px-12 w-full bg-white border border-gray-200 rounded-lg">
+                          <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">
+                            <h1 className="text-black font-bold text-base items-center flex justify-center py-6">
+                              Resumen
+                            </h1>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full">
+                            <div className="flex justify-between">
+                              <h1 className="my-4 text-xs text-[#53545C]  font-bold ">
+                                Producto
+                              </h1>
+                              <br />
+                              <h5 className="my-4 font-light text-[#53545C] text-xs">
+                                {data && data.name}
+                              </h5>
+                            </div>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
+                            <span className="my-4 font-bold text-[#53545C] text-xs">
+                              Método de pago
+                            </span>
+                            <span className="my-4 font-light text-[#53545C] text-xs">
+                              Paga al recibir
+                            </span>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
+                            <span className="my-4 font-bold text-xs text-[#53545C] ">
+                              Envío
+                            </span>
+                            <span className="my-4 font-bold 2xl:text-xl text-xs text-[#42E184] ">
+                              GRATIS
+                            </span>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
+                            <span className="my-4 font-bold text-xs text-[#53545C]">
+                              Color
+                            </span>
+                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                              Por definir
+                            </span>
+                          </div>
+                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
+                            <h1 className="my-4 font-bold text-xs text-[#53545C]">
+                              Tallas
+                            </h1>
+                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                              {variation}
+                            </span>
+                          </div>
+                          <div className="w-full flex justify-between pb-6">
+                            <h1 className="my-4 font-bold text-base text-[#42E184]">
+                              Total
+                            </h1>
+                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                              {data && data.price}
+                            </span>
+                          </div>
+                        </div>
+                        <button className="flex w-full pb-16 ">
                         <Link
                           activeClass="active"
                           to="page2"
@@ -1044,16 +1082,16 @@ export default function Form(dataFinal: any) {
                           smooth={true}
                           offset={0}
                           duration={500}
-                          className="btn-success-modal h-[58px] flex w-full items-center text-center justify-center"
+                          className="btn-success-modal h-[48px] flex w-full items-center text-center justify-center text-[#53545C]"
                         >
-                          Continuar
+                          Continuar con la compra
                         </Link>
                       </button>
                     </div>
 
                     <div id="page2" className="w-full">
-                      <div className="px-4 bg-Form w-full ">
-                        <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97] w-full flex justify-center">
+                      <div className="px-4 bg-Form w-full bg-white border border-gray-200 rounded-lg">
+                        <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97] w-full flex justify-center pt-3">
                           Ingresa tus datos
                         </span>
 
@@ -1230,68 +1268,13 @@ export default function Form(dataFinal: any) {
                             </div>
                           </div>
                         </div>
-
-                        <div className="flex flex-col px-2 w-full">
-                          <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">
-                            <h1 className="text-black font-bold text-base items-center flex justify-center pb-6">
-                              Resumen
-                            </h1>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full">
-                            <div className="flex justify-between">
-                              <h1 className="my-4 text-xs text-[#53545C]  font-bold ">
-                                Producto
-                              </h1>
-                              <br />
-                              <h5 className="my-4 font-light text-[#53545C] text-xs">
-                                {data && data.name}
-                              </h5>
-                            </div>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
-                            <span className="my-4 font-bold text-[#53545C] text-xs">
-                              Método de pago
-                            </span>
-                            <span className="my-4 font-light text-[#53545C] text-xs">
-                              Paga al recibir
-                            </span>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
-                            <span className="my-4 font-bold text-xs text-[#53545C] ">
-                              Envío
-                            </span>
-                            <span className="my-4 font-bold 2xl:text-xl text-xs text-[#42E184] ">
-                              GRATIS
-                            </span>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
-                            <span className="my-4 font-bold text-xs text-[#53545C]">
-                              Color
-                            </span>
-                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
-                              Por definir
-                            </span>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
-                            <h1 className="my-4 font-bold text-xs text-[#53545C]">
-                              Tallas
-                            </h1>
-                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
-                              {variation}
-                            </span>
-                          </div>
-                          <div className="w-full flex justify-between pb-6">
-                            <h1 className="my-4 font-bold text-xs text-[#53545C]">
-                              Total
-                            </h1>
-                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
-                              {data && data.price}
-                            </span>
-                          </div>
-                        </div>
-                        <div className=" justify-center flex w-full pb-4">
+                        
+                        
+                      </div>
+                    </div>
+                    <div className=" justify-center flex w-full pb-4 pt-4">
                           <button
-                            className="btn-success w-full h-[54px] text-base"
+                            className="btn-success w-full h-[48px] text-base text-[#53545C]"
                             type="button"
                             onClick={next}
                             disabled={currentStep === steps.length - 1}
@@ -1300,8 +1283,6 @@ export default function Form(dataFinal: any) {
                             Finalizar Compra
                           </button>
                         </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               )}
