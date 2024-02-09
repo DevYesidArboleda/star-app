@@ -80,10 +80,10 @@ export default function Home({ metadata }: any) {
       >
         <div className="">
           {validPage ? (
-            <Form data={dataFinal} />
-            /*<main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
+            //<Form data={dataFinal} />
+            <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
               <VideoList />
-            </main>*/
+            </main>
           ) : (
             <Loading>
               {loadingContent ? (

@@ -55,7 +55,10 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
             <div className="fixed px-3 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16 ">
               <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
                 <div>
-                  <img className="h-12 w-12 rounded-full" src={`${data.thumbnail}`}/>
+                  <img
+                    className="h-12 w-12 rounded-full"
+                    src={`${data.thumbnail}`}
+                  />
                 </div>
               </div>
               <div className="ml-4 flex-1 py-4">
@@ -63,34 +66,36 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
                   <p className="text-grey-darkest">{data.name}</p>
                 </div>
                 <p className="text-grey-dark mt-1 text-sm">
-                {data.description}
+                  {data.description}
                 </p>
               </div>
             </div>
-            
-            <div className="flex w-[70%] bottom-[160px] py-2 absolute left-0 items-center flex-row pl-3 rounded-r-full border-[#DAD2D2] border-l-0 border-1 border-spacing-2 border-sh shadow-md shadow-[#DAD2D2]">
-                    <div className="rounded-full border-[#42E184] border-2">                        
-                        <img className="h-12 w-12 rounded-full" src={`${data.thumbnail}`}/>
-                    </div>
 
-                    <div style={{ flex: 1, paddingLeft: 16 }}>
-                        <div className="text-white text-sm pb-2">
-                            <span >
-                                Precio:{" "}
-                                <span className="">
-                                    $ {new Intl.NumberFormat().format(data.price)}
-                                </span>
-                            </span>
-                        </div>
-                        <div className="w-full h-[2px] bg-white"
-                        ></div>
-                        <div style={{ paddingTop: 8 }}>
-                            <span className="text-[#42E184] font-semibold text-base">
-                              Envío: GRATIS                               
-                            </span>
-                        </div>
-                    </div>
+            <div className="flex w-[70%] bottom-[160px] py-2 absolute left-0 items-center flex-row pl-3 rounded-r-full border-[#DAD2D2] border-l-0 border-1 border-spacing-2 border-sh shadow-md shadow-[#DAD2D2]">
+              <div className="rounded-full border-[#42E184] border-2">
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={`${data.thumbnail}`}
+                />
+              </div>
+
+              <div style={{ flex: 1, paddingLeft: 16 }}>
+                <div className="text-white text-sm pb-2">
+                  <span>
+                    Precio:{" "}
+                    <span className="">
+                      $ {new Intl.NumberFormat().format(data.price)}
+                    </span>
+                  </span>
                 </div>
+                <div className="w-full h-[2px] bg-white"></div>
+                <div style={{ paddingTop: 8 }}>
+                  <span className="text-[#42E184] font-semibold text-base">
+                    Envío: GRATIS
+                  </span>
+                </div>
+              </div>
+            </div>
 
             <button
               className=" fixed bottom-0 btn-success w-full h-[54px] text-2xl font-bold text-[#53545C]"
