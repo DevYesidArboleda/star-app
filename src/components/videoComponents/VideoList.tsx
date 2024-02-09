@@ -89,14 +89,14 @@ export default function VideoList() {
                 />
                 <button
                   onClick={() => onToggle(video.externalId, video.name)}
-                  className="text-white absolute bottom-[160px] mb-6"
+                  className="text-white absolute bottom-[160px] mb-6 mr-3"
                 >
                   <Image src="/img/add.svg" alt="" width={32} height={32} />
                 </button>
 
                 <div className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-3">
                   <Image src="/img/cart.png" alt="" width={20} height={20} />
-                  <span className="absolute ml-5 mb-5 rounded-full py-[2px] px-[6px] bg-[#F57E77] text-white">{addProduct.length}</span>
+                  <span className="absolute ml-3 mb-5 mr-2 rounded-full py-[2px] px-[6px] bg-[#F57E77] text-white">{addProduct.length}</span>
                 </div>
 
                 {/*<button
