@@ -35,6 +35,10 @@ export interface Provider {
 export interface SimpleCatalog {
     id: string;
     name: string;
+    description:  string;
+    price:        number;    
+    thumbnail:    string;    
+    variations:   Variation[];
 }
 
 export interface Catalog {

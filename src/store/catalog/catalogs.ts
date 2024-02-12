@@ -24,9 +24,13 @@ const catalogsSlices = createSlice({
         state[id] = catalog;
       }
     },
+    resetCatalog(state) {
+      // Reinicia el estado del catálogo
+      return initialState;
+    },
   },
 });
 
-export const { toggleCatalog } = catalogsSlices.actions;
+export const { toggleCatalog, resetCatalog } = catalogsSlices.actions;
 
 export default catalogsSlices.reducer;

@@ -47,8 +47,8 @@ export default function VideoList() {
     useGetFeedVideos().then((videos) => setVideos(videos));
   }, []);
 
-  const onToggle = (id: string, name: string) => {
-    const catalog = { id, name };
+  const onToggle = (id: string, name: string, description: string, price: number, thumbnail:string, variations:any) => {
+    const catalog = { id, name, description, price, thumbnail, variations };
     console.log(catalog);
 
     if (addProduct.some((pos) => pos.id === id)) {
@@ -58,8 +58,8 @@ export default function VideoList() {
     }
   };
 
-  const offToggle = (id: string, name: string) => {
-    const catalog = { id, name };
+  const offToggle = (id: string, name: string, description: string, price: number, thumbnail:string, variations:any) => {
+    const catalog = { id, name, description, price, thumbnail, variations };
     console.log(catalog);
 
     if (addProduct.some((pos) => pos.id === id)) {
@@ -88,7 +88,7 @@ export default function VideoList() {
                   thumbnail={video.thumbnai}
                 />
                 <button
-                  onClick={() => onToggle(video.externalId, video.name)}
+                  onClick={() => onToggle(video.externalId, video.name, video.description, video.price, video.thumbnail, video.variations)}
                   className="text-white absolute bottom-[160px] mb-6 mr-3"
                 >
                   <Image src="/img/add.svg" alt="" width={32} height={32} />
