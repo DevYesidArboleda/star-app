@@ -18,7 +18,7 @@ export default function VideoList() {
     []
   );
   const searchParams = useSearchParams();
-  const catalog_id = searchParams.get("catlogID")||"";
+  const catalog_id = searchParams.get("catalogID")||"";
 
   const dispatch = useAppDispatch();
 
@@ -92,12 +92,12 @@ export default function VideoList() {
                   price={video.price}
                   thumbnail={video.thumbnai}
                 />
-                <button 
+                <button
                   onClick={() => onToggle(video.externalId, video.name, video.description, video.price, video.thumbnail, video.variations)}
-                  className="text-white absolute bottom-[160px] mb-6 mr-3"
+                  className="text-white absolute bottom-[145px] mb-6 w-16 "
                 >
                   <Lottie animationData={animationData}  />
-                  <span className="text-white text-[8px] text-center font-bold">Agregar</span>
+                  <span className="flex justify-center text-white text-[10px] text-center font-bold mt-[-5px]">Agregar</span>
                 </button>              
 
                 <div className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-3">
