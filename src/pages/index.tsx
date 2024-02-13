@@ -27,6 +27,7 @@ export default function Home({ metadata }: any) {
   const searchParams = useSearchParams();
 
   const product_id = searchParams.get("productID");
+  const catalog_id = searchParams.get("catlogID");
   //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
   //const final:any = metadata?.filter((task:any) => task._id === product_id)
 
@@ -73,41 +74,23 @@ export default function Home({ metadata }: any) {
 
   return (
     <>
-      <Layout
-        title="Checkout Estrellas"
-        thumbnail={metadata[0]?.thumbnail}
-        name={metadata[0]?.name}
-      >
+      <Layout title="Checkout Estrellas" thumbnail={metadata[0]?.thumbnail} name={metadata[0]?.name}>
         <div className="">
-          {validPage ? (
-            //<Form data={dataFinal} />
+          {(product_id || catalog_id) && validPage && <Form data={dataFinal} />}
+          {catalog_id && (
             <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
               <VideoList />
             </main>
-          ) : (
+          )}
+          {!validPage && loadingContent && (
             <Loading>
-              {loadingContent ? (
-                <div className="flex items-center justify-center h-screen">
-                  <div className="bg-white  border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
-                    <Image
-                      src="/img/task_alt.svg"
-                      alt=""
-                      width={48}
-                      height={48}
-                    />
-                    <span className="text-green-400 text-xl text-center">
-                      Por favor contacta con tu vendedor
-                    </span>
-                    <span className="text-black text-base font-medium">
-                      información no valida !
-                    </span>
-                  </div>
+              <div className="flex items-center justify-center h-screen">
+                <div className="bg-white border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
+                  <Image src="/img/task_alt.svg" alt="" width={48} height={48} />
+                  <span className="text-green-400 text-xl text-center">Por favor contacta con tu vendedor</span>
+                  <span className="text-black text-base font-medium">Información no válida.</span>
                 </div>
-              ) : (
-                <div className="flex items-center justify-center w-full h-full">
-                  <p>Cargando.......</p>
-                </div>
-              )}
+              </div>
             </Loading>
           )}
         </div>

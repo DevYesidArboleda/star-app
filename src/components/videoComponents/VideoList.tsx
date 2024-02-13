@@ -7,6 +7,7 @@ import Image from "next/image";
 import catalogs, { toggleCatalog } from "@/store/catalog/catalogs";
 import { useAppDispatch, useAppSelector } from "@/store";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function VideoList() {
   const [videos, setVideos] = useState<any>();
@@ -14,6 +15,8 @@ export default function VideoList() {
   const [posicionesCapturadas, setPosicionesCapturadas] = useState<number[]>(
     []
   );
+  const searchParams = useSearchParams();
+  const catalog_id = searchParams.get("catlogID")||"";
 
   const dispatch = useAppDispatch();
 
@@ -44,7 +47,7 @@ export default function VideoList() {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useGetFeedVideos().then((videos) => setVideos(videos));
+    useGetFeedVideos(catalog_id).then((videos) => setVideos(videos));
   }, []);
 
   const onToggle = (id: string, name: string, description: string, price: number, thumbnail:string, variations:any) => {
