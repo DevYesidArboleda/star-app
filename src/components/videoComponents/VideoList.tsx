@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 import { useGetFeedVideos } from "../../hooks/useGetFeedVideos";
 import Video from "./Video";
 import Image from "next/image";
@@ -8,6 +8,8 @@ import catalogs, { toggleCatalog } from "@/store/catalog/catalogs";
 import { useAppDispatch, useAppSelector } from "@/store";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import Lottie from 'lottie-react';
+import animationData from '../../../public/animations/addProductAnimation.json';
 
 export default function VideoList() {
   const [videos, setVideos] = useState<any>();
@@ -90,12 +92,13 @@ export default function VideoList() {
                   price={video.price}
                   thumbnail={video.thumbnai}
                 />
-                <button
+                <button 
                   onClick={() => onToggle(video.externalId, video.name, video.description, video.price, video.thumbnail, video.variations)}
                   className="text-white absolute bottom-[160px] mb-6 mr-3"
                 >
-                  <Image src="/img/add.svg" alt="" width={32} height={32} />
-                </button>
+                  <Lottie animationData={animationData}  />
+                  <span className="text-white text-[8px] text-center font-bold">Agregar</span>
+                </button>              
 
                 <div className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-3">
                   <Image src="/img/cart.png" alt="" width={20} height={20} />

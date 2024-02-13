@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { createRef, useEffect, useRef, useState } from "react";
 import next, { steps } from "@/components/form/FormUnit";
 import { useSteps } from "../../hooks/useSteps";
 import Image from "next/image";
 import { usePrevs } from "../../hooks/useStepsPrev";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
+import Modal from "../Modal/Modal";
 
 interface typeData {
   name: string;
@@ -20,6 +21,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
   const { currentStep, setCurrentStep } = useSteps();
   const myElementRef = useRef<HTMLButtonElement>(null);
   const windowSize = UseWindowSize();
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   /*useEffect(() => {
     setVideo(<ReactPlayer url={`${url}`} controls={true} height="750px" width="464px"/>);
@@ -45,6 +47,16 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
       handleClick();
     }
   }, []);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  
 
   return (
     <>
@@ -96,6 +108,18 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
                 </div>
               </div>
             </div>
+
+            <button onClick={handleOpenModal} className="right-0 text-white absolute bottom-[150px] mb-6 mr-3">
+              <Image src="/img/infoProduct.png" alt="" width={32} height={32} />
+            </button>
+
+            <Modal isOpen={openModal} onClose={handleCloseModal}>
+              {/* Contenido del modal */}
+              <div className="flex flex-col mt-[-20px] z-[1]">
+                <span className="text-base font-bold text-black mb-5">{data.name}</span>
+                <span className="text-sm font-normal text-black">{data.description}</span>
+              </div>
+            </Modal>
 
             <button
               className=" fixed bottom-0 btn-success w-full h-[54px] text-2xl font-bold text-[#53545C]"

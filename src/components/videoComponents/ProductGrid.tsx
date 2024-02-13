@@ -4,6 +4,8 @@ import ProductCard from "./ProductCard";
 import { useAppSelector } from "@/store";
 import { useDispatch } from "react-redux";
 import { resetCatalog } from "@/store/catalog/catalogs";
+import Lottie from 'lottie-react';
+import animationData from '../../../public/animations/shimmerCarritoDeCompra.json';
 
 interface Props {
   catalog: SimpleCatalog[];
@@ -24,7 +26,8 @@ export default function ProductGrid({ catalog }: Props) {
   };
 
   return (
-    <div className="flex flex-wrap gap-10 items-center justify-center">
+    <>
+    {allProduct.length !== 0 ? <div className="flex flex-wrap gap-10 items-center justify-center">
       <div className="flex flex-col mx-auto right-0 w-full mt-4 gap-4">
         <div className="flex flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B]">
           <div className="flex justify-between mb-3">
@@ -57,5 +60,8 @@ export default function ProductGrid({ catalog }: Props) {
         </div>
       </div>
     </div>
+    :<Lottie animationData={animationData}  />
+    }
+    </>
   );
 }

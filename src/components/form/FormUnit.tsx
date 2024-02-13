@@ -361,7 +361,9 @@ export default function Form(dataFinal: any) {
 
         {/* Form */}
         <form
-          className={`md:mt-12 ${currentStep === 0 ? "" : "p-4" } bg-transparent rounded-md flex justify-center w-full`}
+          className={`md:mt-12 ${
+            currentStep === 0 ? "" : "p-4"
+          } bg-transparent rounded-md flex justify-center w-full`}
           onSubmit={handleSubmit(processForm)}
         >
           {currentStep === 0 && (
@@ -610,7 +612,9 @@ export default function Form(dataFinal: any) {
                     type="button"
                     onClick={next}
                     ref={myElementRef}
-                    disabled={windowSize.width >= 768 && existingVariationId === null}
+                    disabled={
+                      windowSize.width >= 768 && existingVariationId === null
+                    }
                     data-ripple-light="true"
                   >
                     Continuar
@@ -898,10 +902,23 @@ export default function Form(dataFinal: any) {
                 </div>
               ) : (
                 <div>
-                  <span className="text-base text-center items-center font-bold w-full flex content-center text-black py-2 justify-center">Detalles de la compra</span>
-                  <div className="flex flex-col items-center w-full ">                    
+                  <div className="flex justify-center items-center">
+                      <div className="flex  w-5 h-5">
+                      <Image
+                        onClick={prev}
+                        src="/img/backPage.png"
+                        alt=""
+                        width={20}
+                        height={20}
+                      />
+                      </div>
+                    <span className="text-base text-center items-center font-bold w-full flex content-center text-black py-2 justify-center">
+                      Detalles de la compra
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center w-full ">
                     <div id="page1" className="flex flex-col w-full gap-4">
-                      <div className="w-full px-12 pt-10 pb-9 bg-white border border-gray-200 rounded-lg">                        
+                      <div className="w-full px-12 pt-10 pb-9 bg-white border border-gray-200 rounded-lg">
                         <div className="flex flex-col pb-3 w-full border-b-1 border-[#D9D9D9] mb-3">
                           <span className="mb-3 font-light text-base text-[#53545C]">
                             Valor total
@@ -1014,67 +1031,67 @@ export default function Form(dataFinal: any) {
                     </div> */}
                           </div>
                         </div>
-                      </div>                      
+                      </div>
 
                       <div className="flex flex-col px-12 w-full bg-white border border-gray-200 rounded-lg">
-                          <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">
-                            <h1 className="text-black font-bold text-base items-center flex justify-center py-6">
-                              Resumen
+                        <div className="border-b-1 lg:border-[#D9D9D9] border-transparent w-full">
+                          <h1 className="text-black font-bold text-base items-center flex justify-center py-6">
+                            Resumen
+                          </h1>
+                        </div>
+                        <div className="border-b-1 border-[#D9D9D9] w-full">
+                          <div className="flex justify-between">
+                            <h1 className="my-4 text-xs text-[#53545C]  font-bold ">
+                              Producto
                             </h1>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full">
-                            <div className="flex justify-between">
-                              <h1 className="my-4 text-xs text-[#53545C]  font-bold ">
-                                Producto
-                              </h1>
-                              <br />
-                              <h5 className="my-4 font-light text-[#53545C] text-xs">
-                                {data && data.name}
-                              </h5>
-                            </div>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
-                            <span className="my-4 font-bold text-[#53545C] text-xs">
-                              Método de pago
-                            </span>
-                            <span className="my-4 font-light text-[#53545C] text-xs">
-                              Paga al recibir
-                            </span>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
-                            <span className="my-4 font-bold text-xs text-[#53545C] ">
-                              Envío
-                            </span>
-                            <span className="my-4 font-bold 2xl:text-xl text-xs text-[#42E184] ">
-                              GRATIS
-                            </span>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
-                            <span className="my-4 font-bold text-xs text-[#53545C]">
-                              Color
-                            </span>
-                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
-                              Por definir
-                            </span>
-                          </div>
-                          <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
-                            <h1 className="my-4 font-bold text-xs text-[#53545C]">
-                              Tallas
-                            </h1>
-                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
-                              {variation}
-                            </span>
-                          </div>
-                          <div className="w-full flex justify-between pb-6">
-                            <h1 className="my-4 font-bold text-base text-[#42E184]">
-                              Total
-                            </h1>
-                            <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
-                              {data && data.price}
-                            </span>
+                            <br />
+                            <h5 className="my-4 font-light text-[#53545C] text-xs">
+                              {data && data.name}
+                            </h5>
                           </div>
                         </div>
-                        <button className="flex w-full pb-16 ">
+                        <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
+                          <span className="my-4 font-bold text-[#53545C] text-xs">
+                            Método de pago
+                          </span>
+                          <span className="my-4 font-light text-[#53545C] text-xs">
+                            Paga al recibir
+                          </span>
+                        </div>
+                        <div className="border-b-1 border-[#D9D9D9] w-full justify-between flex">
+                          <span className="my-4 font-bold text-xs text-[#53545C] ">
+                            Envío
+                          </span>
+                          <span className="my-4 font-bold 2xl:text-xl text-xs text-[#42E184] ">
+                            GRATIS
+                          </span>
+                        </div>
+                        <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
+                          <span className="my-4 font-bold text-xs text-[#53545C]">
+                            Color
+                          </span>
+                          <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                            Por definir
+                          </span>
+                        </div>
+                        <div className="border-b-1 border-[#D9D9D9] w-full flex justify-between">
+                          <h1 className="my-4 font-bold text-xs text-[#53545C]">
+                            Tallas
+                          </h1>
+                          <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                            {variation}
+                          </span>
+                        </div>
+                        <div className="w-full flex justify-between pb-6">
+                          <h1 className="my-4 font-bold text-base text-[#42E184]">
+                            Total
+                          </h1>
+                          <span className="my-4 text-xs font-light tracking-tight text-[#53545C]">
+                            {data && data.price}
+                          </span>
+                        </div>
+                      </div>
+                      <button className="flex w-full pb-16 ">
                         <Link
                           activeClass="active"
                           to="page2"
@@ -1268,21 +1285,19 @@ export default function Form(dataFinal: any) {
                             </div>
                           </div>
                         </div>
-                        
-                        
                       </div>
                     </div>
                     <div className=" justify-center flex w-full pb-4 pt-4">
-                          <button
-                            className="btn-success w-full h-[48px] text-base text-[#53545C]"
-                            type="button"
-                            onClick={next}
-                            disabled={currentStep === steps.length - 1}
-                            data-ripple-light="true"
-                          >
-                            Finalizar Compra
-                          </button>
-                        </div>
+                      <button
+                        className="btn-success w-full h-[48px] text-base text-[#53545C]"
+                        type="button"
+                        onClick={next}
+                        disabled={currentStep === steps.length - 1}
+                        data-ripple-light="true"
+                      >
+                        Finalizar Compra
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
