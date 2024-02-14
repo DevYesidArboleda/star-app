@@ -8,8 +8,8 @@ import Image from "next/image";
 import Lottie from "lottie-react";
 import animationData from "../../../public/animations/shimmerCarritoDeCompra.json";
 import { button } from "@nextui-org/react";
-import ModalCart from "../Modal/ModalCart";
 import FormCatalog from "./FormCatalog";
+import ModalCart from "../Modal/ModalCart";
 
 interface Props {
   catalog: SimpleCatalog[];
