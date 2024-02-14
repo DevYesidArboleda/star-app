@@ -24,9 +24,10 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             right: 0,
             bottom: 0,
             background: "rgba(0, 0, 0, 0.5)",
+            opacity: 0.4,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: "start",
+            justifyContent: "end",
           }}
         >
           <motion.div
@@ -38,6 +39,7 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
               background: "white",
               padding: "20px",
               borderRadius: "8px",
+              width: "380px",
             }}
           >
           <button onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>

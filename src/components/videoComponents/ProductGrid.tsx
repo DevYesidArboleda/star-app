@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SimpleCatalog } from "../../../interfaces";
 import ProductCard from "./ProductCard";
 import { useAppSelector } from "@/store";
@@ -8,6 +8,8 @@ import Image from "next/image";
 import Lottie from "lottie-react";
 import animationData from "../../../public/animations/shimmerCarritoDeCompra.json";
 import { button } from "@nextui-org/react";
+import ModalCart from "../Modal/ModalCart";
+import FormCatalog from "./FormCatalog";
 
 interface Props {
   catalog: SimpleCatalog[];
@@ -25,6 +27,22 @@ export default function ProductGrid({ catalog }: Props) {
 
   const handleLimpiarCatalogo = () => {
     dispatch(resetCatalog());
+  };
+
+  //carrito abrir y cerrar
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleFormSubmit = (data: any) => {
+    // Lógica de manejo de datos del formulario
+    console.log("Datos del formulario:", data);
   };
 
   return (
@@ -79,6 +97,7 @@ export default function ProductGrid({ catalog }: Props) {
             <button
               className=" bg-[#F6A97D] rounded-md w-full h-[54px] text-xl font-bold text-[#53545C]"
               type="button"
+              onClick={handleOpenModal}
             >
               Continuar con la compra
             </button>
@@ -86,6 +105,9 @@ export default function ProductGrid({ catalog }: Props) {
             ""
           )}
         </div>
+        <ModalCart isOpen={isModalOpen} onClose={handleCloseModal}>
+            <FormCatalog onSubmit={handleFormSubmit}/>
+        </ModalCart>
       </div>
     </div>
   );

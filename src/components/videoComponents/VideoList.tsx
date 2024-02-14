@@ -12,6 +12,7 @@ import Lottie from "lottie-react";
 import animationData from "../../../public/animations/addProductAnimation.json";
 import ProductGrid from "./ProductGrid";
 import ModalCart from "../Modal/ModalCart";
+import ListProduct from "./ListProduct";
 
 export default function VideoList() {
   const [videos, setVideos] = useState<any>();
@@ -153,8 +154,7 @@ export default function VideoList() {
                     </div>
 
                     <ModalCart isOpen={isModalOpen} onClose={handleCloseModal}>
-                      <h2 className="text-black">Contenido del Modal</h2>
-                      <p className="text-black">Este es un ejemplo de modal con Framer Motion.</p>
+                      <ListProduct />
                     </ModalCart>
 
                     {/*<button
