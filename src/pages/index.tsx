@@ -78,9 +78,9 @@ export default function Home({ metadata }: any) {
         <div className="">
           {(product_id || catalog_id) && validPage && <Form data={dataFinal} />}
           {catalog_id && (
-            <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto text-xs">
+            <div className="flex justify-center gap-6">
               <VideoList />
-            </main>
+            </div>
           )}
           {!validPage && loadingContent && (
             <Loading>
