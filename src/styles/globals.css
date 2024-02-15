@@ -107,3 +107,17 @@ body {
     transform: scale(0.7);
   }
 }
+
+.btn-text2 {
+  border-radius: var(--radius);
+  position: fixed;
+}
+
+.btn-text2:nth-of-type(2) {
+  background: #42e083;
+  opacity: 0.5;
+  transform: scale(1);
+  animation: circleScale var(--dur) infinite;
+  z-index: 10;
+}
+

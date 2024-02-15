@@ -233,7 +233,7 @@ export default function VideoList() {
 
                     {addProduct.length !== 0 ? (
                       <button
-                        className=" fixed bottom-0 btn-success w-full h-[54px] text-base md:max-w-sm text-[#53545C] "
+                        className="btn-text2 fixed bottom-0 btn-success w-full h-[54px] text-base md:max-w-sm text-[#53545C] "
                         type="button"
                         data-ripple-light="true"
                         onClick={handleOpenModalForm}
