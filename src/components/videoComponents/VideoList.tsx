@@ -13,6 +13,8 @@ import animationData from "../../../public/animations/addProductAnimation.json";
 import ProductGrid from "./ProductGrid";
 import ModalCart from "../Modal/ModalCart";
 import ListProduct from "./ListProduct";
+import ModalForm from "../Modal/ModalForm";
+import FormCatalog from "./FormCatalog";
 
 export default function VideoList() {
   const [videos, setVideos] = useState<any>();
@@ -101,6 +103,23 @@ export default function VideoList() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  //Formulario abrir y cerrar
+  const [isModalOpenForm, setIsModalOpenForm] = useState(false);
+
+  const handleOpenModalForm = () => {
+    setIsModalOpenForm(true);
+  };
+
+  const handleCloseModalForm = () => {
+    setIsModalOpenForm(false);
+  };
+
+
+  const handleFormSubmit = (data: any) => {
+    // Lógica de manejo de datos del formulario
+    console.log("Datos del formulario:", data);
   };
 
   return (
@@ -217,8 +236,9 @@ export default function VideoList() {
                         className=" fixed bottom-0 btn-success w-full h-[54px] text-base md:max-w-sm text-[#53545C] "
                         type="button"
                         data-ripple-light="true"
+                        onClick={handleOpenModalForm}
                       >
-                        <Link href={`/video`}>Finalizar Compra</Link>
+                        Finalizar Compra
                       </button>
                     ) : (
                       ""
@@ -227,6 +247,9 @@ export default function VideoList() {
                 );
               })}
         </section>
+        <ModalForm isOpen={isModalOpenForm} onClose={handleCloseModalForm}>
+              <FormCatalog onSubmit={handleFormSubmit} />
+            </ModalForm>
       </main>
       <div className="lg:flex md:items-start xl:w-[398px] lg:w-[398px] md:hidden">
         <ProductGrid catalog={addProduct} />
