@@ -67,3 +67,43 @@ body {
     height: auto !important;
   }
 }
+
+:root {
+  --WH: 40px;
+  --radius: var(--WH) / 2;
+  --dur: 3s;
+  --delay: var(--dur) / 2;
+}
+
+.btn-text {
+  margin: 0 auto;
+  display: block;
+  border-radius: var(--radius);
+  position: relative;
+}
+
+.btn-text:first-of-type {
+  background: #42e083;
+  top: var(--radius);
+  animation: circleScale var(--dur) infinite;
+  animation-delay: var(--delay);
+  z-index: 1;
+}
+
+.btn-text:nth-of-type(2) {
+  background: #f6a97d;
+  top: calc(-1 * var(--radius));
+  opacity: 0.5;
+  transform: scale(1);
+  animation: circleScale var(--dur) infinite;
+  z-index: 10;
+}
+
+@keyframes circleScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+}

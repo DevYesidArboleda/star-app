@@ -227,7 +227,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
           </div>
           <div className="flex w-full pt-8 items-center justify-center">
             <button
-              className="btn-success md:w-full"
+              className="btn-success btn-text md:w-full flex justify-center text-center items-center"
               type="submit"
             >
               Finalizar Compra

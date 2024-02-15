@@ -99,7 +99,7 @@ export default function ProductGrid({ catalog }: Props) {
             <div className="w-full">
               {allProduct.length !== 0 ? (
                 <button
-                  className=" bg-[#F6A97D] rounded-md w-full h-[54px] text-xl font-bold text-[#53545C]"
+                  className=" bg-[#F6A97D] rounded-2xl w-full h-[54px] text-xl font-bold text-[#53545C]"
                   type="button"
                   onClick={handleOpenModal}
                 >
@@ -164,7 +164,7 @@ export default function ProductGrid({ catalog }: Props) {
               <div className="w-full">
                 {allProduct.length !== 0 ? (
                   <button
-                    className=" bg-[#F6A97D] rounded-md w-full h-[54px] text-xl font-bold text-[#53545C]"
+                    className=" bg-[#F6A97D] rounded-lg w-full h-[54px] text-xl font-bold text-[#53545C]"
                     type="button"
                     onClick={handleOpenModal}
                   >
