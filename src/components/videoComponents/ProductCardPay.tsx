@@ -7,7 +7,7 @@ interface Props {
   catalogs: SimpleCatalog;
 }
 
-export default function ProductCard(catalog: Props) {
+export default function ProductCardPay(catalog: Props) {
   const [valor, setValor] = useState(0);
 
   // Función para sumar al valor
@@ -42,26 +42,7 @@ export default function ProductCard(catalog: Props) {
             </span>
           </div>
         </div>
-        <div className="flex justify-between w-full mt-4">
-          {catalog.catalogs.variations.length === 0 ? (
-            <div>
-            </div>
-          ) : (
-            <div className="">
-              <button className="text-white text-xs p-2 bg-[#F6A97D] rounded-md">
-                Modificar
-              </button>
-            </div>
-          )}
-          <div>
-            <div className="text-[#53545C] bg-[#42E18478] rounded-3xl w-[80px] h-7 items-center flex justify-center gap-3 text-xl">
-              {/* Botón para sumar */}
-              <button onClick={subtractCount}>-</button>
-              <span>{valor}</span>
-              {/* Botón para restar */}
-              <button onClick={addCount}>+</button>
-            </div>
-          </div>
+        <div className="flex justify-between w-full mt-4">          
         </div>
       </div>
     </div>

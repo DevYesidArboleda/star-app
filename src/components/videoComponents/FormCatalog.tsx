@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FormDataSchema } from "../../../lib/schema";
 import { fetchCity, fetchDeparment } from "../utils/funtions";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface FormularioPedidoProps {
   onSubmit: (data: any) => void;
@@ -17,6 +18,9 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
     const [department, setDepartment] = useState<any>([]);
     const [city, setCity] = useState<any>([]);
     const [cityid, setCityid] = useState(0);
+    const searchParams = useSearchParams();
+    const user_id = searchParams.get("userID");
+    const router = useRouter();
 
   const {
     register,
@@ -28,6 +32,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
 
   const processForm = async (data: any) => {
     // Tu lógica de procesamiento del formulario aquí
+    router.push(`/completePayCatalog?userID=${user_id}`);
     onSubmit(data);
   };
 
