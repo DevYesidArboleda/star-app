@@ -8,7 +8,7 @@ interface ModalProps {
   children: ReactNode;
 }
 
-const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -18,16 +18,16 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         exit={{ x: "100%", opacity: 0 }}     // Establecer la opacidad en 0 al salir
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
         style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "rgba(0, 0, 0, 0.1)",
-            display: "flex",
-            alignItems: "start",
-            justifyContent: "end",
-            zIndex:1,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "rgba(0, 0, 0, 0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex:1,
         }}
       >
         <motion.div
@@ -40,10 +40,9 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             padding: "20px",
             borderRadius: "8px",
             width: "380px",
-            height: "100vh",
           }}
         >
-          <button onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>
+          <button className="w-full flex justify-end" onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>
           {children}
         </motion.div>
       </motion.div>
@@ -52,4 +51,4 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default ModalCart;
+export default ModalForm;

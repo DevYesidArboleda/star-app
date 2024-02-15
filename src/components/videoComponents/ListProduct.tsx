@@ -8,7 +8,7 @@ export default function  ListProduct ()  {
     const [products, setProducts] = useState(addProduct)
 
   return (
-    <div>
+    <div className='h-full'>
         <>
         {
             products.length === 0
@@ -23,7 +23,7 @@ export default function  ListProduct ()  {
 export const NoAddProducts = () => {
     return (
         <div className='flex flex-col h-[50vh] items-center justify-center'>
-            <span>No hay productos agregados</span>
+            <span className='text-black'>No hay productos agregados</span>
         </div>
     )
 }

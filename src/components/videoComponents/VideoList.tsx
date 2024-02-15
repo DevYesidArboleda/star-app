@@ -141,7 +141,7 @@ export default function VideoList() {
                       </span>
                     </button>
 
-                    <div onClick={handleOpenModal} className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-3 lg:hidden">
+                    <div onClick={handleOpenModal} className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-4 lg:hidden">
                       <Image
                         src="/img/cart.png"
                         alt=""
@@ -193,7 +193,7 @@ export default function VideoList() {
                       </div>
                     </div>
 
-                    <div className="absolute px-3 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
+                    <div className="absolute px-4 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
                       <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
                         <div>
                           <img

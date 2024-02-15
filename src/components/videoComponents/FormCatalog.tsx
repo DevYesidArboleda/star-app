@@ -51,19 +51,16 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
   }, [cityid]);
 
   return (
-    <div className="px-[16.5px] lg:py-[49.5px] md:py-[20.5px] lg:w-1/4 bg-Form w-[57%] max-w-[408px]">
+    <div className="">
       {/* ... (resto del código del formulario) ... */}
       <form onSubmit={handleSubmit(processForm)}>
         {/* ... (resto de tus campos de entrada) ... */}
-        <div className="flex w-full lg:hidden pt-8 items-center justify-center">
+        <div className="flex flex-col w-full items-center justify-center">
           <h2 className=" leading-7  text-black lg:text-xl md:text-base lg:font-medium md:font-bold text-center mb-5">
-            Hacer Pedido
+          Ingresar Información
           </h2>
-          <span className="mt-1 text-base font-medium leading-6 text-[#8B8D97] md:hidden lg:flex">
-            Ingresa tus datos
-          </span>
 
-          <div className="mt-2 flex flex-col xl:gap-6 lg:gap-4 md:gap-4">
+          <div className="mt-2 flex flex-col xl:gap-6 lg:gap-4 md:gap-4 w-full">
             <div className="col-span-full">
               <div className="mt-2">
                 <input
@@ -223,7 +220,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
               </div>
             </div>
           </div>
-          <div className="flex w-full lg:hidden pt-8 items-center justify-center">
+          <div className="flex w-full pt-8 items-center justify-center">
             <button
               className="btn-success md:w-full"
               type="submit"
