@@ -5,6 +5,8 @@ import Image from "next/image";
 import { usePrevs } from "../../hooks/useStepsPrev";
 import { UseWindowSize } from "@/hooks/UseWindowSize";
 import Modal from "../Modal/Modal";
+import animationData2 from "../../../public/animations/testAnimation.json";
+import Lottie from "lottie-react";
 
 interface typeData {
   name: string;
@@ -121,16 +123,16 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
               </div>
             </Modal>
 
-            <button
-              className=" fixed bottom-0 btn-success w-full h-[54px] text-2xl font-bold text-[#53545C]"
-              type="button"
-              data-ripple-light="true"
-              onClick={
-                data.attributes?.length !== 0 ? () => setOpen(true) : next
-              }
-            >
-              ¡Comprar Ahora!
-            </button>
+            <Lottie animationData={animationData2} className="fixed bottom-0 md:w-[384px] w-full lottie-main " 
+                    type="button"
+                    onClick={
+                      data.attributes?.length !== 0 ? () => setOpen(true) : next
+                    }
+                    disabled={
+                      data.attributes?.length !== 0
+                        ? false
+                        : currentStep === steps.length - 1
+                    } />
           </section>
         </div>
       ) : (
