@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Lottie from "lottie-react";
 import animationData from "../../../public/animations/addProductAnimation.json";
+import animationData2 from "../../../public/animations/testAnimation.json";
 import ProductGrid from "./ProductGrid";
 import ModalCart from "../Modal/ModalCart";
 import ListProduct from "./ListProduct";
@@ -232,14 +233,7 @@ export default function VideoList() {
                     </div>
 
                     {addProduct.length !== 0 ? (
-                      <button
-                        className="btn-text2 fixed bottom-0 btn-success w-full h-[54px] text-base md:max-w-sm text-[#53545C] "
-                        type="button"
-                        data-ripple-light="true"
-                        onClick={handleOpenModalForm}
-                      >
-                        Finalizar Compra
-                      </button>
+                      <Lottie animationData={animationData2} className="fixed bottom-0 w-full lottie-catalog" />
                     ) : (
                       ""
                     )}

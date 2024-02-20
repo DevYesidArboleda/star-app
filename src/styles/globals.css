@@ -121,3 +121,30 @@ body {
   z-index: 10;
 }
 
+.lottie-catalog::after {
+  content: "¡Comprar Ahora!";
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  top: -55px;
+  position: relative;
+  font-size: 24px;
+  font-weight: 700;
+  color: #53545C;
+}
+
+.lottie-main::after {
+  content: "Agregar al carrito de compra";
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  top: -55px;
+  position: relative;
+  font-size: 24px;
+  font-weight: 700;
+  color: #53545C;
+}
