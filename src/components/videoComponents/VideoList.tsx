@@ -233,7 +233,7 @@ export default function VideoList() {
                     </div>
 
                     {addProduct.length !== 0 ? (
-                      <Lottie animationData={animationData2} className="fixed bottom-0 w-full lottie-catalog" />
+                      <Lottie animationData={animationData2} className="fixed bottom-0 md:w-[384px] w-full lottie-catalog" />
                     ) : (
                       ""
                     )}
