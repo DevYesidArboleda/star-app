@@ -6,6 +6,8 @@ import { z } from "zod";
 import { FormDataSchema } from "../../../lib/schema";
 import { fetchCity, fetchDeparment } from "../utils/funtions";
 import { useRouter, useSearchParams } from "next/navigation";
+import Lottie2 from 'react-lottie';
+import animationData3 from "../../../public/animations/animationBuyNow.json";
 
 interface FormularioPedidoProps {
   onSubmit: (data: any) => void;
@@ -54,6 +56,15 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
       });
     }
   }, [cityid]);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData3,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
 
   return (
     <div className="">
@@ -227,10 +238,13 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
           </div>
           <div className="flex w-full pt-8 items-center justify-center">
             <button
-              className="btn-success btn-text md:w-full flex justify-center text-center items-center"
+              className=" w-full flex justify-center text-center items-center"
               type="submit"
             >
-              Finalizar Compra
+              <div className=" w-full h-[54px] text-2xl font-bold text-[#53545C]" data-ripple-light="true"
+                        >
+                        <Lottie2 options={defaultOptions} />
+                      </div>
             </button>
           </div>
         </div>

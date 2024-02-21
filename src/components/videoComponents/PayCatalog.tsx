@@ -52,7 +52,7 @@ export const PayCatalog = () => {
       </div>
 
       <div className="lg:flex hidden flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B] w-[398px]">
-        <div className="text-[#53545C] text-base flex justify-between border-b-1 border-[#BBC1CA6B] py-3">
+        <div className="text-[#53545C] text-base font-bold flex justify-between border-b-1 border-[#BBC1CA6B] py-3">
           <span>{allProduct.length} Items </span>
         </div>
             {allProduct.map((cat) => (

@@ -54,7 +54,7 @@ export default function ProductGrid({ catalog }: Props) {
           <div className="flex flex-col mx-auto right-0 w-full mt-4 gap-4">
             <div className="flex flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B] overflow-y-auto">
               <div className="flex justify-between mb-3">
-                <span className="text-[#53545C] text-base">
+                <span className="text-[#53545C] text-base font-bold">
                   {allProduct.length} items
                 </span>
                 <div>

@@ -31,7 +31,7 @@ export default function ProductCardPay(catalog: Props) {
               alt={`${catalog.catalogs.name} thumbnail`}
             />
           </div>
-          <div className="ml-[-46px]">
+          <div className="">
             <span className="pt-2 text-base font-medium text-[#3D3D3F] capitalize">
               {catalog.catalogs.name}
             </span>
