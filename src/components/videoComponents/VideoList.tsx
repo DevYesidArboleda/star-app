@@ -9,8 +9,10 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Lottie from "lottie-react";
+import Lottie2 from 'react-lottie';
 import animationData from "../../../public/animations/addProductAnimation.json";
 import animationData2 from "../../../public/animations/testAnimation.json";
+import animationData3 from "../../../public/animations/animationBuyNow.json";
 import ProductGrid from "./ProductGrid";
 import ModalCart from "../Modal/ModalCart";
 import ListProduct from "./ListProduct";
@@ -123,6 +125,31 @@ export default function VideoList() {
     console.log("Datos del formulario:", data);
   };
 
+  //test lottie
+  /*let animationContainer = createRef();
+
+  useEffect(() => {
+    const anim = lottie.loadAnimation({
+      container: animationContainer.current, // the dom element that will contain the animation
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/animations/animationBuyNow.json' // the path to the animation json
+    });
+  
+    return () => anim.destroy()
+  }, [])*/
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData3,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+  
+
   return (
     <>
       <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto md:mx-0 text-xs">
@@ -233,7 +260,11 @@ export default function VideoList() {
                     </div>
 
                     {addProduct.length !== 0 ? (
-                      <Lottie animationData={animationData2} className="fixed bottom-0 md:w-[384px] w-full lottie-catalog" />
+                      
+                      <div className="fixed bottom-0 md:w-[384px] w-full h-[54px] text-2xl font-bold text-[#53545C]" data-ripple-light="true"
+                        onClick={handleOpenModalForm}>
+                        <Lottie2 options={defaultOptions} />
+                      </div>
                     ) : (
                       ""
                     )}
