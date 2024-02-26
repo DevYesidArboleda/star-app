@@ -74,7 +74,7 @@ export default function Home({ metadata }: any) {
 
   return (
     <>
-      <Layout title="Checkout Estrellas" thumbnail={metadata[0]?.thumbnail} name={metadata[0]?.name}>
+      <Layout title="Checkout Estrellas" thumbnail={metadata && metadata[0] ? metadata[0].thumbnail : ''} name={metadata && metadata[0] ? metadata[0].name : ''}>
         <div className="">
           {(product_id || catalog_id) && validPage && <Form data={dataFinal} />}
           {catalog_id && (

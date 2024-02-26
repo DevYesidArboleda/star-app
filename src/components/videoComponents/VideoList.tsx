@@ -19,6 +19,7 @@ import ListProduct from "./ListProduct";
 import ModalForm from "../Modal/ModalForm";
 import FormCatalog from "./FormCatalog";
 import Modal from "../Modal/Modal";
+import Loading from "../loading/Loading";
 
 export default function VideoList() {
   const [videos, setVideos] = useState<any>();
@@ -138,16 +139,18 @@ export default function VideoList() {
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const handleButtonClick = (direction: 'up' | 'down') => {
-    const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+  const handleButtonClick = (direction: "up" | "down") => {
+    const newIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
     if (newIndex >= 0 && newIndex < videos.length) {
       setCurrentIndex(newIndex);
 
       if (videoContainerRef.current) {
-        const targetVideo = videoContainerRef.current.children[newIndex] as HTMLDivElement;
+        const targetVideo = videoContainerRef.current.children[
+          newIndex
+        ] as HTMLDivElement;
         if (targetVideo) {
-          targetVideo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          targetVideo.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       }
     }
@@ -164,176 +167,222 @@ export default function VideoList() {
 
   return (
     <>
-      <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto md:mx-0 text-xs" >
-        <section className="pb-14 h-full absolute top-0 right-0 left-0 flex flex-col snap-y snap-mandatory overflow-y-auto videoScroll " ref={videoContainerRef}>
-          {!videos
-            ? "Loading..."
-            : // @ts-ignore
-              videos.map((video, index) => {
-                return (
-                  <div
-                    className="flex flex-row-reverse items-center relative"
-                    key={index}
-                    style={{ scrollSnapAlign: 'start' }}
-                  >
-                    <Video
-                      src={video.videoUrl}
-                      name={video.name}
-                      price={video.price}
-                      thumbnail={video.thumbnai}
-                    />
-                    <button
-                      onClick={() =>
-                        onToggle(
-                          video.externalId,
-                          video.name,
-                          video.description,
-                          video.price,
-                          video.thumbnail,
-                          video.variations
-                        )
-                      }
-                      className="text-white absolute bottom-[145px] mb-6 w-16 "
-                    >
-                      <Lottie animationData={animationData} />
-                      <span className="flex justify-center text-white text-[10px] text-center font-bold mt-[-5px]">
-                        Agregar
-                      </span>
-                    </button>
+      {videos !== "false" ? (
+        <>
+          <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto md:mx-0 text-xs">
+            <section
+              className="pb-14 h-full absolute top-0 right-0 left-0 flex flex-col snap-y snap-mandatory overflow-y-auto videoScroll "
+              ref={videoContainerRef}
+            >
+              {!videos
+                ? "Loading..."
+                : // @ts-ignore
+                  videos.map((video, index) => {
+                    return (
+                      <div
+                        className="flex flex-row-reverse items-center relative"
+                        key={index}
+                        style={{ scrollSnapAlign: "start" }}
+                      >
+                        <Video
+                          src={video.videoUrl}
+                          name={video.name}
+                          price={video.price}
+                          thumbnail={video.thumbnai}
+                        />
+                        <button
+                          onClick={() =>
+                            onToggle(
+                              video.externalId,
+                              video.name,
+                              video.description,
+                              video.price,
+                              video.thumbnail,
+                              video.variations
+                            )
+                          }
+                          className="text-white absolute bottom-[145px] mb-6 w-16 "
+                        >
+                          <Lottie animationData={animationData} />
+                          <span className="flex justify-center text-white text-[10px] text-center font-bold mt-[-5px]">
+                            Agregar
+                          </span>
+                        </button>
 
-                    <div
-                      onClick={handleOpenModal}
-                      className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-4 lg:hidden"
-                    >
-                      <Image
-                        src="/img/cart.png"
-                        alt=""
-                        width={20}
-                        height={20}
-                      />
-                      <span className="absolute ml-3 mb-5 mr-2 rounded-full py-[2px] px-[6px] bg-[#F57E77] text-white">
-                        {addProduct.length}
-                      </span>
-                    </div>
+                        <div
+                          onClick={handleOpenModal}
+                          className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-4 lg:hidden"
+                        >
+                          <Image
+                            src="/img/cart.png"
+                            alt=""
+                            width={20}
+                            height={20}
+                          />
+                          <span className="absolute ml-3 mb-5 mr-2 rounded-full py-[2px] px-[6px] bg-[#F57E77] text-white">
+                            {addProduct.length}
+                          </span>
+                        </div>
 
-                    <ModalCart isOpen={isModalOpen} onClose={handleCloseModal}>
-                      <ListProduct />
-                    </ModalCart>
+                        <ModalCart
+                          isOpen={isModalOpen}
+                          onClose={handleCloseModal}
+                        >
+                          <ListProduct />
+                        </ModalCart>
 
-                    {/*<button
+                        {/*<button
                   onClick={() => offToggle(video.externalId, video.name)}
                   className="text-white absolute mt-5"
                 >
                   <Image src="/img/borrar.png" alt="" width={32} height={32} />
                 </button>*/}
 
-                    <div className="info-overlay absolute bottom-[160px] left-0 right-0 w-[80%]">
-                      <div className="flex w-[70%]  bg-[#21181a91] py-2 items-center flex-row pl-3 rounded-r-full border-l-0 border-1 border-[#dad2d250] border-spacing-2 border-sh shadow-sm shadow-[#DAD2D2AD]">
-                        <div className="rounded-full border-[#42E184] border-2 ">
-                          <img
-                            className="h-12 w-12 rounded-full object-cover"
-                            src={video.thumbnail}
-                            alt={`${video.name} thumbnail`}
-                          />
+                        <div className="info-overlay absolute bottom-[160px] left-0 right-0 w-[80%]">
+                          <div className="flex w-[70%]  bg-[#21181a91] py-2 items-center flex-row pl-3 rounded-r-full border-l-0 border-1 border-[#dad2d250] border-spacing-2 border-sh shadow-sm shadow-[#DAD2D2AD]">
+                            <div className="rounded-full border-[#42E184] border-2 ">
+                              <img
+                                className="h-12 w-12 rounded-full object-cover"
+                                src={video.thumbnail}
+                                alt={`${video.name} thumbnail`}
+                              />
+                            </div>
+
+                            <div className="flex-1 pl-4">
+                              <div className="text-white text-sm pb-2">
+                                <span>
+                                  Precio:{" "}
+                                  <span className="">
+                                    $
+                                    {new Intl.NumberFormat().format(
+                                      video.price
+                                    )}
+                                  </span>
+                                </span>
+                              </div>
+                              <div className="w-full h-[2px] bg-white"></div>
+                              <div style={{ paddingTop: 8 }}>
+                                <span className="text-[#42E184] font-semibold text-base">
+                                  Envío: GRATIS
+                                </span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
 
-                        <div className="flex-1 pl-4">
-                          <div className="text-white text-sm pb-2">
-                            <span>
-                              Precio:{" "}
-                              <span className="">
-                                ${new Intl.NumberFormat().format(video.price)}
-                              </span>
+                        <button
+                          onClick={() => handleButtonClick("up")}
+                          disabled={currentIndex === 0}
+                          className="absolute right-0 cursor-pointer mr-4 mb-12"
+                        >
+                          <Image
+                            src="/img/ScrollUp.svg"
+                            alt=""
+                            width={32}
+                            height={32}
+                          />
+                        </button>
+
+                        <button
+                          onClick={() => handleButtonClick("down")}
+                          disabled={currentIndex === videos.length - 1}
+                          className="absolute right-0 mt-14 cursor-pointer mr-4"
+                        >
+                          <Image
+                            src="/img/ScrollUp.svg"
+                            alt=""
+                            width={32}
+                            height={32}
+                            className="rotate-[180deg]"
+                          />
+                        </button>
+
+                        <div className="absolute px-4 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
+                          <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
+                            <div>
+                              <img
+                                className="h-12 w-12 rounded-full object-cover"
+                                src={video.thumbnail}
+                                alt={`${video.name} overlay thumbnail`}
+                              />
+                            </div>
+                          </div>
+                          <div className="ml-4 flex-1 py-4">
+                            <div className="flex items-bottom justify-between">
+                              <p className="text-grey-darkest whitespace-nowrap overflow-hidden overflow-ellipsis">
+                                {video.name}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={handleOpenModalInfo}
+                          className="right-0 text-white absolute bottom-[220px] mb-6 mr-4"
+                        >
+                          <Image
+                            src="/img/infoProduct.png"
+                            alt=""
+                            width={32}
+                            height={32}
+                          />
+                        </button>
+
+                        <Modal
+                          isOpen={openModal}
+                          onClose={handleCloseModalInfo}
+                        >
+                          {/* Contenido del modal */}
+                          <div className="flex flex-col mt-[-20px] z-[1]">
+                            <span className="text-base font-bold text-black mb-5">
+                              {video.name}
+                            </span>
+                            <span className="text-sm font-normal text-black">
+                              {video.description}
                             </span>
                           </div>
-                          <div className="w-full h-[2px] bg-white"></div>
-                          <div style={{ paddingTop: 8 }}>
-                            <span className="text-[#42E184] font-semibold text-base">
-                              Envío: GRATIS
-                            </span>
+                        </Modal>
+
+                        {addProduct.length !== 0 ? (
+                          <div
+                            className="fixed bottom-0 md:w-[384px] w-full h-[54px] text-2xl font-bold text-[#53545C]"
+                            data-ripple-light="true"
+                            onClick={handleOpenModalForm}
+                          >
+                            <Lottie2 options={defaultOptions} />
                           </div>
-                        </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
-                    </div>
-
-                    <button onClick={() => handleButtonClick('up')} disabled={currentIndex === 0} className="absolute right-0 cursor-pointer mr-4 mb-12">
-                    <Image
-                        src="/img/ScrollUp.svg"
-                        alt=""
-                        width={32}
-                        height={32}
-                      />
-                    </button>
-
-                    <button onClick={() => handleButtonClick('down')} disabled={currentIndex === videos.length - 1} className="absolute right-0 mt-14 cursor-pointer mr-4">
-                      <Image
-                        src="/img/ScrollUp.svg"
-                        alt=""
-                        width={32}
-                        height={32}
-                        className="rotate-[180deg]"
-                      /></button>
-
-                    <div className="absolute px-4 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
-                      <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
-                        <div>
-                          <img
-                            className="h-12 w-12 rounded-full object-cover"
-                            src={video.thumbnail}
-                            alt={`${video.name} overlay thumbnail`}
-                          />
-                        </div>
-                      </div>
-                      <div className="ml-4 flex-1 py-4">
-                        <div className="flex items-bottom justify-between">
-                          <p className="text-grey-darkest whitespace-nowrap overflow-hidden overflow-ellipsis">
-                            {video.name}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <button
-              onClick={handleOpenModalInfo}
-              className="right-0 text-white absolute bottom-[220px] mb-6 mr-4"
-            >
-              <Image src="/img/infoProduct.png" alt="" width={32} height={32} />
-            </button>
-
-            <Modal isOpen={openModal} onClose={handleCloseModalInfo}>
-              {/* Contenido del modal */}
-              <div className="flex flex-col mt-[-20px] z-[1]">
-                <span className="text-base font-bold text-black mb-5">
-                  {video.name}
+                    );
+                  })}
+            </section>
+            <ModalForm isOpen={isModalOpenForm} onClose={handleCloseModalForm}>
+              <FormCatalog onSubmit={handleFormSubmit} />
+            </ModalForm>
+          </main>
+          <div className="lg:flex md:items-start xl:w-[398px] lg:w-[398px] md:hidden hidden">
+            <ProductGrid catalog={addProduct} />
+          </div>
+        </>
+      ) : (
+        <>
+          <Loading>
+            <div className="flex items-center justify-center h-screen">
+              <div className="bg-white border-gray-200 rounded-lg flex flex-col justify-center items-center gap-2 p-6">
+                <Image src="/img/task_alt.svg" alt="" width={48} height={48} />
+                <span className="text-green-400 text-xl text-center">
+                  Por favor contacta con tu vendedor
                 </span>
-                <span className="text-sm font-normal text-black">
-                  {video.description}
+                <span className="text-black text-base font-medium">
+                  Información no válida.
                 </span>
               </div>
-            </Modal>
-
-                    {addProduct.length !== 0 ? (
-                      <div
-                        className="fixed bottom-0 md:w-[384px] w-full h-[54px] text-2xl font-bold text-[#53545C]"
-                        data-ripple-light="true"
-                        onClick={handleOpenModalForm}
-                      >
-                        <Lottie2 options={defaultOptions} />
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                );
-              })}
-        </section>
-        <ModalForm isOpen={isModalOpenForm} onClose={handleCloseModalForm}>
-          <FormCatalog onSubmit={handleFormSubmit} />
-        </ModalForm>
-      </main>
-      <div className="lg:flex md:items-start xl:w-[398px] lg:w-[398px] md:hidden hidden">
-        <ProductGrid catalog={addProduct} />
-      </div>
+            </div>
+          </Loading>
+        </>
+      )}
     </>
   );
 }
