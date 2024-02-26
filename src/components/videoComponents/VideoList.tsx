@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Lottie from "lottie-react";
-import Lottie2 from 'react-lottie';
+import Lottie2 from "react-lottie";
 import animationData from "../../../public/animations/addProductAnimation.json";
 import animationData2 from "../../../public/animations/testAnimation.json";
 import animationData3 from "../../../public/animations/animationBuyNow.json";
@@ -119,36 +119,41 @@ export default function VideoList() {
     setIsModalOpenForm(false);
   };
 
-
   const handleFormSubmit = (data: any) => {
     // Lógica de manejo de datos del formulario
     console.log("Datos del formulario:", data);
   };
 
-  //test lottie
-  /*let animationContainer = createRef();
+  //metodo para scroll
+  const handleScrollUp = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    console.log("se ejecuta hacia arriba")
+  };
 
-  useEffect(() => {
-    const anim = lottie.loadAnimation({
-      container: animationContainer.current, // the dom element that will contain the animation
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: '/animations/animationBuyNow.json' // the path to the animation json
-    });
-  
-    return () => anim.destroy()
-  }, [])*/
+  const handleScrollDown = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    console.log("se ejecuta hacia abajo")
+  };
+
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+
+  const handleScroll = (direction: 'up' | 'down') => {
+    if (direction === 'down' && currentIndex < videos.length - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+    } else if (direction === 'up' && currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+    }
+  };
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData3,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
-  
 
   return (
     <>
@@ -188,7 +193,10 @@ export default function VideoList() {
                       </span>
                     </button>
 
-                    <div onClick={handleOpenModal} className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-4 lg:hidden">
+                    <div
+                      onClick={handleOpenModal}
+                      className="absolute rounded-full p-2 flex items-center bg-white cursor-pointer rigth-0 top-4 mr-4 lg:hidden"
+                    >
                       <Image
                         src="/img/cart.png"
                         alt=""
@@ -240,6 +248,12 @@ export default function VideoList() {
                       </div>
                     </div>
 
+                    <button onClick={() => handleScroll('up')} className="absolute right-0 cursor-pointer">
+                      Scroll Up
+                    </button>
+
+                    <button onClick={() => handleScroll('down')} className="absolute right-0 mt-10 cursor-pointer">Scroll Down</button>
+
                     <div className="absolute px-4 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
                       <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
                         <div>
@@ -260,9 +274,11 @@ export default function VideoList() {
                     </div>
 
                     {addProduct.length !== 0 ? (
-                      
-                      <div className="fixed bottom-0 md:w-[384px] w-full h-[54px] text-2xl font-bold text-[#53545C]" data-ripple-light="true"
-                        onClick={handleOpenModalForm}>
+                      <div
+                        className="fixed bottom-0 md:w-[384px] w-full h-[54px] text-2xl font-bold text-[#53545C]"
+                        data-ripple-light="true"
+                        onClick={handleOpenModalForm}
+                      >
                         <Lottie2 options={defaultOptions} />
                       </div>
                     ) : (
@@ -273,10 +289,10 @@ export default function VideoList() {
               })}
         </section>
         <ModalForm isOpen={isModalOpenForm} onClose={handleCloseModalForm}>
-              <FormCatalog onSubmit={handleFormSubmit} />
-            </ModalForm>
+          <FormCatalog onSubmit={handleFormSubmit} />
+        </ModalForm>
       </main>
-      <div className="lg:flex md:items-start xl:w-[398px] lg:w-[398px] md:hidden">
+      <div className="lg:flex md:items-start xl:w-[398px] lg:w-[398px] md:hidden hidden">
         <ProductGrid catalog={addProduct} />
       </div>
     </>
