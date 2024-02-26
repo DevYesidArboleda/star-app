@@ -31,8 +31,8 @@ export default function ProductCard(catalog: Props) {
               alt={`${catalog.catalogs.name} thumbnail`}
             />
           </div>
-          <div className="lg:ml-[-46px]">
-            <span className="pt-2 text-base font-medium text-[#3D3D3F] capitalize">
+          <div className="lg:ml-[-10px] w-[200px] ">
+            <span className="pt-2 text-base font-medium text-[#3D3D3F] capitalize truncate ">
               {catalog.catalogs.name}
             </span>
           </div>
