@@ -231,7 +231,7 @@ export default function VideoList() {
                       <div className="flex w-[70%]  bg-[#21181a91] py-2 items-center flex-row pl-3 rounded-r-full border-l-0 border-1 border-[#dad2d250] border-spacing-2 border-sh shadow-sm shadow-[#DAD2D2AD]">
                         <div className="rounded-full border-[#42E184] border-2 ">
                           <img
-                            className="h-12 w-12 rounded-full"
+                            className="h-12 w-12 rounded-full object-cover"
                             src={video.thumbnail}
                             alt={`${video.name} thumbnail`}
                           />
@@ -278,7 +278,7 @@ export default function VideoList() {
                       <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
                         <div>
                           <img
-                            className="h-12 w-12 rounded-full"
+                            className="h-12 w-12 rounded-full object-cover"
                             src={video.thumbnail}
                             alt={`${video.name} overlay thumbnail`}
                           />

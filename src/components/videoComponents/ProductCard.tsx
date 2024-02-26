@@ -17,7 +17,9 @@ export default function ProductCard(catalog: Props) {
 
   // Función para restar al valor
   const subtractCount = () => {
-    setValor(valor - 1);
+    if (valor > 0) {
+      setValor(valor - 1);
+    }
   };
 
   return (

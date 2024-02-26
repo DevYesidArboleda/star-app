@@ -203,6 +203,7 @@ export default function Form(dataFinal: any) {
         width="100%"
         height="100%"
         playing={true}
+        className='react-player'
       />
     );
   }, [finalData]);

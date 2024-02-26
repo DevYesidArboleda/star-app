@@ -79,7 +79,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
               <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
                 <div>
                   <img
-                    className="h-12 w-12 rounded-full"
+                    className="h-12 w-12 rounded-full object-cover"
                     src={`${data.thumbnail}`}
                   />
                 </div>
@@ -97,7 +97,7 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
             <div className="flex w-[70%] bottom-[160px] py-2 absolute left-0 items-center flex-row pl-3 rounded-r-full border-[#DAD2D2] border-l-0 border-1 border-spacing-2 border-sh shadow-md shadow-[#DAD2D2]">
               <div className="rounded-full border-[#42E184] border-2">
                 <img
-                  className="h-12 w-12 rounded-full"
+                  className="h-12 w-12 rounded-full object-cover"
                   src={`${data.thumbnail}`}
                 />
               </div>
@@ -120,29 +120,34 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
               </div>
             </div>
 
-            <button onClick={handleOpenModal} className="right-0 text-white absolute bottom-[150px] mb-6 mr-3">
+            <button
+              onClick={handleOpenModal}
+              className="right-0 text-white absolute bottom-[150px] mb-6 mr-3"
+            >
               <Image src="/img/infoProduct.png" alt="" width={32} height={32} />
             </button>
 
             <Modal isOpen={openModal} onClose={handleCloseModal}>
               {/* Contenido del modal */}
               <div className="flex flex-col mt-[-20px] z-[1]">
-                <span className="text-base font-bold text-black mb-5">{data.name}</span>
-                <span className="text-sm font-normal text-black">{data.description}</span>
+                <span className="text-base font-bold text-black mb-5">
+                  {data.name}
+                </span>
+                <span className="text-sm font-normal text-black">
+                  {data.description}
+                </span>
               </div>
             </Modal>
 
             <div
-                        className="fixed bottom-0 md:w-[384px] w-full h-[54px] mb-3 text-2xl font-bold text-[#53545C] .lottieImage"
-                        data-ripple-light="true"
-                        onClick={
-                          data.attributes?.length !== 0 ? () => setOpen(true) : next
-                        }
-                      >
-                        <Lottie2 options={defaultOptions} />
-                      </div>
-
-                      
+              className="fixed bottom-0 md:w-[384px] w-full h-[54px] mb-3 text-2xl font-bold text-[#53545C] .lottieImage"
+              data-ripple-light="true"
+              onClick={
+                data.attributes?.length !== 0 ? () => setOpen(true) : next
+              }
+            >
+              <Lottie2 options={defaultOptions} />
+            </div>
           </section>
         </div>
       ) : (
