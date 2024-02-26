@@ -7,6 +7,8 @@ import { UseWindowSize } from "@/hooks/UseWindowSize";
 import Modal from "../Modal/Modal";
 import animationData2 from "../../../public/animations/testAnimation.json";
 import Lottie from "lottie-react";
+import Lottie2 from "react-lottie";
+import animationData3 from "../../../public/animations/animationBuyNow.json";
 
 interface typeData {
   name: string;
@@ -58,7 +60,14 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
     setOpenModal(false);
   };
 
-  
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData3,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   return (
     <>
@@ -123,16 +132,17 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
               </div>
             </Modal>
 
-            <Lottie animationData={animationData2} className="fixed bottom-0 md:w-[384px] w-full lottie-main " 
-                    type="button"
-                    onClick={
-                      data.attributes?.length !== 0 ? () => setOpen(true) : next
-                    }
-                    disabled={
-                      data.attributes?.length !== 0
-                        ? false
-                        : currentStep === steps.length - 1
-                    } />
+            <div
+                        className="fixed bottom-0 md:w-[384px] w-full h-[54px] mb-3 text-2xl font-bold text-[#53545C] .lottieImage"
+                        data-ripple-light="true"
+                        onClick={
+                          data.attributes?.length !== 0 ? () => setOpen(true) : next
+                        }
+                      >
+                        <Lottie2 options={defaultOptions} />
+                      </div>
+
+                      
           </section>
         </div>
       ) : (

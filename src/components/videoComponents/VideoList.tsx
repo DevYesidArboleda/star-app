@@ -18,6 +18,7 @@ import ModalCart from "../Modal/ModalCart";
 import ListProduct from "./ListProduct";
 import ModalForm from "../Modal/ModalForm";
 import FormCatalog from "./FormCatalog";
+import Modal from "../Modal/Modal";
 
 export default function VideoList() {
   const [videos, setVideos] = useState<any>();
@@ -27,6 +28,15 @@ export default function VideoList() {
   );
   const searchParams = useSearchParams();
   const catalog_id = searchParams.get("catalogID") || "";
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const handleOpenModalInfo = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModalInfo = () => {
+    setOpenModal(false);
+  };
 
   const dispatch = useAppDispatch();
 
@@ -272,6 +282,25 @@ export default function VideoList() {
                         </div>
                       </div>
                     </div>
+
+                    <button
+              onClick={handleOpenModalInfo}
+              className="right-0 text-white absolute bottom-[220px] mb-6 mr-4"
+            >
+              <Image src="/img/infoProduct.png" alt="" width={32} height={32} />
+            </button>
+
+            <Modal isOpen={openModal} onClose={handleCloseModalInfo}>
+              {/* Contenido del modal */}
+              <div className="flex flex-col mt-[-20px] z-[1]">
+                <span className="text-base font-bold text-black mb-5">
+                  {video.name}
+                </span>
+                <span className="text-sm font-normal text-black">
+                  {video.description}
+                </span>
+              </div>
+            </Modal>
 
                     {addProduct.length !== 0 ? (
                       <div
