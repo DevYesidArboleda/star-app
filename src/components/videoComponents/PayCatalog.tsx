@@ -17,7 +17,7 @@ export const PayCatalog = () => {
   );
 
   return (
-    <div className="flex items-start justify-center pt-6 gap-8">
+    <div className="flex lg:items-start lg:justify-center items-center lg:flex-row flex-col-reverse pt-6 gap-8">
       <div className="flex flex-col items-center bg-white border border-gray-200 rounded-lg justify-evenly shadow  mx-3 max-w-[366px] md:max-w-[508px]">
         <div className="">
           <Image
@@ -51,7 +51,7 @@ export const PayCatalog = () => {
         </div>
       </div>
 
-      <div className="lg:flex hidden flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B] w-[398px]">
+      <div className="lg:flex  flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B] md:w-[398px] w-[360px]">
         <div className="text-[#53545C] text-base font-bold flex justify-between border-b-1 border-[#BBC1CA6B] py-3">
           <span>{allProduct.length} Items </span>
         </div>
