@@ -27,7 +27,7 @@ export default function Home({ metadata }: any) {
   const searchParams = useSearchParams();
 
   const product_id = searchParams.get("productID");
-  const catalog_id = searchParams.get("catalogID");
+  const catalog_id = searchParams.get("catalogueID");
   //const product: any | undefined = (metada.products || []).find((product:any) => product._id === `"${product_id}"`);
   //const final:any = metadata?.filter((task:any) => task._id === product_id)
 

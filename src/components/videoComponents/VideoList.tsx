@@ -27,7 +27,7 @@ export default function VideoList() {
     []
   );
   const searchParams = useSearchParams();
-  const catalog_id = searchParams.get("catalogID") || "";
+  const catalog_id = searchParams.get("catalogueID") || "";
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const handleOpenModalInfo = () => {
