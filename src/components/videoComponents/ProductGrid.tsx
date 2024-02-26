@@ -66,7 +66,7 @@ export default function ProductGrid({ catalog }: Props) {
                   </div>
                   <span
                     onClick={handleLimpiarCatalogo}
-                    className="text-[#F57E77] text-[13px]"
+                    className="text-[#F57E77] text-[13px] cursor-pointer"
                   >
                     Limpiar carrito
                   </span>
@@ -132,7 +132,7 @@ export default function ProductGrid({ catalog }: Props) {
                   </div>
                   <span
                     onClick={handleLimpiarCatalogo}
-                    className="text-[#F57E77] text-[13px]"
+                    className="text-[#F57E77] text-[13px] cursor-pointer"
                   >
                     Limpiar carrito
                   </span>
