@@ -135,24 +135,21 @@ export default function VideoList() {
   };
 
   //metodo para scroll
-  const handleScrollUp = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    console.log("se ejecuta hacia arriba")
-  };
-
-  const handleScrollDown = () => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    console.log("se ejecuta hacia abajo")
-  };
-
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const handleScroll = (direction: 'up' | 'down') => {
-    if (direction === 'down' && currentIndex < videos.length - 1) {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
-    } else if (direction === 'up' && currentIndex > 0) {
-      setCurrentIndex((prevIndex) => prevIndex - 1);
+  const handleButtonClick = (direction: 'up' | 'down') => {
+    const newIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+
+    if (newIndex >= 0 && newIndex < videos.length) {
+      setCurrentIndex(newIndex);
+
+      if (videoContainerRef.current) {
+        const targetVideo = videoContainerRef.current.children[newIndex] as HTMLDivElement;
+        if (targetVideo) {
+          targetVideo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     }
   };
 
@@ -167,8 +164,8 @@ export default function VideoList() {
 
   return (
     <>
-      <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto md:mx-0 text-xs">
-        <section className="pb-14 h-full absolute top-0 right-0 left-0 flex flex-col snap-y snap-mandatory overflow-y-auto videoScroll">
+      <main className="overflow-hidden md:relative bg-black text-white max-w-sm w-full h-screen mx-auto md:mx-0 text-xs" >
+        <section className="pb-14 h-full absolute top-0 right-0 left-0 flex flex-col snap-y snap-mandatory overflow-y-auto videoScroll " ref={videoContainerRef}>
           {!videos
             ? "Loading..."
             : // @ts-ignore
@@ -177,6 +174,7 @@ export default function VideoList() {
                   <div
                     className="flex flex-row-reverse items-center relative"
                     key={index}
+                    style={{ scrollSnapAlign: 'start' }}
                   >
                     <Video
                       src={video.videoUrl}
@@ -258,11 +256,23 @@ export default function VideoList() {
                       </div>
                     </div>
 
-                    <button onClick={() => handleScroll('up')} className="absolute right-0 cursor-pointer">
-                      Scroll Up
+                    <button onClick={() => handleButtonClick('up')} disabled={currentIndex === 0} className="absolute right-0 cursor-pointer mr-4 mb-12">
+                    <Image
+                        src="/img/ScrollUp.svg"
+                        alt=""
+                        width={32}
+                        height={32}
+                      />
                     </button>
 
-                    <button onClick={() => handleScroll('down')} className="absolute right-0 mt-10 cursor-pointer">Scroll Down</button>
+                    <button onClick={() => handleButtonClick('down')} disabled={currentIndex === videos.length - 1} className="absolute right-0 mt-14 cursor-pointer mr-4">
+                      <Image
+                        src="/img/ScrollUp.svg"
+                        alt=""
+                        width={32}
+                        height={32}
+                        className="rotate-[180deg]"
+                      /></button>
 
                     <div className="absolute px-4 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
                       <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
