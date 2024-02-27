@@ -12,7 +12,7 @@ export const PayCatalog = () => {
   const user_id = searchParams.get("userID");
   const allProduct = useAppSelector((state) => Object.values(state.catalogo));
   const addAll = allProduct.reduce(
-    (total, elemento) => total + elemento.price,
+    (total, elemento) => total + (elemento.price*elemento.quantity),
     0
   );
 

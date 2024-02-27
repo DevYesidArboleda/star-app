@@ -75,11 +75,12 @@ export default function VideoList() {
     id: string,
     name: string,
     description: string,
-    price: number,
+    price: number,    
+    quantity: number,
     thumbnail: string,
     variations: any
   ) => {
-    const catalog = { id, name, description, price, thumbnail, variations };
+    const catalog = { id, name, description, quantity, price, thumbnail, variations };
     console.log(catalog);
 
     if (addProduct.some((pos) => pos.id === id)) {
@@ -93,11 +94,12 @@ export default function VideoList() {
     id: string,
     name: string,
     description: string,
+    quantity: number,
     price: number,
     thumbnail: string,
     variations: any
   ) => {
-    const catalog = { id, name, description, price, thumbnail, variations };
+    const catalog = { id, name, description, quantity, price, thumbnail, variations };
     console.log(catalog);
 
     if (addProduct.some((pos) => pos.id === id)) {
@@ -195,8 +197,9 @@ export default function VideoList() {
                             onToggle(
                               video.externalId,
                               video.name,
-                              video.description,
+                              video.description,                              
                               video.price,
+                              1,
                               video.thumbnail,
                               video.variations
                             )
@@ -270,10 +273,11 @@ export default function VideoList() {
                           </div>
                         </div>
 
+                        <div className={` ${addProduct.length === 1 ? "hidden" : ""}`}>
                         <button
                           onClick={() => handleButtonClick("up")}
                           disabled={currentIndex === 0}
-                          className="absolute right-0 cursor-pointer mr-4 mb-12"
+                          className={`absolute right-0 cursor-pointer mr-4 mb-12 ${currentIndex === 0 ? "hidden" : ""}`}
                         >
                           <Image
                             src="/img/ScrollUp.svg"
@@ -286,16 +290,17 @@ export default function VideoList() {
                         <button
                           onClick={() => handleButtonClick("down")}
                           disabled={currentIndex === videos.length - 1}
-                          className="absolute right-0 mt-14 cursor-pointer mr-4"
+                          className={`absolute right-0 mt-14 cursor-pointer mr-4`}
                         >
                           <Image
                             src="/img/ScrollUp.svg"
                             alt=""
                             width={32}
                             height={32}
-                            className="rotate-[180deg]"
+                            className={`rotate-[180deg] ${currentIndex === videos.length - 1 ? "hidden" : ""}`}
                           />
                         </button>
+                        </div>
 
                         <div className="absolute px-4 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16">
                           <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">

@@ -72,9 +72,13 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
   return (
     <>
       {windowSize.width <= 700 ? (
-        <div>
-          <section className="bg-black snap-start h-video h-screen flex justify-center items-center">
-            {video}
+      
+          <div className="bg-black  w-screen h-screen flex justify-center items-center">
+            {video?(
+              <div
+              className="h-screen w-100"
+              >{video}</div>
+            ):(null)}
             <div className="fixed px-3 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16 ">
               <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
                 <div>
@@ -146,10 +150,9 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
                 data.attributes?.length !== 0 ? () => setOpen(true) : next
               }
             >
-              <Lottie2 options={defaultOptions} />
             </div>
-          </section>
-        </div>
+          </div>
+       
       ) : (
         <div className="w-full flex  justify-center">
           <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-0 py-2 max-w-screen-lg 2xl:pr-6 2xl:py-0">

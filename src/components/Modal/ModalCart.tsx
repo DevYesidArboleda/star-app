@@ -40,7 +40,7 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             padding: "20px",
             borderRadius: "8px",
             width: "380px",
-            height: "100vh",
+            height: "100dvh",
           }}
         >
           <button onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>

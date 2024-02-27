@@ -36,6 +36,7 @@ export interface SimpleCatalog {
     id: string;
     name: string;
     description:  string;
+    quantity: number;
     price:        number;    
     thumbnail:    string;    
     variations:   Variation[];

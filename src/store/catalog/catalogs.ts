@@ -18,7 +18,8 @@ const catalogsSlices = createSlice({
       const { id } = catalog;
 
       if (!!state[id]) {
-        delete state[id];
+        //delete state[id];
+        state[id] = { ...state[id], ...catalog };
         // return;
       } else {
         state[id] = catalog;

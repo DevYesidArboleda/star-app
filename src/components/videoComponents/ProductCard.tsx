@@ -1,25 +1,49 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SimpleCatalog } from "../../../interfaces";
-import { useAppSelector } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { toggleCatalog } from "@/store/catalog/catalogs";
 
 interface Props {
   catalogs: SimpleCatalog;
 }
 
 export default function ProductCard(catalog: Props) {
-  const [valor, setValor] = useState(0);
+  const [cantidad, setCantidad] = useState(0);
+  const dispatch = useAppDispatch();
 
-  // Función para sumar al valor
+  // Actualizar la cantidad cuando cambia el catálogo
+  useEffect(() => {
+    setCantidad(catalog.catalogs.quantity || 1);
+  }, [catalog.catalogs.id]); 
+
   const addCount = () => {
-    setValor(valor + 1);
+    const newCantidad = cantidad + 1;
+    setCantidad(newCantidad);
+    onToggle(catalog.catalogs.id, catalog.catalogs.name, catalog.catalogs.description, newCantidad, catalog.catalogs.price, catalog.catalogs.thumbnail, catalog.catalogs.variations);
   };
 
   // Función para restar al valor
   const subtractCount = () => {
-    if (valor > 0) {
-      setValor(valor - 1);
+    if (cantidad > 1) {
+      const newCantidad = cantidad - 1;
+      setCantidad(newCantidad);
+      onToggle(catalog.catalogs.id, catalog.catalogs.name, catalog.catalogs.description, newCantidad, catalog.catalogs.price, catalog.catalogs.thumbnail, catalog.catalogs.variations);
     }
+  };
+
+  const onToggle = (
+    id: string,
+    name: string,
+    description: string,
+    quantity: number,
+    price: number,
+    thumbnail: string,
+    variations: any
+  ) => {
+    const catalog = { id, name, description, quantity, price, thumbnail, variations };
+    console.log(catalog);
+    dispatch(toggleCatalog(catalog));
   };
 
   return (
@@ -59,7 +83,7 @@ export default function ProductCard(catalog: Props) {
             <div className="text-[#53545C] bg-[#42E18478] rounded-3xl w-[80px] h-7 items-center flex justify-center gap-3 text-xl">
               {/* Botón para sumar */}
               <button onClick={subtractCount}>-</button>
-              <span>{valor}</span>
+              <span>{cantidad}</span>
               {/* Botón para restar */}
               <button onClick={addCount}>+</button>
             </div>
