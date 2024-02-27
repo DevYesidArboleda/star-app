@@ -273,7 +273,7 @@ export default function VideoList() {
                           </div>
                         </div>
 
-                        <div className={` `}>
+                        <div className={`mt-[-140px] `}>
                         <button
                           onClick={() => handleButtonClick("up")}
                           disabled={currentIndex === 0}
