@@ -52,18 +52,18 @@ export default function ProductCard(catalog: Props) {
         <div className="flex flex-row w-full justify-between">
           <div>
             <img
-              className="h-12 w-12 rounded-md"
+              className="h-12 w-12 rounded-md object-cover"
               src={catalog.catalogs.thumbnail}
               alt={`${catalog.catalogs.name} thumbnail`}
             />
           </div>
-          <div className="lg:ml-[-10px] sm:w-[200px] w-[175px] truncate">
+          <div className="lg:ml-[-10px] lg:w-[180px] sm:w-[150px] w-[140px] truncate">
             <span className="pt-2 text-base font-medium text-[#3D3D3F] capitalize truncate ">
               {catalog.catalogs.name}
             </span>
           </div>
           <div className="">
-            <span className="pt-2 text-base font-medium text-[#53545C] ">
+            <span className="pt-2 text-base font-medium text-[#53545C] w-full">
               $ {new Intl.NumberFormat().format(catalog.catalogs.price)}
             </span>
           </div>

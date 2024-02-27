@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
 import Image from "next/image";
+import { UseWindowSize } from "@/hooks/UseWindowSize";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface ModalProps {
 }
 
 const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const windowSize = UseWindowSize();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -23,13 +26,16 @@ const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "rgba(0, 0, 0, 0.6)",
+          background: `${windowSize.width <= 500 ? "#E7ECEF": "rgba(0, 0, 0, 0.6)"}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          flexDirection: "column",
+          height:`${windowSize.width <= 500 ? "100dvh": ""}`,
           zIndex:1,
         }}
       >
+        <button className={`w-full flex justify-star pl-[11px] mb-4 ${windowSize.width <= 500 ? "": "hidden"}`} onClick={onClose}><Image src="/img/backPage.png" alt="" width={24} height={24} /></button>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -39,10 +45,10 @@ const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             background: "white",
             padding: "20px",
             borderRadius: "8px",
-            width: "380px",
+            width: `${windowSize.width <= 500 ? "95%": "380px"}`,
           }}
         >
-          <button className="w-full flex justify-end" onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>
+          <button className={`w-full flex justify-end ${windowSize.width <= 500 ? "hidden": ""}`} onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>
           {children}
         </motion.div>
       </motion.div>

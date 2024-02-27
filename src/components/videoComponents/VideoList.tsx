@@ -350,11 +350,11 @@ export default function VideoList() {
 
                         {addProduct.length !== 0 ? (
                           <div
-                            className="fixed bottom-0 md:w-[384px] w-full h-[54px] text-2xl font-bold text-[#53545C]"
+                            className="fixed bottom-0 md:w-[384px] w-full h-[84px] text-2xl font-bold text-[#53545C] flex justify-center"
                             data-ripple-light="true"
                             onClick={handleOpenModalForm}
                           >
-                            <Lottie2 options={defaultOptions} />
+                            <button className="button">¡Comprar Ahora!</button>
                           </div>
                         ) : (
                           ""

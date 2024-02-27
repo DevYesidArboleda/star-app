@@ -144,12 +144,13 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
             </Modal>
 
             <div
-              className="fixed bottom-0 md:w-[384px] w-full h-[54px] mb-3 text-2xl font-bold text-[#53545C] .lottieImage"
+              className="fixed bottom-0 md:w-[384px] w-full h-[84px] text-2xl font-bold text-[#53545C] .lottieImage flex justify-center"
               data-ripple-light="true"
               onClick={
                 data.attributes?.length !== 0 ? () => setOpen(true) : next
               }
             >
+              <button className="button">¡Comprar Ahora!</button>
             </div>
           </div>
        
