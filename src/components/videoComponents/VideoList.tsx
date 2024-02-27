@@ -242,7 +242,7 @@ export default function VideoList() {
                 </button>*/}
 
                         <div className="info-overlay absolute bottom-[160px] left-0 right-0 w-[80%]">
-                          <div className="flex w-[70%]  bg-[#21181a91] py-2 items-center flex-row pl-3 rounded-r-full border-l-0 border-1 border-[#dad2d250] border-spacing-2 border-sh shadow-sm shadow-[#DAD2D2AD]">
+                          <div className="flex w-[75%]  bg-[#21181a91] py-2 items-center flex-row pl-3 rounded-r-full border-l-0 border-1 border-[#dad2d250] border-spacing-2 border-sh shadow-sm shadow-[#DAD2D2AD]">
                             <div className="rounded-full border-[#42E184] border-2 ">
                               <img
                                 className="h-12 w-12 rounded-full object-cover"
@@ -273,7 +273,7 @@ export default function VideoList() {
                           </div>
                         </div>
 
-                        <div className={` ${addProduct.length === 1 ? "hidden" : ""}`}>
+                        <div className={` `}>
                         <button
                           onClick={() => handleButtonClick("up")}
                           disabled={currentIndex === 0}
