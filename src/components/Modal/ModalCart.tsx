@@ -32,6 +32,7 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             alignItems: "start",
             justifyContent: "end",
             flexDirection: `${windowSize.width <= 500 ? "column": "row"}`,
+            height:`${windowSize.width <= 500 ? "100dvh": ""}`,
             zIndex:1,
         }}
       >
@@ -45,7 +46,7 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           style={{
             background: `${windowSize.width <= 500 ? "#E7ECEF": "white"}`,
-            padding: "20px",
+            padding: `${windowSize.width <= 500 ? "16px": "20px"}`,
             borderRadius: "8px",
             width: `${windowSize.width <= 500 ? "100%": "380px"}`,
             height: "100dvh",
@@ -53,6 +54,7 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         >          
           <div className={`${windowSize.width <= 500 ? "flex justify-star": "flex justify-end"}`}>
             <button onClick={onClose}><Image src={`${windowSize.width <= 500 ? "/img/backToPage.svg": "/img/closeTablet.svg"}`} alt="" width={20} height={20}  /></button>
+            <span className= {`${windowSize.width <= 500 ? "text-black font-bold text-base w-full items-center justify-center flex ml-[-19px]": "hidden"}`}>Carrito de compra</span>
           </div>
           {children}
         </motion.div>

@@ -162,10 +162,18 @@ body {
   .ScrollModal {
     max-height: 320px !important;
   }
+
+  .scrollMobileCart {
+    max-height: 320px !important;
+  }
 }
 
 @media (max-width:430px) {
   .ScrollModal {
+    max-height: 500px;
+  }
+
+  .scrollMobileCart {
     max-height: 500px;
   }
 }
