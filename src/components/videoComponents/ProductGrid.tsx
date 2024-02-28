@@ -57,7 +57,7 @@ export default function ProductGrid({ catalog }: Props) {
                 <span className="text-[#53545C] text-base font-bold">
                   {allProduct.length} items
                 </span>
-                <div className="flex flex-wrap items-center">
+                <div className="flex flex-wrap items-center lg:flow-root">
                   <div className="justify-center rounded-full p-2 lg:flex items-center bg-white hidden ">
                     <Image src="/img/cart.png" alt="" width={25} height={25} className="lg:flex hidden"/>
                     <span className="absolute ml-6 mb-5 mr-0 rounded-full py-[2px] px-[7px] bg-[#F57E77] text-white text-xs">
