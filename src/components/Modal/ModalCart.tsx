@@ -54,7 +54,7 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         >          
           <div className={`${windowSize.width <= 500 ? "flex justify-star": "flex justify-end"}`}>
             <button onClick={onClose}><Image src={`${windowSize.width <= 500 ? "/img/backToPage.svg": "/img/closeTablet.svg"}`} alt="" width={20} height={20}  /></button>
-            <span className= {`${windowSize.width <= 500 ? "text-black font-bold text-base w-full items-center justify-center flex ml-[-19px]": "hidden"}`}>Carrito de compra</span>
+            <span className= {`${windowSize.width <= 500 ? "text-black font-bold text-base w-[90%] items-center justify-center flex ": "hidden"}`}>Carrito de compra</span>
           </div>
           {children}
         </motion.div>

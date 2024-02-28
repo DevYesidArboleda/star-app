@@ -32,10 +32,10 @@ const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           justifyContent: "center",
           flexDirection: "column",
           height:`${windowSize.width <= 500 ? "100dvh": ""}`,
-          zIndex:1,
+          zIndex:`${windowSize.width <= 500 ? 40: 1}`,
         }}
       >
-        <button className={`w-full flex justify-star pl-[11px] mb-4 ${windowSize.width <= 500 ? "": "hidden"}`} onClick={onClose}><Image src="/img/backToPage.svg" alt="" width={20} height={20} /></button>
+        <button className={`w-full flex justify-star pl-[11px] mb-2 ${windowSize.width <= 500 ? "": "hidden"}`} onClick={onClose}><Image src="/img/backToPage.svg" alt="" width={20} height={20} /></button>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -43,7 +43,7 @@ const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           style={{
             background: "white",
-            padding: "20px",
+            padding: `${windowSize.width <= 500 ? "16px": "20px"}`,
             borderRadius: "8px",
             width: `${windowSize.width <= 500 ? "95%": "380px"}`,
           }}

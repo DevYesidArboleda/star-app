@@ -72,13 +72,13 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
       <form onSubmit={handleSubmit(processForm)}>
         {/* ... (resto de tus campos de entrada) ... */}
         <div className="flex flex-col w-full items-center justify-center">
-          <h2 className=" leading-7  text-black lg:text-xl md:text-base lg:font-medium font-bold text-center mb-5">
+          <h2 className=" leading-7  text-black lg:text-xl md:text-base lg:font-medium font-bold text-center md:mb-5 mb-2">
           Ingresar Información
           </h2>
 
           <div className="mt-2 flex flex-col xl:gap-6 lg:gap-4 md:gap-4 w-full">
             <div className="col-span-full">
-              <div className="mt-5">
+              <div className="mt-0">
                 <input
                   type="text"
                   id="name"
@@ -229,14 +229,14 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
                 <textarea
                   id="note"
                   placeholder="Notas o información adicional"
-                  className="bg-Form-input md:h-20 h-[150px]"
+                  className="bg-Form-input md:h-20 h-[130px]"
                   autoComplete="street-address"
                   //onChange={handleInputNote}
                 />
               </div>
             </div>
           </div>
-          <div className="flex w-full pt-8 items-center justify-center">
+          <div className="flex w-full lg:pt-8 pt-4 items-center justify-center">
             <button
               className=" w-full flex justify-center text-center items-center"
               type="submit"
