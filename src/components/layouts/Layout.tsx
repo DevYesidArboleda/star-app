@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
-
+import { UseWindowSize } from "@/hooks/UseWindowSize";
 import { NavBar } from '../ui';
 import { Providers } from '@/store/Providers';
 
@@ -17,6 +17,7 @@ const origin = (typeof window === 'undefined') ? '' : window.location.origin;
 
 
 export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
+  const windowSize = UseWindowSize();
   
   return (
       <>                  
@@ -32,12 +33,17 @@ export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
 
         </Head> 
       
-        <NavBar />
+        <NavBar /> 
 
         <main style={{
-          //padding: '0px 20px',
-          minHeight: "calc(100vh - 64px)",
-          width:"100vw"
+          minWidth: '100%',
+          minHeight: '100%',
+          padding: `${windowSize.width <= 420 ? '0px  20px 0px 0px': ""}`,
+          margin: '0px 0px 0px 0px',
+          maxHeight: '100%',
+          maxWidth:"100%",
+          width:"100vw",
+          height:"100vh"
         }}>
             <Providers>
               { children }

@@ -17,9 +17,9 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-        initial={{ x: "100%", opacity: 0 }}  // Establecer la opacidad inicial en 0
-        animate={{ x: 0, opacity: 1 }}       // Establecer la opacidad en 1 al animar
-        exit={{ x: "100%", opacity: 0 }}     // Establecer la opacidad en 0 al salir
+        initial={windowSize.width > 500 ? { x: "100%", opacity: 0 } : undefined}
+        animate={windowSize.width > 500 ? { x: 0, opacity: 1 } : undefined}
+        exit={windowSize.width > 500 ? { x: "100%", opacity: 0 } : undefined}   // Establecer la opacidad en 0 al salir
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
         style={{
             position: "fixed",
@@ -40,9 +40,9 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             <NavBar />
           </div>
         <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 50 }}
+          initial={ windowSize.width > 500 ?{ opacity: 0, x: 50 } : undefined}
+          animate={ windowSize.width > 500 ? { opacity: 1, x: 0 } : undefined}
+          exit={ windowSize.width > 500 ? { opacity: 0, x: 50 } : undefined}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           style={{
             background: `${windowSize.width <= 500 ? "#E7ECEF": "white"}`,

@@ -149,9 +149,6 @@ body {
   color: #53545C;
 }
 
-.lottieImage image{
-  width: 370px;
-}
 
 .react-player video{
   object-fit: cover;
@@ -165,6 +162,12 @@ body {
 
   .scrollMobileCart {
     max-height: 320px !important;
+  }
+}
+
+@media (max-width:420px) {
+  .lottieImage .button{
+    width: 95%;
   }
 }
 

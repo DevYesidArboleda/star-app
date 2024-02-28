@@ -69,91 +69,97 @@ export const VideoStreaming = ({ setOpen, data, video, next }: any) => {
     },
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const isMobile = windowWidth <= 400;
+
   return (
     <>
       {windowSize.width <= 700 ? (
-      
-          <div className="bg-black  w-screen h-screen flex justify-center items-center">
-            {video?(
-              <div
-              className="h-screen w-100"
-              >{video}</div>
-            ):(null)}
-            <div className="fixed px-3 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16 ">
-              <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
-                <div>
-                  <img
-                    className="h-12 w-12 rounded-full object-cover"
-                    src={`${data.thumbnail}`}
-                  />
-                </div>
-              </div>
-              <div className="ml-4 flex-1 py-4">
-                <div className="flex items-bottom justify-between">
-                  <p className="text-grey-darkest">{data.name}</p>
-                </div>
-                <p className="text-grey-dark mt-1 text-sm">
-                  {data.description}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex w-[70%] bottom-[160px] py-2 absolute left-0 items-center flex-row pl-3 rounded-r-full border-[#DAD2D2] border-l-0 border-1 border-spacing-2 border-sh shadow-md shadow-[#DAD2D2]">
-              <div className="rounded-full border-[#42E184] border-2">
+        <div className="bg-black  w-screen h-screen flex justify-center items-center">
+          {video ? <div className="h-screen w-100">{video}</div> : null}
+          <div className="fixed px-3 flex items-center bg-grey-light cursor-pointer left-0 top-1 h-16 ">
+            <div className="rounded-full bg-gradient-to-r from-[#42E083] via-yellow-500 to-[#FF8A00] p-[2px]">
+              <div>
                 <img
                   className="h-12 w-12 rounded-full object-cover"
                   src={`${data.thumbnail}`}
                 />
               </div>
-
-              <div style={{ flex: 1, paddingLeft: 16 }}>
-                <div className="text-white text-sm pb-2">
-                  <span>
-                    Precio:{" "}
-                    <span className="">
-                      $ {new Intl.NumberFormat().format(data.price)}
-                    </span>
-                  </span>
-                </div>
-                <div className="w-full h-[2px] bg-white"></div>
-                <div style={{ paddingTop: 8 }}>
-                  <span className="text-[#42E184] font-semibold text-base">
-                    Envío: GRATIS
-                  </span>
-                </div>
-              </div>
             </div>
-
-            <button
-              onClick={handleOpenModal}
-              className="right-0 text-white absolute bottom-[150px] mb-6 mr-3"
-            >
-              <Image src="/img/infoProduct.png" alt="" width={32} height={32} />
-            </button>
-
-            <Modal isOpen={openModal} onClose={handleCloseModal}>
-              {/* Contenido del modal */}
-              <div className="flex flex-col mt-[-20px] z-[1]">
-                <span className="text-base font-bold text-black mb-5">
-                  {data.name}
-                </span>
-                <span className="text-sm font-normal text-black">
-                  {data.description}
-                </span>
+            <div className="ml-4 flex-1 py-4">
+              <div className="flex items-bottom justify-between">
+                <p className="text-grey-darkest">{data.name}</p>
               </div>
-            </Modal>
-
-            <div
-              className="fixed bottom-0 md:w-[384px] w-full h-[84px] text-2xl font-bold text-[#53545C] .lottieImage flex justify-center"
-              data-ripple-light="true"
-              onClick={
-                data.attributes?.length !== 0 ? () => setOpen(true) : next
-              }
-            >
-              <button className="button">¡Comprar Ahora!</button>
+              {/* <p className="text-grey-dark mt-1 text-sm">{data.description}</p> */}
             </div>
           </div>
-       
+
+          <div className="flex w-[70%] bottom-[160px] py-2 absolute left-0 items-center flex-row pl-3 rounded-r-full border-[#DAD2D2] border-l-0 border-1 border-spacing-2 border-sh shadow-md shadow-[#DAD2D2]">
+            <div className="rounded-full border-[#42E184] border-2">
+              <img
+                className="h-12 w-12 rounded-full object-cover"
+                src={`${data.thumbnail}`}
+              />
+            </div>
+
+            <div style={{ flex: 1, paddingLeft: 16 }}>
+              <div className="text-white text-sm pb-2">
+                <span>
+                  Precio:{" "}
+                  <span className="">
+                    $ {new Intl.NumberFormat().format(data.price)}
+                  </span>
+                </span>
+              </div>
+              <div className="w-full h-[2px] bg-white"></div>
+              <div style={{ paddingTop: 8 }}>
+                <span className="text-[#42E184] font-semibold text-base">
+                  Envío: GRATIS
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={handleOpenModal}
+            className="right-0 text-white absolute bottom-[150px] mb-6 mr-3"
+          >
+            <Image src="/img/infoProduct.png" alt="" width={32} height={32} />
+          </button>
+
+          <Modal isOpen={openModal} onClose={handleCloseModal}>
+            {/* Contenido del modal */}
+            <div className="flex flex-col mt-[-20px] z-[1]">
+              <span className="text-base font-bold text-black mb-5">
+                {data.name}
+              </span>
+              <span className="text-sm font-normal text-black">
+                {data.description}
+              </span>
+            </div>
+          </Modal>
+
+          <div
+            className="fixed bottom-0 md:w-[384px] w-full h-[84px] text-2xl font-bold text-[#53545C] lottieImage flex justify-center"
+            data-ripple-light="true"
+            onClick={data.attributes?.length !== 0 ? () => setOpen(true) : next}
+          >
+            <button className="button">¡Comprar Ahora!</button>
+          </div>
+        </div>
       ) : (
         <div className="w-full flex  justify-center">
           <div className="flex flex-row items-center w-full bg-white border border-gray-200 rounded-lg justify-evenly shadow md:flex-col pr-8 md:pr-5 md:py-0 py-2 max-w-screen-lg 2xl:pr-6 2xl:py-0">
