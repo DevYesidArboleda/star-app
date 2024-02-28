@@ -49,7 +49,7 @@ export default function ProductGrid({ catalog }: Props) {
 
   return (
     <>
-      {windowSize.width >= 900 ? (
+      {(windowSize.width >= 900 || windowSize.width <= 500) ? (
         <div className="flex flex-wrap gap-10 items-center justify-center xl:w-full lg:w-full md:w-full">
           <div className="flex flex-col mx-auto right-0 w-full mt-4 gap-4">
             <div className="flex flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B] overflow-y-auto max-h-[600px] ">
@@ -57,9 +57,9 @@ export default function ProductGrid({ catalog }: Props) {
                 <span className="text-[#53545C] text-base font-bold">
                   {allProduct.length} items
                 </span>
-                <div>
+                <div className="flex flex-wrap items-center">
                   <div className="justify-center rounded-full p-2 lg:flex items-center bg-white hidden ">
-                    <Image src="/img/cart.png" alt="" width={25} height={25} />
+                    <Image src="/img/cart.png" alt="" width={25} height={25} className="lg:flex hidden"/>
                     <span className="absolute ml-6 mb-5 mr-0 rounded-full py-[2px] px-[7px] bg-[#F57E77] text-white text-xs">
                       {allProduct.length}
                     </span>
@@ -115,7 +115,7 @@ export default function ProductGrid({ catalog }: Props) {
           </div>
         </div>
       ) : (
-        //Estructura tablets y mobiles
+        //Estructura solo tablets
         <div className="flex flex-wrap gap-10 items-center justify-center xl:w-full lg:w-full md:w-full h-full">
           <div className="flex flex-col mx-auto right-0 w-full mt-4 h-full justify-between">
             <div className="flex flex-col bg-white rounded-2xl overflow-hidden p-4 [&>*:last-child]:border-b-0 [&>*:first-child]:border-b-0 [&>*]:border-b-2  border-[#BBC1CA6B] overflow-y-auto ScrollModal">

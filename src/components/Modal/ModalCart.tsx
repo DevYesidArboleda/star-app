@@ -1,6 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ReactNode } from "react";
 import Image from "next/image";
+import { UseWindowSize } from "@/hooks/UseWindowSize";
+import { NavBar } from "../ui";
 
 interface ModalProps {
   isOpen: boolean;
@@ -9,6 +11,8 @@ interface ModalProps {
 }
 
 const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+  const windowSize = UseWindowSize();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -23,27 +27,33 @@ const ModalCart: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: "rgba(0, 0, 0, 0.1)",
+            background: `${windowSize.width <= 500 ? "#E7ECEF": "rgba(0, 0, 0, 0.1)"}`,
             display: "flex",
             alignItems: "start",
             justifyContent: "end",
+            flexDirection: `${windowSize.width <= 500 ? "column": "row"}`,
             zIndex:1,
         }}
       >
+        <div className={`${windowSize.width <= 500 ? "flex w-full h-9": "hidden"}`}>
+            <NavBar />
+          </div>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 50 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           style={{
-            background: "white",
+            background: `${windowSize.width <= 500 ? "#E7ECEF": "white"}`,
             padding: "20px",
             borderRadius: "8px",
-            width: "380px",
+            width: `${windowSize.width <= 500 ? "100%": "380px"}`,
             height: "100dvh",
           }}
-        >
-          <button onClick={onClose}><Image src="/img/close.png" alt="" width={24} height={24} /></button>
+        >          
+          <div className={`${windowSize.width <= 500 ? "flex justify-star": "flex justify-end"}`}>
+            <button onClick={onClose}><Image src={`${windowSize.width <= 500 ? "/img/backToPage.svg": "/img/closeTablet.svg"}`} alt="" width={20} height={20}  /></button>
+          </div>
           {children}
         </motion.div>
       </motion.div>

@@ -78,7 +78,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
 
           <div className="mt-2 flex flex-col xl:gap-6 lg:gap-4 md:gap-4 w-full">
             <div className="col-span-full">
-              <div className="mt-3">
+              <div className="mt-5">
                 <input
                   type="text"
                   id="name"
@@ -95,7 +95,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
             </div>
 
             <div className="col-span-full">
-              <div className="mt-3">
+              <div className="mt-5">
                 <input
                   type="text"
                   id="lastname"
@@ -112,7 +112,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
             </div>
 
             <div className="col-span-full">
-              <div className="mt-3">
+              <div className="mt-5">
                 <input
                   type="number"
                   id="phone"
@@ -129,7 +129,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
             </div>
 
             <div className="col-span-full">
-              <div className="mt-3">
+              <div className="mt-5">
                 <input
                   type="email"
                   id="email"
@@ -146,7 +146,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
             </div>
 
             <div className="col-span-full">
-              <div className="mt-3">
+              <div className="mt-5">
                 <input
                   type="text"
                   id="street"
@@ -164,7 +164,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
             </div>
 
             <div className="xl:col-span-full sm:col-span-3">
-              <div className="mt-3">
+              <div className="mt-5">
                 <select
                   id="department"
                   {...register("department")}
@@ -192,7 +192,7 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
             </div>
 
             <div className="xl:col-span-full sm:col-span-3">
-              <div className="mt-3">
+              <div className="mt-5">
                 <select
                   id="city"
                   {...register("city")}
@@ -225,11 +225,11 @@ const FormCatalog: React.FC<FormularioPedidoProps> = ({ onSubmit }) => {
               >
                 Notas adicionales
               </label>
-              <div className="mt-3 ">
+              <div className="mt-5 ">
                 <textarea
                   id="note"
                   placeholder="Notas o información adicional"
-                  className="bg-Form-input md:h-20 h-[180px]"
+                  className="bg-Form-input md:h-20 h-[150px]"
                   autoComplete="street-address"
                   //onChange={handleInputNote}
                 />

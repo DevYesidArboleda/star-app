@@ -139,24 +139,25 @@ export default function VideoList() {
 
   //metodo para scroll
   const videoContainerRef = useRef<HTMLDivElement>(null);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  const handleButtonClick = (direction: "up" | "down") => {
-    const newIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+const handleButtonClick = (direction: "up" | "down") => {
+  const newIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
 
-    if (newIndex >= 0 && newIndex < videos.length) {
-      setCurrentIndex(newIndex);
+  console.log("newIndex:", newIndex);
 
-      if (videoContainerRef.current) {
-        const targetVideo = videoContainerRef.current.children[
-          newIndex
-        ] as HTMLDivElement;
-        if (targetVideo) {
-          targetVideo.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }
+  if (newIndex >= 0 && newIndex < videos.length && videoContainerRef.current) {
+    setCurrentIndex(newIndex);
+
+    const targetVideo = videoContainerRef.current.children[newIndex] as HTMLDivElement | undefined;
+
+    console.log("targetVideo:", targetVideo);
+
+    if (targetVideo) {
+      targetVideo.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  };
+  }
+};
 
   const defaultOptions = {
     loop: true,

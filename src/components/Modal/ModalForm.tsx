@@ -35,7 +35,7 @@ const ModalForm: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
           zIndex:1,
         }}
       >
-        <button className={`w-full flex justify-star pl-[11px] mb-4 ${windowSize.width <= 500 ? "": "hidden"}`} onClick={onClose}><Image src="/img/backPage.png" alt="" width={24} height={24} /></button>
+        <button className={`w-full flex justify-star pl-[11px] mb-4 ${windowSize.width <= 500 ? "": "hidden"}`} onClick={onClose}><Image src="/img/backToPage.svg" alt="" width={20} height={20} /></button>
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
