@@ -903,7 +903,7 @@ export default function Form(dataFinal: any) {
                 </div>
               ) : (
                 <div>
-                  <div className="flex justify-center items-center">
+                  <div className="flex justify-center items-center paddinCero">
                       <div className="flex  w-5 h-5">
                       <Image
                         onClick={prev}

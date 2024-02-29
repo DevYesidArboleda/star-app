@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import { UseWindowSize } from "@/hooks/UseWindowSize";
@@ -18,7 +18,7 @@ const origin = (typeof window === 'undefined') ? '' : window.location.origin;
 
 export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
   const windowSize = UseWindowSize();
-  
+
   return (
       <>                  
 
@@ -35,10 +35,10 @@ export const Layout: FC<Props> = ({ children, title, thumbnail, name }) => {
       
         <NavBar /> 
 
-        <main style={{
+        <main id="padding" style={{
           minWidth: '100%',
           minHeight: '100%',
-          padding: `${windowSize.width <= 420 ? '0px  20px 0px 0px': ""}`,
+          padding: '0px  0px 0px 0px',
           margin: '0px 0px 0px 0px',
           maxHeight: '100%',
           maxWidth:"100%",
